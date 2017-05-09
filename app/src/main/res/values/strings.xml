@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">android-app-oschina</string>
+
+    <!--ToolBar name-->
+    <string name="title_dongtan">动弹</string>
+    <string name="title_zonghe">综合</string>
+
+</resources>
