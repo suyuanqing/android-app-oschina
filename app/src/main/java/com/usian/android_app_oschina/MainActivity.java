@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -34,8 +35,8 @@ public class MainActivity extends BaseActivity {
     RadioButton btnExploreComprehensive;
     @Bind(R.id.btn_explore_move)
     RadioButton btnExploreMove;
-    @Bind(R.id.btn_explore_plus)
-    RadioButton btnExplorePlus;
+    @Bind(R.id.iv_explore_plus)
+    ImageView ivExplorePlus;
     @Bind(R.id.btn_explore_find)
     RadioButton btnExploreFind;
     @Bind(R.id.btn_explore_my)
@@ -67,7 +68,7 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.btn_explore_comprehensive, R.id.btn_explore_move, R.id.btn_explore_plus, R.id.btn_explore_find, R.id.btn_explore_my})
+    @OnClick({R.id.btn_explore_comprehensive, R.id.btn_explore_move, R.id.iv_explore_plus, R.id.btn_explore_find, R.id.btn_explore_my})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_explore_comprehensive:
@@ -76,7 +77,7 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.btn_explore_move:
                 break;
-            case R.id.btn_explore_plus:
+            case R.id.iv_explore_plus:
                 break;
             case R.id.btn_explore_find:
                 break;

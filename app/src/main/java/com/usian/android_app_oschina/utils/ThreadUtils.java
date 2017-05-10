@@ -15,7 +15,7 @@ public class ThreadUtils {
         sHandler.post(task);
     }
 
-    public static void runSunThread(Runnable task){
+    public static void runOnSubThread(Runnable task){
         new Thread(task).start();
     }
 

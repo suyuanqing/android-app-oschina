@@ -4,5 +4,7 @@
     <!--ToolBar name-->
     <string name="title_dongtan">动弹</string>
     <string name="title_zonghe">综合</string>
+    <string name="title_faxian">发现</string>
+    <string name="title_my">我的</string>
 
 </resources>

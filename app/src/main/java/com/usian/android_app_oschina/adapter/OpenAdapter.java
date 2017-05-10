@@ -42,13 +42,31 @@ public class OpenAdapter extends RecyclerView.Adapter{
         return new OpenViewHolder(v);
     }
 
+    public interface Onclickitemre{
+        void onclickitems(View v, int pos);
+    }
+
+    private Onclickitemre onclickitems;
+
+    public void setOnClickitems(Onclickitemre onclickitems){
+        this.onclickitems = onclickitems;
+    }
+
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        OpenViewHolder openholder = (OpenViewHolder) holder;
+        final OpenViewHolder openholder = (OpenViewHolder) holder;
 
         openholder.title.setText(data.get(position).getTitle());
         openholder.description.setText(data.get(position).getBody());
+
+        openholder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int pos = openholder.getLayoutPosition();
+                onclickitems.onclickitems(openholder.itemView,pos);
+            }
+        });
 
     }
 

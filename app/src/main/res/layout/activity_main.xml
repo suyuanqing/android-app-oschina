@@ -34,6 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#f7f7f7"/>
+
     <RadioGroup
         android:id="@+id/btns"
         android:layout_width="match_parent"
@@ -42,7 +43,8 @@
         android:gravity="bottom"
         android:weightSum="5"
         android:background="@color/white"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        >
 
         <RadioButton
             android:id="@+id/btn_explore_comprehensive"
@@ -50,9 +52,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/ic_nav_news_normal"
+            android:drawableTop="@drawable/tab_icon_comprehensive"
             android:gravity="center"
-            android:text="综合" />
+            android:text="@string/title_zonghe" />
 
         <RadioButton
             android:id="@+id/btn_explore_move"
@@ -60,19 +62,20 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/ic_nav_tweet_normal"
+            android:drawableTop="@drawable/tab_icon_move"
             android:gravity="center"
-            android:text="动弹" />
+            android:text="@string/title_dongtan" />
 
-        <RadioButton
-            android:id="@+id/btn_explore_plus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <ImageView
+            android:id="@+id/iv_explore_plus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/ic_nav_add_normal"
-            android:gravity="center" />
+            android:scaleType="centerInside"
+            android:src="@drawable/tab_icon_add_plus"
+            android:gravity="center"/>
 
         <RadioButton
             android:id="@+id/btn_explore_find"
@@ -80,9 +83,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/ic_nav_discover_normal"
+            android:drawableTop="@drawable/tab_icon_find"
             android:gravity="center"
-            android:text="发现" />
+            android:text="@string/title_faxian" />
 
         <RadioButton
             android:id="@+id/btn_explore_my"
@@ -90,9 +93,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
-            android:drawableTop="@drawable/ic_nav_my_normal"
+            android:drawableTop="@drawable/tab_icon_my"
             android:gravity="center"
-            android:text="我的" />
+            android:text="@string/title_my" />
     </RadioGroup>
 
 
