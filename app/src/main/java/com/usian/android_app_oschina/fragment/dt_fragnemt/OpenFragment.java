@@ -119,38 +119,33 @@ public class OpenFragment extends BaseFragment {
         //设置圆点指示器颜色??
         //设置文字指示器??
         //隐藏指示器??
-        //mRollViewPager.setHintView(new?IconHintView(this,?R.drawable.point_focus,?R.drawable.point_normal));??
         openPager.setHintView(new ColorPointHintView(getContext(), Color.YELLOW,Color.WHITE));
-        //mRollViewPager.setHintView(new?TextHintView(this));??
-        //mRollViewPager.setHintView(null);??
-//        myAdapter=new MyAdapter();
-//        mListview.setAdapter(myAdapter);
     }
 
 
 
-private class TestNormalAdapter extends StaticPagerAdapter {
-    private int[] images = {
-            R.mipmap.a,
-            R.mipmap.b,
-            R.mipmap.c,
-            R.mipmap.d,
-            R.mipmap.e,
-    };
+    private class TestNormalAdapter extends StaticPagerAdapter {
+        private int[] images = {
+                R.mipmap.a,
+                R.mipmap.b,
+                R.mipmap.c,
+                R.mipmap.d,
+                R.mipmap.e,
+        };
 
-    @Override
-    public View getView(ViewGroup container, int position) {
-        ImageView view = new ImageView(container.getContext());
-        view.setImageResource(images[position]);
-        view.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        return view;
-    }
+        @Override
+        public View getView(ViewGroup container, int position) {
+            ImageView view = new ImageView(container.getContext());
+            view.setImageResource(images[position]);
+            view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            return view;
+        }
 
-    @Override
-    public int getCount() {
-        return images.length;
-    }
+        @Override
+        public int getCount() {
+            return images.length;
+        }
 
 
 }

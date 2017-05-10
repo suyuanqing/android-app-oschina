@@ -8,8 +8,6 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.adapter.ZHPagerAdapter;
@@ -27,10 +25,6 @@ import butterknife.ButterKnife;
 
 public class SynthesizeFragment extends BaseFragment {
 
-    @Bind(R.id.title_name)
-    TextView titleName;
-    @Bind(R.id.title_toolbar)
-    Toolbar titleToolbar;
     @Bind(R.id.zh_tab)
     TabLayout zhTab;
     @Bind(R.id.zh_viewpager)
@@ -47,8 +41,6 @@ public class SynthesizeFragment extends BaseFragment {
 
         ButterKnife.bind(this, mRoot);
 
-        //TODO 还有一个搜索按钮没有添加
-        titleName.setText(R.string.title_zonghe);
         initData();
         return mRoot;
     }
@@ -61,6 +53,8 @@ public class SynthesizeFragment extends BaseFragment {
         data.add(new ReBlogFragment());
 
         title_adapter = new ZHPagerAdapter(getActivity().getSupportFragmentManager(),data);
+
+        zhTab.setupWithViewPager(zhViewpager);
 
         zhViewpager.setAdapter(title_adapter);
 

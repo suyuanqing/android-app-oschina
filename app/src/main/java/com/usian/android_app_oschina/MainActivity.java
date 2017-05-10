@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        titleName.setText(R.string.title_zonghe);
         initData();
     }
 
@@ -71,6 +71,7 @@ public class MainActivity extends BaseActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_explore_comprehensive:
+                titleName.setText(R.string.title_zonghe);
                 pager.setCurrentItem(0);
                 break;
             case R.id.btn_explore_move:
