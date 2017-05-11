@@ -41,8 +41,13 @@ public class VolleyUtil implements Ihttp {
     public void doGet(String url, Map<String, String> params, final NetworkCallback networkCallback) {
 
         StringBuffer apiurl = new StringBuffer();
+        apiurl.append(url+"?");
+        int index = 0;
         for (String s : params.keySet()){
-            apiurl.append("?"+s).append("&"+s).append("&"+s);
+            index++;
+            apiurl.append(s+"="+params.get(s));
+            if (index < params.size())
+                apiurl.append("&");
         }
 
         String string = apiurl.toString();
