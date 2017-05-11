@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.usian.android_app_oschina.R;
@@ -24,13 +23,15 @@ public class OpenAdapter extends RecyclerView.Adapter{
     }
 
     class OpenViewHolder extends RecyclerView.ViewHolder {
-        TextView title,description;
-        ImageView img_today;
+        TextView title,description,aite,num,padate;
         public OpenViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.tv_title);
             description = (TextView) itemView.findViewById(R.id.tv_description);
-            img_today = (ImageView) itemView.findViewById(R.id.iv_today);
+            aite = (TextView) itemView.findViewById(R.id.tv_author);
+            num = (TextView) itemView.findViewById(R.id.tv_num);
+            padate = (TextView) itemView.findViewById(R.id.tv_pubdate);
+
         }
     }
 
@@ -59,6 +60,9 @@ public class OpenAdapter extends RecyclerView.Adapter{
 
         openholder.title.setText(data.get(position).getTitle());
         openholder.description.setText(data.get(position).getBody());
+        openholder.aite.setText(data.get(position).getAuthor());
+        openholder.num.setText(data.get(position).getCommentCount());
+        openholder.padate.setText(data.get(position).getPubDate());
 
         openholder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

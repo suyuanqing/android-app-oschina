@@ -2,21 +2,29 @@
 <in.srain.cube.views.ptr.PtrFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/ptr_news"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    
+    android:layout_height="match_parent"
+    >
+
+
+
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
         >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical"
             >
-
+            <ProgressBar
+                android:id="@+id/open_progressbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                />
             <com.jude.rollviewpager.RollPagerView
                 android:id="@+id/open_pager"
                 android:layout_width="match_parent"
@@ -26,11 +34,14 @@
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/open_recycler"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:layout_below="@id/open_pager"
                ></android.support.v7.widget.RecyclerView>
-        </LinearLayout>
+        </RelativeLayout>
 
     </android.support.v4.widget.NestedScrollView>
+
+
 
 </in.srain.cube.views.ptr.PtrFrameLayout>

@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina.fragment.zh_fragment;
+package com.usian.android_app_oschina.fragment.dt_fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -49,6 +49,14 @@ public class StirFragnemt extends BaseFragment {
         titleName.setText(R.string.title_dongtan);
 
         return mRoot;
+    }
+
+    @Override
+    public void initData() {
+        super.initData();
+
+
+
     }
 
     @Override

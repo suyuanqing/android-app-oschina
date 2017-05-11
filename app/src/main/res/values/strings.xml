@@ -6,5 +6,10 @@
     <string name="title_zonghe">综合</string>
     <string name="title_faxian">发现</string>
     <string name="title_my">我的</string>
+    <string name="title_zixun_info">资讯详情</string>
+
+
+    <!--SearchView hint-->
+    <string name="search_send_comment">发表评论</string>
 
 </resources>

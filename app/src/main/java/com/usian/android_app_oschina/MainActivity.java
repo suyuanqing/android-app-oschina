@@ -13,7 +13,7 @@ import android.widget.Toolbar;
 
 import com.usian.android_app_oschina.adapter.MainAdapter;
 import com.usian.android_app_oschina.base.BaseActivity;
-import com.usian.android_app_oschina.fragment.dt_fragnemt.SynthesizeFragment;
+import com.usian.android_app_oschina.fragment.zh_fragnemt.SynthesizeFragment;
 
 import java.util.ArrayList;
 

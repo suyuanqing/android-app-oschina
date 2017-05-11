@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina.fragment.dt_fragnemt;
+package com.usian.android_app_oschina.fragment.dt_fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,33 +18,35 @@ import butterknife.ButterKnife;
 
 /**
  * Created by 苏元庆 on 2017/5/9.
+ * 这个是动弹下最新动弹的Fragment
  */
 
-public class ReBlogFragment extends BaseFragment {
+public class ThrumFragment extends BaseFragment {
 
-
-    @Bind(R.id.reblog_recycler)
-    RecyclerView reblogRecycler;
-
+    @Bind(R.id.latest_recycler)
+    RecyclerView latestRecycler;
     private View mRoot;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        mRoot = inflater.inflate(R.layout.fragment_reblog, null);
+        mRoot = inflater.inflate(R.layout.fragment_latest, null);
+
         ButterKnife.bind(this, mRoot);
-        initData();
+
+
         return mRoot;
+
     }
 
     @Override
     public void initData() {
         super.initData();
-        reblogRecycler.setHasFixedSize(true);
-        reblogRecycler.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        reblogRecycler.setItemAnimator(new DefaultItemAnimator());
-        reblogRecycler.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        latestRecycler.setHasFixedSize(true);
+        latestRecycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
+        latestRecycler.setItemAnimator(new DefaultItemAnimator());
+        latestRecycler.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
 
     }
 

@@ -33,7 +33,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#f7f7f7"/>
+        android:background="#C0C0C0"/>
 
     <RadioGroup
         android:id="@+id/btns"

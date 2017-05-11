@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina.fragment.zh_fragment;
+package com.usian.android_app_oschina.fragment.dt_fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
  * 这个是动弹下最新动弹的Fragment
  */
 
-public class LatestFragment extends BaseFragment {
+public class MyTanFragment extends BaseFragment {
 
     @Bind(R.id.latest_recycler)
     RecyclerView latestRecycler;
