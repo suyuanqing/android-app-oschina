@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#F6F6F6"
     android:orientation="vertical"
-    tools:context="com.usian.android_app_oschina.activity.OpenActivity">
+    tools:context=".controller.activity.OpenActivity">
 
     <include
         android:layout_width="match_parent"

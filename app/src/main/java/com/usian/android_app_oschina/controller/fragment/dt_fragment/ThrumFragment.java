@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina.fragment.dt_fragment;
+package com.usian.android_app_oschina.controller.fragment.dt_fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,26 +27,36 @@ public class ThrumFragment extends BaseFragment {
     RecyclerView latestRecycler;
     private View mRoot;
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_latest;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        mRoot = inflater.inflate(R.layout.fragment_latest, null);
-
-        ButterKnife.bind(this, mRoot);
-
+        mRoot = inflater.inflate(getLayoutId(), null);
 
         return mRoot;
 
     }
 
     @Override
-    public void initData() {
-        super.initData();
+    protected void initData(Bundle bun) {
+
+    }
+
+    @Override
+    protected void initView(View view) {
         latestRecycler.setHasFixedSize(true);
         latestRecycler.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
         latestRecycler.setItemAnimator(new DefaultItemAnimator());
         latestRecycler.addItemDecoration(new DividerItemDecoration(getContext(),DividerItemDecoration.VERTICAL));
+    }
+
+    @Override
+    protected void initListener() {
 
     }
 

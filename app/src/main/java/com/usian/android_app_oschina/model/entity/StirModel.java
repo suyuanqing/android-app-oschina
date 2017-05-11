@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina.model;
+package com.usian.android_app_oschina.model.entity;
 
 import java.util.List;
 

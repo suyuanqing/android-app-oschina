@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina.activity;
+package com.usian.android_app_oschina.controller.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

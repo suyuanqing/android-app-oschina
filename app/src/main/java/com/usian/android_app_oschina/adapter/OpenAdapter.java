@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.usian.android_app_oschina.R;
-import com.usian.android_app_oschina.model.InformationModel;
+import com.usian.android_app_oschina.model.entity.InformationModel;
 
 import java.util.ArrayList;
 

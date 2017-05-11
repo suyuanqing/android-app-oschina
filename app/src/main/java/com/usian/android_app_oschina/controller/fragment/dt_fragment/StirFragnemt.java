@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina.fragment.dt_fragment;
+package com.usian.android_app_oschina.controller.fragment.dt_fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -37,25 +37,32 @@ public class StirFragnemt extends BaseFragment {
     private View mRoot;
     private ArrayList<Fragment> data = new ArrayList<>();
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.fragment_stir;
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        mRoot = inflater.inflate(R.layout.fragment_stir, null);
-
-        ButterKnife.bind(this, mRoot);
-
-        //TODO 还有一个搜索按钮没有添加
-        titleName.setText(R.string.title_dongtan);
+        mRoot = inflater.inflate(getLayoutId(), null);
 
         return mRoot;
     }
 
     @Override
-    public void initData() {
-        super.initData();
+    protected void initData(Bundle bun) {
 
+    }
 
+    @Override
+    protected void initView(View view) {
+        titleName.setText(R.string.title_dongtan);
+    }
+
+    @Override
+    protected void initListener() {
 
     }
 
