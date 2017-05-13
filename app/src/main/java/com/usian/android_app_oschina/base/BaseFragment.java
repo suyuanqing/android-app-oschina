@@ -20,7 +20,7 @@ public abstract class BaseFragment extends Fragment {
 
 
     private Bundle params;
-    private boolean isFirst = true;
+    private boolean isFirst = false;
 
     @Nullable
     @Override
@@ -110,6 +110,16 @@ public abstract class BaseFragment extends Fragment {
         if (isFirst){
             loadData();
             isFirst = false;
+        }
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            //相当于Fragment的onResume
+        } else {
+            //相当于Fragment的onPause
         }
     }
 

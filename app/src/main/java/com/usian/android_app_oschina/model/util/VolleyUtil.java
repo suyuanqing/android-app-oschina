@@ -1,7 +1,5 @@
 package com.usian.android_app_oschina.model.util;
 
-import android.util.Log;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -11,6 +9,7 @@ import com.android.volley.toolbox.Volley;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.model.http.Ihttp;
 import com.usian.android_app_oschina.model.http.NetworkCallback;
+import com.usian.android_app_oschina.utils.LogUtils;
 
 import java.util.Map;
 
@@ -51,7 +50,7 @@ public class VolleyUtil implements Ihttp {
         }
 
         String string = apiurl.toString();
-        Log.d("TAG", "doGet: "+string);
+        LogUtils.d("TAG", "doGet: "+string);
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, string, new Response.Listener<String>() {
             @Override

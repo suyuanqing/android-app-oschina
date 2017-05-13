@@ -35,7 +35,7 @@ public class ReBlogFragment extends BaseFragment {
     private int index = 1;
     private ArrayList<ReBlogModel.BlogBean> data = new ArrayList<>();
     private ReBlogAdapter adapter;
-    private boolean flag;
+    private boolean flag = false;
 
     @Override
     protected int getLayoutId() {
@@ -89,6 +89,7 @@ public class ReBlogFragment extends BaseFragment {
                 adapter.notifyDataSetChanged();
                 if (flag){
                     reblogRecycler.setLoadMoreComplete();
+                    flag = false;
                 }else {
                     reblogRecycler.setRefreshComplete();
                 }
