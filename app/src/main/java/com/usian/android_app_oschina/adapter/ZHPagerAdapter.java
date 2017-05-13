@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class ZHPagerAdapter extends FragmentPagerAdapter{
     private ArrayList<Fragment> data;
-    private String[] titlename = {"开源资讯","推荐资讯","技术问答","每日一搏"};
+    private String[] titlename = {"开源资讯","推荐资讯","热门资讯","最新博客"};
     public ZHPagerAdapter(FragmentManager fm, ArrayList<Fragment> data) {
         super(fm);
         this.data = data;

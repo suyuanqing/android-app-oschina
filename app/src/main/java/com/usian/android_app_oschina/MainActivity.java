@@ -1,9 +1,7 @@
 package com.usian.android_app_oschina;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -11,24 +9,27 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.usian.android_app_oschina.adapter.MainAdapter;
 import com.usian.android_app_oschina.base.BaseActivity;
+import com.usian.android_app_oschina.controller.fragment.dt_fragment.StirFragnemt;
+import com.usian.android_app_oschina.controller.fragment.fx_fragment.FxFragment;
+import com.usian.android_app_oschina.controller.fragment.my_fragment.MineFragment;
 import com.usian.android_app_oschina.controller.fragment.zh_fragnemt.SynthesizeFragment;
-
-import java.util.ArrayList;
+import com.usian.android_app_oschina.utils.FragmentBuilder;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity {
 
+
     @Bind(R.id.title_name)
     TextView titleName;
+    @Bind(R.id.iv_btn_search_normal)
+    ImageView ivBtnSearchNormal;
     @Bind(R.id.title_toolbar)
     Toolbar titleToolbar;
     @Bind(R.id.pager)
-    ViewPager pager;
+    FrameLayout pager;
     @Bind(R.id.linn)
     LinearLayout linn;
     @Bind(R.id.btn_explore_comprehensive)
@@ -46,25 +47,29 @@ public class MainActivity extends BaseActivity {
     @Bind(R.id.activity_main)
     LinearLayout activityMain;
 
-    private ArrayList<Fragment> data = new ArrayList<>();
-    private MainAdapter adapter;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        titleName.setText(R.string.title_zonghe);
-        initData();
+    protected int getLayoutId() {
+        return R.layout.activity_main;
     }
 
-    public void initData(){
+    @Override
+    protected void initData() {
 
-        data.add(new SynthesizeFragment());
+    }
 
-        adapter = new MainAdapter(getSupportFragmentManager(),data);
+    @Override
+    protected void initView() {
+        titleName.setText(R.string.title_zonghe);
+        FragmentBuilder.getInstance().containerId(R.id.pager).start(SynthesizeFragment.class);
+    }
 
-        pager.setAdapter(adapter);
+    @Override
+    protected void initListener() {
+
+    }
+
+    @Override
+    protected void loadData() {
 
     }
 
@@ -73,16 +78,31 @@ public class MainActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btn_explore_comprehensive:
                 titleName.setText(R.string.title_zonghe);
-                pager.setCurrentItem(0);
+                FragmentBuilder.getInstance().containerId(R.id.pager).start(SynthesizeFragment.class);
                 break;
             case R.id.btn_explore_move:
+                titleName.setText(R.string.title_dongtan);
+                FragmentBuilder.getInstance().containerId(R.id.pager).start(StirFragnemt.class);
                 break;
             case R.id.iv_explore_plus:
+
                 break;
             case R.id.btn_explore_find:
+                titleName.setText(R.string.title_faxian);
+                FragmentBuilder.getInstance().containerId(R.id.pager).start(FxFragment.class);
                 break;
             case R.id.btn_explore_my:
+                titleName.setText(R.string.title_my);
+                FragmentBuilder.getInstance().containerId(R.id.pager).start(MineFragment.class);
                 break;
         }
     }
+
+    //    TODO 搜索
+    @OnClick(R.id.iv_btn_search_normal)
+    public void onViewClicked() {
+
+    }
+
+
 }

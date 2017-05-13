@@ -1,14 +1,10 @@
 package com.usian.android_app_oschina.controller.fragment.dt_fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.base.BaseFragment;
@@ -32,20 +28,11 @@ public class ThrumFragment extends BaseFragment {
         return R.layout.fragment_latest;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        mRoot = inflater.inflate(getLayoutId(), null);
-
-        return mRoot;
+    protected void initData() {
 
     }
 
-    @Override
-    protected void initData(Bundle bun) {
-
-    }
 
     @Override
     protected void initView(View view) {
@@ -57,6 +44,11 @@ public class ThrumFragment extends BaseFragment {
 
     @Override
     protected void initListener() {
+
+    }
+
+    @Override
+    protected void loadData() {
 
     }
 

@@ -1,17 +1,12 @@
 package com.usian.android_app_oschina.controller.fragment.dt_fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.usian.android_app_oschina.R;
+import com.usian.android_app_oschina.adapter.DongTanAdapter;
 import com.usian.android_app_oschina.base.BaseFragment;
 
 import java.util.ArrayList;
@@ -26,15 +21,11 @@ import butterknife.ButterKnife;
 
 public class StirFragnemt extends BaseFragment {
 
-    @Bind(R.id.title_name)
-    TextView titleName;
-    @Bind(R.id.title_toolbar)
-    Toolbar titleToolbar;
     @Bind(R.id.dt_tab)
     TabLayout dtTab;
     @Bind(R.id.dt_viewpager)
     ViewPager dtViewpager;
-    private View mRoot;
+
     private ArrayList<Fragment> data = new ArrayList<>();
 
     @Override
@@ -42,27 +33,30 @@ public class StirFragnemt extends BaseFragment {
         return R.layout.fragment_stir;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        mRoot = inflater.inflate(getLayoutId(), null);
-
-        return mRoot;
-    }
-
-    @Override
-    protected void initData(Bundle bun) {
+    protected void initData() {
 
     }
 
     @Override
     protected void initView(View view) {
-        titleName.setText(R.string.title_dongtan);
+        dtViewpager.setOffscreenPageLimit(4);
+        data.add(new LatestFragment());
+        data.add(new HotFragment());
+        data.add(new ThrumFragment());
+        data.add(new MyTanFragment());
+        DongTanAdapter adapter = new DongTanAdapter(getActivity().getSupportFragmentManager(),data);
+        dtViewpager.setAdapter(adapter);
+        dtTab.setupWithViewPager(dtViewpager);
     }
 
     @Override
     protected void initListener() {
+
+    }
+
+    @Override
+    protected void loadData() {
 
     }
 

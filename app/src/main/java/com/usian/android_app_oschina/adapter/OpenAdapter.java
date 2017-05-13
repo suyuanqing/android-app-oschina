@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.usian.android_app_oschina.R;
-import com.usian.android_app_oschina.model.entity.InformationModel;
+import com.usian.android_app_oschina.model.entity.OpenNewsModel;
 
 import java.util.ArrayList;
 
@@ -15,9 +15,9 @@ import java.util.ArrayList;
  * Created by 苏元庆 on 2017/5/9.
  */
 public class OpenAdapter extends RecyclerView.Adapter{
-    private ArrayList<InformationModel.NewsBean> data;
+    private ArrayList<OpenNewsModel.NewsBean> data;
     Context context;
-    public OpenAdapter (Context context, ArrayList<InformationModel.NewsBean> data){
+    public OpenAdapter (Context context, ArrayList<OpenNewsModel.NewsBean> data){
         this.data = data;
         this.context = context;
     }

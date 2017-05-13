@@ -1,16 +1,12 @@
 package com.usian.android_app_oschina.controller.fragment.zh_fragnemt;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.os.SystemClock;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,12 +17,12 @@ import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
 import com.thoughtworks.xstream.XStream;
 import com.usian.android_app_oschina.R;
-import com.usian.android_app_oschina.controller.activity.OpenActivity;
 import com.usian.android_app_oschina.adapter.OpenAdapter;
 import com.usian.android_app_oschina.base.BaseFragment;
-import com.usian.android_app_oschina.model.http.biz.LoadNewsImpl;
-import com.usian.android_app_oschina.model.entity.InformationModel;
+import com.usian.android_app_oschina.controller.activity.OpenActivity;
+import com.usian.android_app_oschina.model.entity.OpenNewsModel;
 import com.usian.android_app_oschina.model.http.NetworkCallback;
+import com.usian.android_app_oschina.model.http.biz.LoadNewsImpl;
 import com.usian.android_app_oschina.utils.LogUtils;
 import com.usian.android_app_oschina.utils.ThreadUtils;
 
@@ -34,7 +30,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import in.srain.cube.views.ptr.PtrClassicDefaultFooter;
 import in.srain.cube.views.ptr.PtrClassicDefaultHeader;
 import in.srain.cube.views.ptr.PtrDefaultHandler2;
@@ -56,33 +51,18 @@ public class OpenFragment extends BaseFragment implements NetworkCallback{
     PtrFrameLayout ptrNews;
     @Bind(R.id.open_progressbar)
     ProgressBar openProgressbar;
-    private View mRoot;
-    private ArrayList<InformationModel.NewsBean> data;
+    private ArrayList<OpenNewsModel.NewsBean> data;
     private OpenAdapter adapter;
     private LinearLayoutManager mLinear;
     private int index = 1;
-
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
 
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_open;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
-        mRoot = inflater.inflate(getLayoutId(), null);
-        return mRoot;
-    }
-
-    @Override
-    protected void initData(Bundle bun) {
+    protected void initData() {
         LoadNewsImpl news = new LoadNewsImpl();
         news.getNews(index+"",this);
     }
@@ -118,6 +98,11 @@ public class OpenFragment extends BaseFragment implements NetworkCallback{
         });
     }
 
+    @Override
+    protected void loadData() {
+
+    }
+
     //上拉加载和下拉刷新
     public void ptrShow() {
         PtrClassicDefaultFooter footer = new PtrClassicDefaultFooter(getContext());
@@ -132,7 +117,7 @@ public class OpenFragment extends BaseFragment implements NetworkCallback{
             @Override
             public void onLoadMoreBegin(PtrFrameLayout frame) {
                 index++;
-                initData(getArguments());
+                initData();
             }
 
             @Override
@@ -174,10 +159,10 @@ public class OpenFragment extends BaseFragment implements NetworkCallback{
         openProgressbar.setVisibility(View.GONE);
 
         XStream xstream = new XStream();
-        xstream.alias("oschina", InformationModel.class);
-        xstream.alias("news", InformationModel.NewsBean.class);
-        InformationModel o = (InformationModel) xstream.fromXML(result);
-        List<InformationModel.NewsBean> newslist = o.getNewslist();
+        xstream.alias("oschina", OpenNewsModel.class);
+        xstream.alias("news", OpenNewsModel.NewsBean.class);
+        OpenNewsModel o = (OpenNewsModel) xstream.fromXML(result);
+        List<OpenNewsModel.NewsBean> newslist = o.getNewslist();
         data.addAll(newslist);
 
 
@@ -225,10 +210,5 @@ public class OpenFragment extends BaseFragment implements NetworkCallback{
 
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
 
 }

@@ -12,4 +12,12 @@
     <!--SearchView hint-->
     <string name="search_send_comment">发表评论</string>
 
+    <!--发现-->
+    <string name="fx_mytj">码云推荐</string>
+    <string name="fx_kyrj">开源软件</string>
+    <string name="fx_sys">扫一扫</string>
+    <string name="fx_yyy">摇一摇</string>
+    <string name="fx_fjcxy">附近的程序员</string>
+    <string name="fx_xxhd">线下活动</string>
+
 </resources>

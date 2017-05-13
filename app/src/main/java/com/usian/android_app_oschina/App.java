@@ -3,13 +3,18 @@ package com.usian.android_app_oschina;
 import android.app.Application;
 import android.content.Context;
 
+import com.usian.android_app_oschina.base.BaseActivity;
+
 /**
  * Created by 苏元庆 on 2017/5/9.
  */
 
 public class App extends Application{
 
-    private static Context context;
+    //获取全局Activity
+    public static BaseActivity activity;
+
+    public static Context context;
 
     @Override
     public void onCreate() {

@@ -8,5 +8,6 @@
     <color name="actionbar_background">@color/main_green</color>
     <color name="white">#ffffff</color>
     <color name="transparent">#00000000</color>
+    <color name="black_dan">#999999</color>
 
 </resources>

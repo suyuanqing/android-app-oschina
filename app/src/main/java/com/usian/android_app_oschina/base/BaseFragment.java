@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.usian.android_app_oschina.exception.NotFoundContainerException;
+
 import butterknife.ButterKnife;
 
 /**
@@ -16,23 +18,18 @@ import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment {
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
-    protected BaseActivity mActivity;
-
-    protected abstract int getLayoutId();
+    private Bundle params;
+    private boolean isFirst = true;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         if (getLayoutId() != 0){
-            return inflater.inflate(getLayoutId(),null);
+            return inflater.inflate(getLayoutId(),container,false);
         }else{
-            return super.onCreateView(inflater, container, savedInstanceState);
+            throw new NotFoundContainerException("Fragment布局ID不能为0,currentFragment = " + getClass().getSimpleName());
         }
 
     }
@@ -41,16 +38,22 @@ public abstract class BaseFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this,view);
+        isFirst = true;
         initView(view);
-        initData(getArguments());
+        initData();
         initListener();
     }
 
     /**
-     * 初始化数据
-     * @param bun 接收从别的fragment中传过来的参数
+     * 获取布局ID
+     * @return
      */
-    protected abstract void initData(Bundle bun);
+    protected abstract int getLayoutId();
+
+    /**
+     * 初始化数据
+     */
+    protected abstract void initData();
 
     /**
      * 初始化控件
@@ -63,19 +66,57 @@ public abstract class BaseFragment extends Fragment {
      */
     protected abstract void initListener();
 
+    /**
+     * 加载数据
+     */
+    protected abstract void loadData();
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden){
+            //当前Fragment被隐藏
+            onHidden();
+        }else{
+            //当前Fragment显示
+            onShow();
+        }
+    }
+
+    public void onShow(){
+
+    }
+
+    public void onHidden(){
+
+    }
+
+    public Bundle getParams() {
+        return params;
+    }
+
+    /**
+     * 设置传过来的参数
+     * @param params
+     */
+    public void setParams(Bundle params) {
+        this.params = params;
+    }
+
+    //当页面可见时加载数据，仅仅加载一次
     @Override
     public void onResume() {
         super.onResume();
+        if (isFirst){
+            loadData();
+            isFirst = false;
+        }
     }
 
     @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
 

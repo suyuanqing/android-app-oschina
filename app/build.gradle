@@ -39,4 +39,6 @@ dependencies {
     compile 'com.youth.banner:banner:1.4.9'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     compile files('libs/volleyutils.jar')
+    compile 'com.androidkun:pulltorefreshrecyclerview:1.0.6'
+
 }

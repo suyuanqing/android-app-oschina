@@ -1,7 +1,6 @@
 package com.usian.android_app_oschina;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -11,7 +10,6 @@ import android.widget.RelativeLayout;
 import com.usian.android_app_oschina.base.BaseActivity;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class SplashActivity extends BaseActivity {
 
@@ -29,23 +27,34 @@ public class SplashActivity extends BaseActivity {
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        ButterKnife.bind(this);
-
-        welcome();
+    protected int getLayoutId() {
+        return R.layout.activity_splash;
     }
 
-    public void welcome(){
-
+    @Override
+    protected void initData() {
         new Thread(){
             @Override
             public void run() {
-                SystemClock.sleep(2000);
+//                TODO 发布项目时修改闪屏页面停留时间
+                SystemClock.sleep(0);
                 hand.sendEmptyMessage(999);
             }
         }.start();
+    }
+
+    @Override
+    protected void initView() {
+
+    }
+
+    @Override
+    protected void initListener() {
+
+    }
+
+    @Override
+    protected void loadData() {
 
     }
 

@@ -17,6 +17,15 @@
             android:textColor="@color/white"
             android:textSize="20dp"/>
 
+        <ImageView
+            android:id="@+id/iv_btn_search_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:src="@mipmap/btn_search_normal"
+            android:layout_marginRight="10dp"
+            />
+
     </Toolbar>
 
 </RelativeLayout>
