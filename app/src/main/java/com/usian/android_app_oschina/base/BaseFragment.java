@@ -71,7 +71,7 @@ public abstract class BaseFragment extends Fragment {
      */
     protected abstract void loadData();
 
-    @Override
+   /* @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden){
@@ -81,7 +81,7 @@ public abstract class BaseFragment extends Fragment {
             //当前Fragment显示
             onShow();
         }
-    }
+    }*/
 
     public void onShow(){
 
@@ -118,8 +118,10 @@ public abstract class BaseFragment extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
             //相当于Fragment的onResume
+            onShow();
         } else {
             //相当于Fragment的onPause
+            onHidden();
         }
     }
 

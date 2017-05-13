@@ -14,6 +14,7 @@ import com.usian.android_app_oschina.model.entity.ReBlogModel;
 import com.usian.android_app_oschina.model.http.NetworkCallback;
 import com.usian.android_app_oschina.model.http.biz.LoadNetNews;
 import com.usian.android_app_oschina.model.http.biz.LoadNewsImpl;
+import com.usian.android_app_oschina.utils.LogUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -89,7 +90,6 @@ public class ReBlogFragment extends BaseFragment {
                 adapter.notifyDataSetChanged();
                 if (flag){
                     reblogRecycler.setLoadMoreComplete();
-                    flag = false;
                 }else {
                     reblogRecycler.setRefreshComplete();
                 }
@@ -112,6 +112,7 @@ public class ReBlogFragment extends BaseFragment {
     public void onHidden() {
         super.onHidden();
         flag = false;
+        LogUtils.e("ReBlogFragment", "已经被隐藏");
     }
 
     @Override
