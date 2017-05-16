@@ -11,7 +11,11 @@ import com.jiyun.lenovo.roundorcirle.GlideCircleTransform;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.model.entity.LatestTweetModel;
+import com.usian.android_app_oschina.utils.DateUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -44,7 +48,16 @@ public class TweetAdapter extends BaseAdapter<LatestTweetModel.TweetBean> {
 
         holder.setText(R.id.tv_tweet_userName, tweetBean.getAuthor());
         holder.setText(R.id.tv_tweet_body, tweetBean.getBody());
-        holder.setText(R.id.tv_tweet_date, tweetBean.getPubDate());
+        SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = null;
+        try {
+            Date parse = sim.parse(tweetBean.getPubDate());
+            time = DateUtils.format(parse);
+            holder.setText(R.id.tv_tweet_date, time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         holder.setText(R.id.btn_tweet_dianzan_pinglun, tweetBean.getCommentCount());
 
     }

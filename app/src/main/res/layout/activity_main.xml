@@ -54,7 +54,9 @@
             android:button="@null"
             android:drawableTop="@drawable/tab_icon_comprehensive"
             android:gravity="center"
-            android:text="@string/title_zonghe" />
+            android:checked="true"
+            android:text="@string/title_zonghe"
+            android:textColor="@color/text_xuanzhong"/>
 
         <RadioButton
             android:id="@+id/btn_explore_move"
@@ -64,7 +66,8 @@
             android:button="@null"
             android:drawableTop="@drawable/tab_icon_move"
             android:gravity="center"
-            android:text="@string/title_dongtan" />
+            android:text="@string/title_dongtan"
+            android:textColor="@color/text_xuanzhong"/>
 
         <ImageView
             android:id="@+id/iv_explore_plus"
@@ -85,7 +88,8 @@
             android:button="@null"
             android:drawableTop="@drawable/tab_icon_find"
             android:gravity="center"
-            android:text="@string/title_faxian" />
+            android:text="@string/title_faxian"
+            android:textColor="@color/text_xuanzhong"/>
 
         <RadioButton
             android:id="@+id/btn_explore_my"
@@ -95,7 +99,8 @@
             android:button="@null"
             android:drawableTop="@drawable/tab_icon_my"
             android:gravity="center"
-            android:text="@string/title_my" />
+            android:text="@string/title_my"
+            android:textColor="@color/text_xuanzhong"/>
     </RadioGroup>
 
 

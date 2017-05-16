@@ -12,9 +12,9 @@ import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.adapter.LatestBlogAdapter;
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.model.entity.LatestModel;
-import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.model.http.biz.newsbus.ILoadNetNews;
 import com.usian.android_app_oschina.model.http.biz.newsbus.LoadNewsImpl;
+import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.utils.LogUtils;
 
 import java.util.ArrayList;
@@ -36,6 +36,7 @@ public class LatestBlogFragment extends BaseFragment {
     private ArrayList<LatestModel.BlogBean> data = new ArrayList<>();
     private boolean flag = false;
     private LatestBlogAdapter adapter;
+    private boolean isFrist;
 
     @Override
     protected int getLayoutId() {
@@ -86,6 +87,7 @@ public class LatestBlogFragment extends BaseFragment {
         netNews.getLatestBlog(index + "", new NetworkCallback() {
             @Override
             public void onSuccess(String result) {
+
                 XStream xstream = new XStream();
                 xstream.alias("oschina", LatestModel.class);
                 xstream.alias("blog", LatestModel.BlogBean.class);
@@ -94,10 +96,15 @@ public class LatestBlogFragment extends BaseFragment {
                 data.addAll(newslist);
                 LogUtils.e("TAG",index+"--------"+flag);
                 adapter.notifyDataSetChanged();
-                if (flag){
-                    latestrecycler.setLoadMoreComplete();
-                }else {
-                    latestrecycler.setRefreshComplete();
+
+                if (isFrist){
+                    if (flag){
+                        latestrecycler.setLoadMoreComplete();
+                    }else {
+                        latestrecycler.setRefreshComplete();
+                    }
+                }else{
+                    isFrist = true;
                 }
             }
 
@@ -112,7 +119,7 @@ public class LatestBlogFragment extends BaseFragment {
     public void onHidden() {
         super.onHidden();
         LogUtils.e("LatestBlogFragment", "已经被隐藏");
-        flag = false;
+        isFrist = false;
     }
 
 

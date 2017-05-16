@@ -10,7 +10,11 @@ import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.controller.activity.OpenActivity;
 import com.usian.android_app_oschina.model.entity.LatestModel;
+import com.usian.android_app_oschina.utils.DateUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -29,8 +33,18 @@ public class LatestBlogAdapter extends BaseAdapter<LatestModel.BlogBean> {
         holder.setText(R.id.tv_author, newsBean.getAuthorname());
         holder.setText(R.id.tv_description, newsBean.getBody());
         holder.setText(R.id.tv_num, newsBean.getCommentCount());
-        holder.setText(R.id.tv_pubdate, newsBean.getPubDate());
+
         holder.setText(R.id.tv_title, newsBean.getTitle());
+
+        SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = null;
+        try {
+            Date parse = sim.parse(newsBean.getPubDate());
+            time = DateUtils.format(parse);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        holder.setText(R.id.tv_pubdate, time);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

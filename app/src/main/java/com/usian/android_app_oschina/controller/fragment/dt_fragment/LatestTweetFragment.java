@@ -1,6 +1,5 @@
 package com.usian.android_app_oschina.controller.fragment.dt_fragment;
 
-import android.app.ProgressDialog;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
@@ -14,9 +13,9 @@ import com.usian.android_app_oschina.adapter.TweetAdapter;
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.model.entity.LatestTweetModel;
 import com.usian.android_app_oschina.model.entity.StirModel;
-import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.model.http.biz.tweetbus.ILoadTweet;
 import com.usian.android_app_oschina.model.http.biz.tweetbus.LoadTweetImpl;
+import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +39,7 @@ public class LatestTweetFragment extends BaseFragment {
     private boolean flag = false;
     private ILoadTweet iLoadTweet;
     private List<LatestTweetModel.TweetBean> datas = new ArrayList<>();
-    private ProgressDialog dialog;
+    private boolean isFrist;
 
     @Override
     protected int getLayoutId() {
@@ -54,7 +53,7 @@ public class LatestTweetFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-        dialog = ProgressDialog.show(App.activity, "", "loading");
+
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(App.activity, LinearLayoutManager.VERTICAL,false);
         latestsRecycler.setLayoutManager(linearLayoutManager);
         latestsRecycler.addItemDecoration(new DividerItemDecoration(App.activity, DividerItemDecoration.VERTICAL));
@@ -92,7 +91,7 @@ public class LatestTweetFragment extends BaseFragment {
         iLoadTweet.getLatestTweet(index + "", new NetworkCallback() {
             @Override
             public void onSuccess(String result) {
-                dialog.dismiss();
+
                 XStream xStream = new XStream();
                 xStream.alias("oschina", LatestTweetModel.class);
                 xStream.alias("tweet", LatestTweetModel.TweetBean.class);
@@ -100,11 +99,17 @@ public class LatestTweetFragment extends BaseFragment {
                 List<LatestTweetModel.TweetBean> tweets = o.getTweets();
                 datas.addAll(tweets);
                 adapter.notifyDataSetChanged();
-                if (flag){
-                    latestsRecycler.setLoadMoreComplete();
+
+                if (isFrist){
+                    if (flag){
+                        latestsRecycler.setLoadMoreComplete();
+                    }else{
+                        latestsRecycler.setRefreshComplete();
+                    }
                 }else{
-                    latestsRecycler.setRefreshComplete();
+                    isFrist = true;
                 }
+
 
             }
 
@@ -120,7 +125,7 @@ public class LatestTweetFragment extends BaseFragment {
     @Override
     public void onHidden() {
         super.onHidden();
-        flag = false;
+        isFrist = false;
     }
 
     @Override

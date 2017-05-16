@@ -92,9 +92,9 @@ public class SynthesizeFragment extends BaseFragment {
     }
 
     public void upPopupWindow(){
-
-
         PopupWindow popupWindow = new PopupWindow();
+
+
 
     }
 

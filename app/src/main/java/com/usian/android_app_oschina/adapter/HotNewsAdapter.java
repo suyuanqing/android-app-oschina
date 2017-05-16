@@ -10,7 +10,11 @@ import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.controller.activity.OpenActivity;
 import com.usian.android_app_oschina.model.entity.HotNewsModel;
+import com.usian.android_app_oschina.utils.DateUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,6 +22,8 @@ import java.util.List;
  */
 
 public class HotNewsAdapter extends BaseAdapter<HotNewsModel.NewsBean> {
+
+    private String time;
 
     public HotNewsAdapter(Context context, List<HotNewsModel.NewsBean> datas) {
         super(context, R.layout.item_open_hotnews, datas);
@@ -29,7 +35,16 @@ public class HotNewsAdapter extends BaseAdapter<HotNewsModel.NewsBean> {
         holder.setText(R.id.tv_author, newsBean.getAuthor());
         holder.setText(R.id.tv_description, newsBean.getBody());
         holder.setText(R.id.tv_num, newsBean.getCommentCount());
-        holder.setText(R.id.tv_pubdate, newsBean.getPubDate());
+
+        SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date parse = sim.parse(newsBean.getPubDate());
+            time = DateUtils.format(parse);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        holder.setText(R.id.tv_pubdate, time);
         holder.setText(R.id.tv_title, newsBean.getTitle());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

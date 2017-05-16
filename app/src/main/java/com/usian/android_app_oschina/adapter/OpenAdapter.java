@@ -4,12 +4,17 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.model.entity.OpenNewsModel;
+import com.usian.android_app_oschina.utils.DateUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by 苏元庆 on 2017/5/9.
@@ -17,6 +22,8 @@ import java.util.ArrayList;
 public class OpenAdapter extends RecyclerView.Adapter{
     private ArrayList<OpenNewsModel.NewsBean> data;
     Context context;
+    private String time;
+
     public OpenAdapter (Context context, ArrayList<OpenNewsModel.NewsBean> data){
         this.data = data;
         this.context = context;
@@ -24,6 +31,7 @@ public class OpenAdapter extends RecyclerView.Adapter{
 
     class OpenViewHolder extends RecyclerView.ViewHolder {
         TextView title,description,aite,num,padate;
+        ImageView img;
         public OpenViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.tv_title);
@@ -31,6 +39,7 @@ public class OpenAdapter extends RecyclerView.Adapter{
             aite = (TextView) itemView.findViewById(R.id.tv_author);
             num = (TextView) itemView.findViewById(R.id.tv_num);
             padate = (TextView) itemView.findViewById(R.id.tv_pubdate);
+            img = (ImageView) itemView.findViewById(R.id.iv_today);
 
         }
     }
@@ -62,7 +71,15 @@ public class OpenAdapter extends RecyclerView.Adapter{
         openholder.description.setText(data.get(position).getBody());
         openholder.aite.setText(data.get(position).getAuthor());
         openholder.num.setText(data.get(position).getCommentCount());
-        openholder.padate.setText(data.get(position).getPubDate());
+
+        SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            Date parse = sim.parse(data.get(position).getPubDate());
+            time = DateUtils.format(parse);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        openholder.padate.setText(time);
 
         openholder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

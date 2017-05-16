@@ -1,28 +1,31 @@
 package com.usian.android_app_oschina.controller.fragment.zh_fragnemt;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 
 import com.jude.rollviewpager.RollPagerView;
 import com.jude.rollviewpager.adapter.StaticPagerAdapter;
 import com.jude.rollviewpager.hintview.ColorPointHintView;
 import com.thoughtworks.xstream.XStream;
+import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.adapter.OpenAdapter;
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.controller.activity.OpenActivity;
 import com.usian.android_app_oschina.model.entity.OpenNewsModel;
-import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.model.http.biz.newsbus.LoadNewsImpl;
+import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.utils.LogUtils;
 import com.usian.android_app_oschina.utils.ThreadUtils;
 
@@ -30,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import in.srain.cube.views.ptr.PtrClassicDefaultFooter;
 import in.srain.cube.views.ptr.PtrClassicDefaultHeader;
 import in.srain.cube.views.ptr.PtrDefaultHandler2;
@@ -40,7 +44,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
  * 综合下开源资讯的Fragmeng
  */
 
-public class OpenFragment extends BaseFragment implements NetworkCallback{
+public class OpenFragment extends BaseFragment implements NetworkCallback {
 
 
     @Bind(R.id.open_pager)
@@ -49,12 +53,11 @@ public class OpenFragment extends BaseFragment implements NetworkCallback{
     RecyclerView openRecycler;
     @Bind(R.id.ptr_news)
     PtrFrameLayout ptrNews;
-    @Bind(R.id.open_progressbar)
-    ProgressBar openProgressbar;
     private ArrayList<OpenNewsModel.NewsBean> data;
     private OpenAdapter adapter;
     private LinearLayoutManager mLinear;
     private int index = 1;
+    private ProgressDialog dialog;
 
     @Override
     protected int getLayoutId() {
@@ -64,7 +67,7 @@ public class OpenFragment extends BaseFragment implements NetworkCallback{
     @Override
     protected void initData() {
         LoadNewsImpl news = new LoadNewsImpl();
-        news.getNews(index+"",this);
+        news.getNews(index + "", this);
     }
 
     @Override
@@ -81,7 +84,7 @@ public class OpenFragment extends BaseFragment implements NetworkCallback{
         openRecycler.setItemAnimator(new DefaultItemAnimator());
         openRecycler.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         data = new ArrayList<>();
-        adapter = new OpenAdapter(getContext(),data);
+        adapter = new OpenAdapter(getContext(), data);
         openRecycler.setAdapter(adapter);
     }
 
@@ -91,7 +94,7 @@ public class OpenFragment extends BaseFragment implements NetworkCallback{
             @Override
             public void onclickitems(View v, int pos) {
                 Intent intent = new Intent(getContext(), OpenActivity.class);
-                intent.putExtra("id",data.get(pos).getId());
+                intent.putExtra("id", data.get(pos).getId());
                 intent.putExtra("pinglun", data.get(pos).getCommentCount());
                 startActivity(intent);
             }
@@ -100,7 +103,9 @@ public class OpenFragment extends BaseFragment implements NetworkCallback{
 
     @Override
     protected void loadData() {
-
+        dialog = new ProgressDialog(App.activity);
+        dialog.setMessage("loading");
+        dialog.show();
     }
 
     //上拉加载和下拉刷新
@@ -156,7 +161,7 @@ public class OpenFragment extends BaseFragment implements NetworkCallback{
     @Override
     public void onSuccess(String result) {
         ptrNews.refreshComplete();
-        openProgressbar.setVisibility(View.GONE);
+        dialog.dismiss();
 
         XStream xstream = new XStream();
         xstream.alias("oschina", OpenNewsModel.class);
@@ -181,6 +186,20 @@ public class OpenFragment extends BaseFragment implements NetworkCallback{
     @Override
     public void onError(String errormsg) {
         LogUtils.e("OpenFragment", "获取失败：" + errormsg);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        // TODO: inflate a fragment view
+        View rootView = super.onCreateView(inflater, container, savedInstanceState);
+        ButterKnife.bind(this, rootView);
+        return rootView;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        ButterKnife.unbind(this);
     }
 
 

@@ -12,9 +12,9 @@ import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.adapter.ReBlogAdapter;
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.model.entity.ReBlogModel;
-import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.model.http.biz.newsbus.ILoadNetNews;
 import com.usian.android_app_oschina.model.http.biz.newsbus.LoadNewsImpl;
+import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.utils.LogUtils;
 
 import java.util.ArrayList;
@@ -38,6 +38,7 @@ public class ReBlogFragment extends BaseFragment {
     private ArrayList<ReBlogModel.BlogBean> data = new ArrayList<>();
     private ReBlogAdapter adapter;
     private boolean flag = false;
+    private boolean isFrist;
 
     @Override
     protected int getLayoutId() {
@@ -79,7 +80,8 @@ public class ReBlogFragment extends BaseFragment {
     protected void loadData() {
 
         netNews = new LoadNewsImpl();
-        netNews.getRecommBlog(index + "", new NetworkCallback() {
+        netNews.getRecommBlog(index + "",  new NetworkCallback() {
+
             @Override
             public void onSuccess(String result) {
                 XStream xstream = new XStream();
@@ -90,10 +92,15 @@ public class ReBlogFragment extends BaseFragment {
                 data.addAll(newslist);
 
                 adapter.notifyDataSetChanged();
-                if (flag){
-                    reblogRecycler.setLoadMoreComplete();
-                }else {
-                    reblogRecycler.setRefreshComplete();
+
+                if (isFrist){
+                    if (flag){
+                        reblogRecycler.setLoadMoreComplete();
+                    }else {
+                        reblogRecycler.setRefreshComplete();
+                    }
+                }else{
+                    isFrist = true;
                 }
             }
 
@@ -113,7 +120,7 @@ public class ReBlogFragment extends BaseFragment {
     @Override
     public void onHidden() {
         super.onHidden();
-        flag = false;
+        isFrist = false;
         LogUtils.e("ReBlogFragment", "已经被隐藏");
     }
 

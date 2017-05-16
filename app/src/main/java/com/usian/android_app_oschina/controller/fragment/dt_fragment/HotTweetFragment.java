@@ -41,6 +41,7 @@ public class HotTweetFragment extends BaseFragment {
     private ILoadTweet iLoadTweet;
     private List<LatestTweetModel.TweetBean> datas = new ArrayList<>();
     private ProgressDialog dialog;
+    private boolean isFrist;
 
     @Override
     protected int getLayoutId() {
@@ -54,7 +55,9 @@ public class HotTweetFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-        dialog = ProgressDialog.show(App.activity, "", "loading");
+        dialog = new ProgressDialog(App.activity);
+        dialog.setMessage("loading");
+        dialog.show();
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(App.activity, LinearLayoutManager.VERTICAL,false);
         hotTweetRecycler.setLayoutManager(linearLayoutManager);
         hotTweetRecycler.addItemDecoration(new DividerItemDecoration(App.activity, DividerItemDecoration.VERTICAL));
@@ -90,6 +93,7 @@ public class HotTweetFragment extends BaseFragment {
 
         iLoadTweet = new LoadTweetImpl();
         iLoadTweet.getHotTweet(index + "", new NetworkCallback() {
+
             @Override
             public void onSuccess(String result) {
                 dialog.dismiss();
@@ -100,10 +104,16 @@ public class HotTweetFragment extends BaseFragment {
                 List<LatestTweetModel.TweetBean> tweets = o.getTweets();
                 datas.addAll(tweets);
                 adapter.notifyDataSetChanged();
-                if (flag){
-                    hotTweetRecycler.setLoadMoreComplete();
+
+
+                if (isFrist){
+                    if (flag){
+                        hotTweetRecycler.setLoadMoreComplete();
+                    }else{
+                        hotTweetRecycler.setRefreshComplete();
+                    }
                 }else{
-                    hotTweetRecycler.setRefreshComplete();
+                    isFrist = true;
                 }
 
             }
@@ -120,7 +130,7 @@ public class HotTweetFragment extends BaseFragment {
     @Override
     public void onHidden() {
         super.onHidden();
-        flag = false;
+        isFrist = false;
     }
 
     @Override
