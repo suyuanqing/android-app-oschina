@@ -1,5 +1,6 @@
 package com.usian.android_app_oschina.controller.fragment.zh_fragnemt;
 
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -11,9 +12,9 @@ import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.adapter.LatestBlogAdapter;
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.model.entity.LatestModel;
-import com.usian.android_app_oschina.model.http.NetworkCallback;
-import com.usian.android_app_oschina.model.http.biz.LoadNetNews;
-import com.usian.android_app_oschina.model.http.biz.LoadNewsImpl;
+import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
+import com.usian.android_app_oschina.model.http.biz.newsbus.ILoadNetNews;
+import com.usian.android_app_oschina.model.http.biz.newsbus.LoadNewsImpl;
 import com.usian.android_app_oschina.utils.LogUtils;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class LatestBlogFragment extends BaseFragment {
     @Bind(R.id.latest_recycler)
     PullToRefreshRecyclerView latestrecycler;
 
-    private LoadNetNews netNews;
+    private ILoadNetNews netNews;
     private int index = 1;
     private ArrayList<LatestModel.BlogBean> data = new ArrayList<>();
     private boolean flag = false;
@@ -51,13 +52,16 @@ public class LatestBlogFragment extends BaseFragment {
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(App.activity, LinearLayoutManager.VERTICAL,false);
         latestrecycler.setLayoutManager(linearLayoutManager);
+        latestrecycler.addItemDecoration(new DividerItemDecoration(App.activity, DividerItemDecoration.VERTICAL));
         adapter = new LatestBlogAdapter(App.activity,data);
+
         latestrecycler.setPullToRefreshListener(new PullToRefreshListener() {
             @Override
             public void onRefresh() {
                 data.clear();
                 flag = false;
                 loadData();
+
             }
 
             @Override
@@ -92,7 +96,6 @@ public class LatestBlogFragment extends BaseFragment {
                 adapter.notifyDataSetChanged();
                 if (flag){
                     latestrecycler.setLoadMoreComplete();
-                    flag = false;
                 }else {
                     latestrecycler.setRefreshComplete();
                 }
@@ -111,4 +114,7 @@ public class LatestBlogFragment extends BaseFragment {
         LogUtils.e("LatestBlogFragment", "已经被隐藏");
         flag = false;
     }
+
+
+
 }

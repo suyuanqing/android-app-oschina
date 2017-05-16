@@ -83,6 +83,18 @@ public abstract class BaseFragment extends Fragment {
         }
     }*/
 
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            //相当于Fragment的onResume
+            onShow();
+        } else {
+            //相当于Fragment的onPause
+            onHidden();
+        }
+    }
+
     public void onShow(){
 
     }
@@ -113,17 +125,6 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            //相当于Fragment的onResume
-            onShow();
-        } else {
-            //相当于Fragment的onPause
-            onHidden();
-        }
-    }
 
     @Override
     public void onDestroyView() {

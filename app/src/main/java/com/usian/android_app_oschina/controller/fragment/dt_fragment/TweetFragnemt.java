@@ -19,7 +19,7 @@ import butterknife.ButterKnife;
  * 动弹的Fragment。
  */
 
-public class StirFragnemt extends BaseFragment {
+public class TweetFragnemt extends BaseFragment {
 
     @Bind(R.id.dt_tab)
     TabLayout dtTab;
@@ -41,10 +41,10 @@ public class StirFragnemt extends BaseFragment {
     @Override
     protected void initView(View view) {
         dtViewpager.setOffscreenPageLimit(4);
-        data.add(new LatestFragment());
-        data.add(new HotFragment());
+        data.add(new LatestTweetFragment());
+        data.add(new HotTweetFragment());
         data.add(new ThrumFragment());
-        data.add(new MyTanFragment());
+        data.add(new MineTweetFragment());
         DongTanAdapter adapter = new DongTanAdapter(getActivity().getSupportFragmentManager(),data);
         dtViewpager.setAdapter(adapter);
         dtTab.setupWithViewPager(dtViewpager);

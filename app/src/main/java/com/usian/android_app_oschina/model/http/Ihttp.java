@@ -1,5 +1,8 @@
 package com.usian.android_app_oschina.model.http;
 
+import com.usian.android_app_oschina.model.http.callback.InfoIdCallback;
+import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
+
 import java.util.Map;
 
 /**
@@ -23,6 +26,14 @@ public interface Ihttp {
      * @param params 传入的参数
      * @param networkCallback
      */
-    void dpPost(String url, Map<String, String> params, NetworkCallback networkCallback);
+    void doPost(String url, Map<String, String> params, NetworkCallback networkCallback);
+
+    /**
+     * 解析自定义的XMlResquest(适用于Volley解析)
+     * @param url
+     * @param params
+     * @param infoIdCallback (因为是pull解析，所以用另一个callback)
+     */
+    void doXml(String url, Map<String, String> params, InfoIdCallback infoIdCallback);
 
 }

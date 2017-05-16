@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina.model.concall;
+package com.usian.android_app_oschina.contact;
 
 /**
  * Created by 苏元庆 on 2017/5/11.
@@ -14,6 +14,9 @@ public class Urls {
     //新闻资讯
     public static final String NEWSURL = BASEURL+"action/api/news_list";
 
+    //新闻id
+    public static final String NEWS_ID_URL = BASEURL+"action/api/news_detail";
+
     //推荐博客
     public static final String RECOMMBLOG = BASEURL+"action/api/blog_list";
 
@@ -22,6 +25,9 @@ public class Urls {
 
     //热门资讯
     public static final String HOTNEWS = BASEURL+"action/api/news_list";
+
+    //动弹apiurl
+    public static final String TWEETURL = BASEURL+"action/api/tweet_list";
 
 
 }

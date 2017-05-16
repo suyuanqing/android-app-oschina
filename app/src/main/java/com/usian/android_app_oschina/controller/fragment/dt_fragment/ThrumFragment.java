@@ -25,7 +25,7 @@ public class ThrumFragment extends BaseFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.fragment_latest;
+        return R.layout.fragment_tweet_latest;
     }
 
     @Override

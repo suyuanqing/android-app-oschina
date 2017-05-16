@@ -1,9 +1,10 @@
-package com.usian.android_app_oschina.model.http.biz;
+package com.usian.android_app_oschina.model.http.biz.newsbus;
 
-import com.usian.android_app_oschina.model.concall.Arguments;
-import com.usian.android_app_oschina.model.concall.Urls;
+import com.usian.android_app_oschina.contact.Arguments;
+import com.usian.android_app_oschina.contact.Urls;
 import com.usian.android_app_oschina.model.http.HttpFactory;
-import com.usian.android_app_oschina.model.http.NetworkCallback;
+import com.usian.android_app_oschina.model.http.callback.InfoIdCallback;
+import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.Map;
  * 业务的具体实现类
  */
 
-public class LoadNewsImpl implements LoadNetNews {
+public class LoadNewsImpl implements ILoadNetNews {
     //开源博客
     @Override
     public void getNews(String pageIndex, NetworkCallback networkCallback) {
@@ -60,5 +61,14 @@ public class LoadNewsImpl implements LoadNetNews {
         params.put("pageSize", Arguments.PAGESIZE+"");
 
         HttpFactory.create().doGet(Urls.LATESTBLOG,params,networkCallback);
+    }
+
+    //获取新闻id
+    @Override
+    public void getNewsId(String id, InfoIdCallback infoIdCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id",id);
+
+        HttpFactory.create().doXml(Urls.NEWS_ID_URL, params, infoIdCallback);
     }
 }

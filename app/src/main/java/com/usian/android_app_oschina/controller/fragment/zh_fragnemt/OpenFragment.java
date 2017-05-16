@@ -21,8 +21,8 @@ import com.usian.android_app_oschina.adapter.OpenAdapter;
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.controller.activity.OpenActivity;
 import com.usian.android_app_oschina.model.entity.OpenNewsModel;
-import com.usian.android_app_oschina.model.http.NetworkCallback;
-import com.usian.android_app_oschina.model.http.biz.LoadNewsImpl;
+import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
+import com.usian.android_app_oschina.model.http.biz.newsbus.LoadNewsImpl;
 import com.usian.android_app_oschina.utils.LogUtils;
 import com.usian.android_app_oschina.utils.ThreadUtils;
 
@@ -91,8 +91,8 @@ public class OpenFragment extends BaseFragment implements NetworkCallback{
             @Override
             public void onclickitems(View v, int pos) {
                 Intent intent = new Intent(getContext(), OpenActivity.class);
-                LogUtils.e("OpenFragment", "发送给OpenAdapter的URL为：" + data.get(pos).getUrl());
-                intent.putExtra("url",data.get(pos).getUrl());
+                intent.putExtra("id",data.get(pos).getId());
+                intent.putExtra("pinglun", data.get(pos).getCommentCount());
                 startActivity(intent);
             }
         });

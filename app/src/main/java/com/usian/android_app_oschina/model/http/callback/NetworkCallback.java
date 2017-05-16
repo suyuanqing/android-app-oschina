@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina.model.http;
+package com.usian.android_app_oschina.model.http.callback;
 
 /**
  * Created by 苏元庆 on 2017/5/11.

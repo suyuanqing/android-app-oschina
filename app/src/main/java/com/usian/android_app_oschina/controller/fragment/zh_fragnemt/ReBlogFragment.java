@@ -1,5 +1,6 @@
 package com.usian.android_app_oschina.controller.fragment.zh_fragnemt;
 
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -11,9 +12,9 @@ import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.adapter.ReBlogAdapter;
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.model.entity.ReBlogModel;
-import com.usian.android_app_oschina.model.http.NetworkCallback;
-import com.usian.android_app_oschina.model.http.biz.LoadNetNews;
-import com.usian.android_app_oschina.model.http.biz.LoadNewsImpl;
+import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
+import com.usian.android_app_oschina.model.http.biz.newsbus.ILoadNetNews;
+import com.usian.android_app_oschina.model.http.biz.newsbus.LoadNewsImpl;
 import com.usian.android_app_oschina.utils.LogUtils;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class ReBlogFragment extends BaseFragment {
     @Bind(R.id.reblog_recycler)
     PullToRefreshRecyclerView reblogRecycler;
 
-    private LoadNetNews netNews;
+    private ILoadNetNews netNews;
     private int index = 1;
     private ArrayList<ReBlogModel.BlogBean> data = new ArrayList<>();
     private ReBlogAdapter adapter;
@@ -48,6 +49,7 @@ public class ReBlogFragment extends BaseFragment {
     protected void initView(View view) {
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(App.activity, LinearLayoutManager.VERTICAL,false);
         reblogRecycler.setLayoutManager(linearLayoutManager);
+        reblogRecycler.addItemDecoration(new DividerItemDecoration(App.activity, DividerItemDecoration.VERTICAL));
         adapter = new ReBlogAdapter(App.activity,data);
         reblogRecycler.setPullToRefreshListener(new PullToRefreshListener() {
             @Override

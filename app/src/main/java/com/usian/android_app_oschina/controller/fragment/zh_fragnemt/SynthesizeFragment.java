@@ -4,9 +4,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.animation.RotateAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 
+import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.adapter.ZHPagerAdapter;
 import com.usian.android_app_oschina.base.BaseFragment;
@@ -31,6 +34,9 @@ public class SynthesizeFragment extends BaseFragment {
     ImageView ivIcAdd;
     private ArrayList<Fragment> data = new ArrayList<>();
     private ZHPagerAdapter title_adapter;
+    private Animation animation;
+    private Animation animation1;
+    private boolean iv_rotation = true;
 
     @Override
     protected int getLayoutId() {
@@ -39,7 +45,14 @@ public class SynthesizeFragment extends BaseFragment {
 
     @Override
     protected void initData() {
+        animation = AnimationUtils.loadAnimation(App.activity, R.anim.ic_add_rotation);
+        animation.setFillAfter(true);
+        iv_rotation = animation.getFillAfter();
+        animation.setDuration(500);
 
+        animation1 = AnimationUtils.loadAnimation(App.activity, R.anim.ic_add_rotation_false);
+        animation1.setFillAfter(true);
+        animation1.setDuration(500);
     }
 
     @Override
@@ -68,10 +81,21 @@ public class SynthesizeFragment extends BaseFragment {
 
     @OnClick(R.id.iv_ic_add)
     public void onViewClicked() {
+        if (iv_rotation){
+            ivIcAdd.startAnimation(animation);
+            iv_rotation = false;
+        }else{
+            ivIcAdd.startAnimation(animation1);
+            iv_rotation = true;
+        }
 
-        RotateAnimation rotateAnimation = new RotateAnimation(0,225);
-
-        ivIcAdd.setAnimation(rotateAnimation);
-        rotateAnimation.setDuration(2000);
     }
+
+    public void upPopupWindow(){
+
+
+        PopupWindow popupWindow = new PopupWindow();
+
+    }
+
 }

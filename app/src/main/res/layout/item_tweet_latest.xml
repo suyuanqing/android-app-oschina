@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="@color/white">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:id="@+id/iv_tweet_userTitle"
+        android:layout_margin="10dp"
+        android:background="@mipmap/ic_launcher"/>
+
+        <LinearLayout
+            android:id="@+id/tweet_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/iv_tweet_userTitle"
+            >
+
+            <TextView
+                android:id="@+id/tv_tweet_userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                android:textColor="@android:color/black"
+                android:text="苏元庆"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_tweet_body"
+                android:layout_marginTop="5dp"
+                android:text="天气真好"/>
+
+            <ImageView
+                android:id="@+id/iv_tweet_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tweet_linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tweet_linear"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/iv_tweet_userTitle">
+
+        <TextView
+            android:id="@+id/tv_tweet_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <RadioGroup
+            android:id="@+id/btns"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="bottom"
+            android:weightSum="3"
+            android:layout_weight="2"
+            android:background="@color/white"
+            android:layout_gravity="center"
+            >
+
+            <CheckBox
+                android:id="@+id/btn_tweet_dianzan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableLeft="@drawable/dianzan_icon"
+                android:gravity="center"
+                android:text="@string/dianzan"
+                android:textColor="@color/black_dan"/>
+
+            <CheckBox
+                android:id="@+id/btn_tweet_dianzan_pinglun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableLeft="@mipmap/ic_comment_30"
+                android:gravity="center"
+                android:text="@string/pinglun"
+                android:textColor="@color/black_dan"/>
+
+            <CheckBox
+                android:id="@+id/btn_tweet_zhuanfa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:button="@null"
+                android:drawableLeft="@mipmap/ic_forward"
+                android:gravity="center"
+                android:text="@string/zhuanfa"
+                android:textColor="@color/black_dan"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -7,10 +7,17 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.usian.android_app_oschina.App;
+import com.usian.android_app_oschina.costom.XMLRequest;
 import com.usian.android_app_oschina.model.http.Ihttp;
-import com.usian.android_app_oschina.model.http.NetworkCallback;
+import com.usian.android_app_oschina.model.http.callback.InfoIdCallback;
+import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.utils.LogUtils;
 
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -70,7 +77,62 @@ public class VolleyUtil implements Ihttp {
     }
 
     @Override
-    public void dpPost(String url, Map<String, String> params, NetworkCallback networkCallback) {
+    public void doPost(String url, Map<String, String> params, NetworkCallback networkCallback) {
 
     }
+
+    @Override
+    public void doXml(String url, Map<String, String> params, final InfoIdCallback infoIdCallback) {
+        StringBuffer apiurl = new StringBuffer();
+        apiurl.append(url+"?");
+        int index = 0;
+        for (String s : params.keySet()){
+            index++;
+            apiurl.append(s+"="+params.get(s));
+            if (index < params.size())
+                apiurl.append("&");
+        }
+
+        String string = apiurl.toString();
+        LogUtils.d("TAG", "doXml: "+string);
+        XMLRequest xmlRequest = new XMLRequest(Request.Method.GET, string, new Response.Listener<XmlPullParser>() {
+            @Override
+            public void onResponse(XmlPullParser response) {
+                try {
+                    int eventType = response.getEventType();
+                    while (eventType != XmlPullParser.END_DOCUMENT) {
+                        switch (eventType) {
+                            case XmlPullParser.START_TAG:
+                                String nodeName = response.getName();
+                                Map<String, String> params = new HashMap<>();
+
+                                if ("url".equals(nodeName)) {
+                                    String url = response.nextText();
+                                    params.put("id", url);
+                                    infoIdCallback.onSuccess(params);
+                                }else if ("commentCount".equals(nodeName)){
+                                    String commentCount = response.nextText();
+                                    params.put("commentCount", commentCount);
+                                    infoIdCallback.onSuccess(params);
+                                }
+                                break;
+                        }
+                        eventType = response.next();
+                    }
+                } catch (XmlPullParserException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+             }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+                infoIdCallback.onError(volleyError.getMessage());
+            }
+        });
+        requestQueue.add(xmlRequest);
+    }
+
+
 }

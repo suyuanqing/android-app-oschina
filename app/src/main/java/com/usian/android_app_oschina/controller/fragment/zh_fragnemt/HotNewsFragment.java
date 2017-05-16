@@ -1,5 +1,6 @@
 package com.usian.android_app_oschina.controller.fragment.zh_fragnemt;
 
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -11,9 +12,9 @@ import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.adapter.HotNewsAdapter;
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.model.entity.HotNewsModel;
-import com.usian.android_app_oschina.model.http.NetworkCallback;
-import com.usian.android_app_oschina.model.http.biz.LoadNetNews;
-import com.usian.android_app_oschina.model.http.biz.LoadNewsImpl;
+import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
+import com.usian.android_app_oschina.model.http.biz.newsbus.ILoadNetNews;
+import com.usian.android_app_oschina.model.http.biz.newsbus.LoadNewsImpl;
 import com.usian.android_app_oschina.utils.LogUtils;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class HotNewsFragment extends BaseFragment {
     @Bind(R.id.hotnews_recycler)
     PullToRefreshRecyclerView hotnewsRecycler;
 
-    private LoadNetNews netNews;
+    private ILoadNetNews netNews;
     private int index = 1;
     private ArrayList<HotNewsModel.NewsBean> data = new ArrayList<>();
     private boolean flag = false;
@@ -51,6 +52,7 @@ public class HotNewsFragment extends BaseFragment {
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(App.activity, LinearLayoutManager.VERTICAL,false);
         hotnewsRecycler.setLayoutManager(linearLayoutManager);
+        hotnewsRecycler.addItemDecoration(new DividerItemDecoration(App.activity, DividerItemDecoration.VERTICAL));
         adapter = new HotNewsAdapter(App.activity,data);
 
         hotnewsRecycler.displayLastRefreshTime(true);
@@ -114,9 +116,5 @@ public class HotNewsFragment extends BaseFragment {
         LogUtils.e("HotNewsFragment","已经被隐藏");
     }
 
-    @Override
-    public void onShow() {
-        super.onShow();
-        LogUtils.e("HotNewsFragment","正在显示");
-    }
+
 }

@@ -7,6 +7,7 @@
     <string name="title_faxian">发现</string>
     <string name="title_my">我的</string>
     <string name="title_zixun_info">资讯详情</string>
+    <string name="loading">正在加载</string>
 
 
     <!--SearchView hint-->
@@ -19,5 +20,15 @@
     <string name="fx_yyy">摇一摇</string>
     <string name="fx_fjcxy">附近的程序员</string>
     <string name="fx_xxhd">线下活动</string>
+
+    <!--动弹-->
+    <string name="dianzan">赞</string>
+    <string name="pinglun">评论</string>
+    <string name="zhuanfa">转发</string>
+
+    <!--搜索-->
+    <string name="sear_text">搜索博客、软件、资讯、问答、找人</string>
+    <string name="cencel_sear">取消</string>
+
 
 </resources>

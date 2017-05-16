@@ -1,5 +1,8 @@
 package com.usian.android_app_oschina;
 
+import android.content.Intent;
+import android.os.Process;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -10,7 +13,9 @@ import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.usian.android_app_oschina.base.BaseActivity;
-import com.usian.android_app_oschina.controller.fragment.dt_fragment.StirFragnemt;
+import com.usian.android_app_oschina.base.BaseFragment;
+import com.usian.android_app_oschina.controller.activity.SearchActivity;
+import com.usian.android_app_oschina.controller.fragment.dt_fragment.TweetFragnemt;
 import com.usian.android_app_oschina.controller.fragment.fx_fragment.FxFragment;
 import com.usian.android_app_oschina.controller.fragment.my_fragment.MineFragment;
 import com.usian.android_app_oschina.controller.fragment.zh_fragnemt.SynthesizeFragment;
@@ -82,7 +87,7 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.btn_explore_move:
                 titleName.setText(R.string.title_dongtan);
-                FragmentBuilder.getInstance().containerId(R.id.pager).start(StirFragnemt.class);
+                FragmentBuilder.getInstance().containerId(R.id.pager).start(TweetFragnemt.class);
                 break;
             case R.id.iv_explore_plus:
 
@@ -101,8 +106,30 @@ public class MainActivity extends BaseActivity {
     //    TODO 搜索
     @OnClick(R.id.iv_btn_search_normal)
     public void onViewClicked() {
-
+        startActivity(new Intent(this, SearchActivity.class));
     }
 
+
+    /**
+     * 捕获back键 当back键被按下时
+     */
+    @Override
+    public void onBackPressed() {
+
+        FragmentManager manager = getSupportFragmentManager();
+        FragmentManager.BackStackEntry entry = manager.getBackStackEntryAt(manager.getBackStackEntryCount() - 1);
+        String name = entry.getName();
+        if("SynthesizeFragment".equals(name) || "TweetFragnemt".equals(name)
+                || "MineFragment".equals(name) || "FxFragment".equals(name)){
+            Process.killProcess(Process.myPid());
+            System.exit(0);
+        }else {
+            manager.popBackStackImmediate();
+            String fragmentName = manager.getBackStackEntryAt(manager.getBackStackEntryCount() - 1).getName();
+            BaseFragment fragment = (BaseFragment) manager.findFragmentByTag(fragmentName);
+            FragmentBuilder.getInstance().setLastFragment(fragment);
+        }
+
+    }
 
 }
