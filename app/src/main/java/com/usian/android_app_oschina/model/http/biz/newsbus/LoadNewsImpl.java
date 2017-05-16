@@ -71,4 +71,12 @@ public class LoadNewsImpl implements ILoadNetNews {
 
         HttpFactory.create().doXml(Urls.NEWS_ID_URL, params, infoIdCallback);
     }
+
+    @Override
+    public void getBlogId(String id, InfoIdCallback infoIdCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id",id);
+
+        HttpFactory.create().doXml(Urls.BLOG_ID_URL, params, infoIdCallback);
+    }
 }

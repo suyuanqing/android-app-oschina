@@ -1,7 +1,6 @@
 package com.usian.android_app_oschina.controller.fragment.zh_fragnemt;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -9,7 +8,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -20,10 +19,12 @@ import com.jude.rollviewpager.hintview.ColorPointHintView;
 import com.thoughtworks.xstream.XStream;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
-import com.usian.android_app_oschina.adapter.OpenAdapter;
+import com.usian.android_app_oschina.adapter.BlogAdapter;
+import com.usian.android_app_oschina.adapter.NewsAdapter;
 import com.usian.android_app_oschina.base.BaseFragment;
-import com.usian.android_app_oschina.controller.activity.OpenActivity;
 import com.usian.android_app_oschina.model.entity.OpenNewsModel;
+import com.usian.android_app_oschina.model.entity.ReBlogModel;
+import com.usian.android_app_oschina.model.http.biz.newsbus.ILoadNetNews;
 import com.usian.android_app_oschina.model.http.biz.newsbus.LoadNewsImpl;
 import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.utils.LogUtils;
@@ -33,7 +34,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import in.srain.cube.views.ptr.PtrClassicDefaultFooter;
 import in.srain.cube.views.ptr.PtrClassicDefaultHeader;
 import in.srain.cube.views.ptr.PtrDefaultHandler2;
@@ -53,11 +53,16 @@ public class OpenFragment extends BaseFragment implements NetworkCallback {
     RecyclerView openRecycler;
     @Bind(R.id.ptr_news)
     PtrFrameLayout ptrNews;
-    private ArrayList<OpenNewsModel.NewsBean> data;
-    private OpenAdapter adapter;
+    private ArrayList<OpenNewsModel.NewsBean> newsdata;
+    private ArrayList<ReBlogModel.BlogBean> blogdata;
+    private NewsAdapter newsAdapter;
+    private BlogAdapter blogAdapter;
     private LinearLayoutManager mLinear;
     private int index = 1;
     private ProgressDialog dialog;
+    private ArrayList<String> list;
+    private int flag;
+    private ILoadNetNews iLoadNetNews;
 
     @Override
     protected int getLayoutId() {
@@ -66,12 +71,34 @@ public class OpenFragment extends BaseFragment implements NetworkCallback {
 
     @Override
     protected void initData() {
-        LoadNewsImpl news = new LoadNewsImpl();
-        news.getNews(index + "", this);
+        openPager.setVisibility(View.GONE);
+        newsAdapter = new NewsAdapter(getContext(), newsdata);
+        blogAdapter = new BlogAdapter(getContext(), blogdata);
+
+        if (list.get(flag).equals("开源资讯")){
+
+            openRecycler.setAdapter(newsAdapter);
+        }else if (list.get(flag).equals("推荐博客")){
+
+            openRecycler.setAdapter(blogAdapter);
+        }else if (list.get(flag).equals("热门资讯")){
+
+            openRecycler.setAdapter(newsAdapter);
+        }else if (list.get(flag).equals("最新博客")){
+
+            openRecycler.setAdapter(blogAdapter);
+        }
     }
 
     @Override
     protected void initView(View view) {
+        Bundle bundle = this.getArguments();
+        if(bundle != null){
+            list = bundle.getStringArrayList("content");
+            flag = bundle.getInt("flag");
+        }
+        Log.e("NewsInfoActivity", "当前Fragmeng位置："+list.get(flag));
+
         initImg();
         ptrShow();
         mLinear = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -83,68 +110,120 @@ public class OpenFragment extends BaseFragment implements NetworkCallback {
         openRecycler.setNestedScrollingEnabled(false);
         openRecycler.setItemAnimator(new DefaultItemAnimator());
         openRecycler.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        data = new ArrayList<>();
-        adapter = new OpenAdapter(getContext(), data);
-        openRecycler.setAdapter(adapter);
+        newsdata = new ArrayList<>();
+        blogdata = new ArrayList<>();
+
+
+
     }
 
     @Override
     protected void initListener() {
-        adapter.setOnClickitems(new OpenAdapter.Onclickitemre() {
-            @Override
-            public void onclickitems(View v, int pos) {
-                Intent intent = new Intent(getContext(), OpenActivity.class);
-                intent.putExtra("id", data.get(pos).getId());
-                intent.putExtra("pinglun", data.get(pos).getCommentCount());
-                startActivity(intent);
-            }
-        });
+
+
+
     }
 
     @Override
     protected void loadData() {
         dialog = new ProgressDialog(App.activity);
         dialog.setMessage("loading");
-        dialog.show();
+//        dialog.show();
+        iLoadNetNews = new LoadNewsImpl();
+
+        if (list.get(flag).equals("开源资讯")){
+            iLoadNetNews.getNews(index + "", this);
+        }else if (list.get(flag).equals("推荐博客")){
+            iLoadNetNews.getRecommBlog(index + "", this);
+        }else if (list.get(flag).equals("热门资讯")){
+            iLoadNetNews.getHotNews(index + "", this);
+        }else if (list.get(flag).equals("最新博客")){
+            iLoadNetNews.getLatestBlog(index + "", this);
+        }
+
     }
 
-    //上拉加载和下拉刷新
-    public void ptrShow() {
-        PtrClassicDefaultFooter footer = new PtrClassicDefaultFooter(getContext());
-        PtrClassicDefaultHeader header = new PtrClassicDefaultHeader(getContext());
+    @Override
+    public void onSuccess(String result) {
+        ptrNews.refreshComplete();
+        dialog.dismiss();
 
-        ptrNews.setHeaderView(header);
-        ptrNews.setFooterView(footer);
-        ptrNews.addPtrUIHandler(header);
-        ptrNews.addPtrUIHandler(footer);
+        if (list.get(flag).equals("开源资讯")){
 
-        ptrNews.setPtrHandler(new PtrDefaultHandler2() {
+            openPager.setVisibility(View.VISIBLE);
+            XStream xstream = new XStream();
+            xstream.alias("oschina", OpenNewsModel.class);
+            xstream.alias("news", OpenNewsModel.NewsBean.class);
+            OpenNewsModel o = (OpenNewsModel) xstream.fromXML(result);
+            List<OpenNewsModel.NewsBean> newslist = o.getNewslist();
+            newsdata.addAll(newslist);
+            newspositioning();
+        }else if (list.get(flag).equals("推荐博客")){
+
+            XStream xstream = new XStream();
+            xstream.alias("oschina", ReBlogModel.class);
+            xstream.alias("blog", ReBlogModel.BlogBean.class);
+            ReBlogModel o = (ReBlogModel) xstream.fromXML(result);
+            List<ReBlogModel.BlogBean> newslist = o.getBlogs();
+            blogdata.addAll(newslist);
+            blogpositioning();
+        }else if (list.get(flag).equals("热门资讯")){
+
+            XStream xstream = new XStream();
+            xstream.alias("oschina", OpenNewsModel.class);
+            xstream.alias("news", OpenNewsModel.NewsBean.class);
+            OpenNewsModel o = (OpenNewsModel) xstream.fromXML(result);
+            List<OpenNewsModel.NewsBean> newslist = o.getNewslist();
+            newsdata.addAll(newslist);
+            newspositioning();
+
+        }else if (list.get(flag).equals("最新博客")){
+            XStream xstream = new XStream();
+            xstream.alias("oschina", ReBlogModel.class);
+            xstream.alias("blog", ReBlogModel.BlogBean.class);
+            ReBlogModel o = (ReBlogModel) xstream.fromXML(result);
+            List<ReBlogModel.BlogBean> newslist = o.getBlogs();
+            blogdata.addAll(newslist);
+            blogpositioning();
+
+            blogpositioning();
+        }
+
+
+
+
+
+    }
+
+    //定位当前浏览位置
+    public void newspositioning(){
+        ThreadUtils.runOnUIThread(new Runnable() {
             @Override
-            public void onLoadMoreBegin(PtrFrameLayout frame) {
-                index++;
-                initData();
-            }
-
-            @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                ThreadUtils.runOnSubThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        SystemClock.sleep(2000);
-                        ThreadUtils.runOnUIThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                ptrNews.refreshComplete();
-                                adapter.notifyDataSetChanged();
-                            }
-                        });
-                    }
-                });
-
+            public void run() {
+                newsAdapter.notifyDataSetChanged();
+                mLinear.scrollToPositionWithOffset(newsdata.size(), newsdata.size());
+                mLinear.setStackFromEnd(true);
             }
         });
-
     }
+
+    public void blogpositioning(){
+        ThreadUtils.runOnUIThread(new Runnable() {
+            @Override
+            public void run() {
+                newsAdapter.notifyDataSetChanged();
+                mLinear.scrollToPositionWithOffset(blogdata.size(), blogdata.size());
+                mLinear.setStackFromEnd(true);
+            }
+        });
+    }
+
+    @Override
+    public void onError(String errormsg) {
+        LogUtils.e("OpenFragment", "获取失败：" + errormsg);
+    }
+
+
 
     //设置轮播图
     public void initImg() {
@@ -158,52 +237,7 @@ public class OpenFragment extends BaseFragment implements NetworkCallback {
         openPager.setHintView(new ColorPointHintView(getContext(), Color.YELLOW, Color.WHITE));
     }
 
-    @Override
-    public void onSuccess(String result) {
-        ptrNews.refreshComplete();
-        dialog.dismiss();
-
-        XStream xstream = new XStream();
-        xstream.alias("oschina", OpenNewsModel.class);
-        xstream.alias("news", OpenNewsModel.NewsBean.class);
-        OpenNewsModel o = (OpenNewsModel) xstream.fromXML(result);
-        List<OpenNewsModel.NewsBean> newslist = o.getNewslist();
-        data.addAll(newslist);
-
-
-        ThreadUtils.runOnUIThread(new Runnable() {
-            @Override
-            public void run() {
-                adapter.notifyDataSetChanged();
-                mLinear.scrollToPositionWithOffset(data.size(), data.size());
-                mLinear.setStackFromEnd(true);
-            }
-        });
-
-
-    }
-
-    @Override
-    public void onError(String errormsg) {
-        LogUtils.e("OpenFragment", "获取失败：" + errormsg);
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
-    }
-
-
-    private class TestNormalAdapter extends StaticPagerAdapter {
+    private static class TestNormalAdapter extends StaticPagerAdapter {
         private int[] images = {
                 R.mipmap.a,
                 R.mipmap.b,
@@ -226,6 +260,60 @@ public class OpenFragment extends BaseFragment implements NetworkCallback {
             return images.length;
         }
 
+    }
+
+    public static OpenFragment newInstance(List<String> contentList,int flag){
+        Bundle bundle = new Bundle();
+        bundle.putStringArrayList("content", (ArrayList<String>) contentList);
+        bundle.putInt("flag", flag);
+        OpenFragment testFm = new OpenFragment();
+        testFm.setArguments(bundle);
+
+        return testFm;
+
+    }
+
+    //上拉加载和下拉刷新
+    public void ptrShow() {
+        PtrClassicDefaultFooter footer = new PtrClassicDefaultFooter(getContext());
+        PtrClassicDefaultHeader header = new PtrClassicDefaultHeader(getContext());
+
+        ptrNews.setHeaderView(header);
+        ptrNews.setFooterView(footer);
+        ptrNews.addPtrUIHandler(header);
+        ptrNews.addPtrUIHandler(footer);
+
+        ptrNews.setPtrHandler(new PtrDefaultHandler2() {
+            @Override
+            public void onLoadMoreBegin(PtrFrameLayout frame) {
+                index++;
+                loadData();
+            }
+
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                ThreadUtils.runOnSubThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SystemClock.sleep(2000);
+                        ThreadUtils.runOnUIThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ptrNews.refreshComplete();
+                                if (list.get(flag).equals("开源资讯") &&
+                                        list.get(flag).equals("热门资讯")){
+                                    newsAdapter.notifyDataSetChanged();
+                                    }else{
+
+                                blogAdapter.notifyDataSetChanged();
+                                 }
+                            }
+                        });
+                    }
+                });
+
+            }
+        });
 
     }
 

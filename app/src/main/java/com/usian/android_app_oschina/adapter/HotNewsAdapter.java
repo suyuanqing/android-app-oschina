@@ -8,7 +8,7 @@ import com.androidkun.adapter.BaseAdapter;
 import com.androidkun.adapter.ViewHolder;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
-import com.usian.android_app_oschina.controller.activity.OpenActivity;
+import com.usian.android_app_oschina.controller.activity.NewsInfoActivity;
 import com.usian.android_app_oschina.model.entity.HotNewsModel;
 import com.usian.android_app_oschina.utils.DateUtils;
 
@@ -50,7 +50,7 @@ public class HotNewsAdapter extends BaseAdapter<HotNewsModel.NewsBean> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(App.activity, OpenActivity.class);
+                Intent intent = new Intent(App.activity, NewsInfoActivity.class);
                 intent.putExtra("id", newsBean.getId());
                 App.activity.startActivity(intent);
             }

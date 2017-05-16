@@ -25,4 +25,7 @@ public interface ILoadNetNews {
     //请求新闻详情ID
     void getNewsId(String id, InfoIdCallback infoIdCallback);
 
+    //请求博客详情ID
+    void getBlogId(String id, InfoIdCallback infoIdCallback);
+
 }

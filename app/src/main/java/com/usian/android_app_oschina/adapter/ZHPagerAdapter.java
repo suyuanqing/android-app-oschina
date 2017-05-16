@@ -4,18 +4,22 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.usian.android_app_oschina.base.BaseFragment;
+
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by 苏元庆 on 2017/5/9.
  */
 
 public class ZHPagerAdapter extends FragmentPagerAdapter{
-    private ArrayList<Fragment> data;
-    private String[] titlename = {"开源资讯","推荐资讯","热门资讯","最新博客"};
-    public ZHPagerAdapter(FragmentManager fm, ArrayList<Fragment> data) {
+    private ArrayList<BaseFragment> data;
+    private List<String> titleList;
+    public ZHPagerAdapter(FragmentManager fm, ArrayList<BaseFragment> data, List<String> titleList) {
         super(fm);
         this.data = data;
+        this.titleList = titleList;
     }
 
     @Override
@@ -30,6 +34,6 @@ public class ZHPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return titlename[position];
+        return titleList.get(position);
     }
 }

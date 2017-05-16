@@ -1,14 +1,17 @@
 package com.usian.android_app_oschina.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
-import com.usian.android_app_oschina.model.entity.OpenNewsModel;
+import com.usian.android_app_oschina.controller.activity.BlogInfoActivity;
+import com.usian.android_app_oschina.model.entity.ReBlogModel;
 import com.usian.android_app_oschina.utils.DateUtils;
 
 import java.text.ParseException;
@@ -19,20 +22,20 @@ import java.util.Date;
 /**
  * Created by 苏元庆 on 2017/5/9.
  */
-public class OpenAdapter extends RecyclerView.Adapter{
-    private ArrayList<OpenNewsModel.NewsBean> data;
+public class BlogAdapter extends RecyclerView.Adapter{
+    private ArrayList<ReBlogModel.BlogBean> data;
     Context context;
     private String time;
 
-    public OpenAdapter (Context context, ArrayList<OpenNewsModel.NewsBean> data){
+    public BlogAdapter(Context context, ArrayList<ReBlogModel.BlogBean> data){
         this.data = data;
         this.context = context;
     }
 
-    class OpenViewHolder extends RecyclerView.ViewHolder {
+    class BlogViewHolder extends RecyclerView.ViewHolder {
         TextView title,description,aite,num,padate;
         ImageView img;
-        public OpenViewHolder(View itemView) {
+        public BlogViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.tv_title);
             description = (TextView) itemView.findViewById(R.id.tv_description);
@@ -47,29 +50,19 @@ public class OpenAdapter extends RecyclerView.Adapter{
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View v = View.inflate(parent.getContext(), R.layout.item_open_news,null);
+        View v = View.inflate(parent.getContext(), R.layout.item_open_reblog,null);
 
-        return new OpenViewHolder(v);
-    }
-
-    public interface Onclickitemre{
-        void onclickitems(View v, int pos);
-    }
-
-    private Onclickitemre onclickitems;
-
-    public void setOnClickitems(Onclickitemre onclickitems){
-        this.onclickitems = onclickitems;
+        return new BlogViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
-        final OpenViewHolder openholder = (OpenViewHolder) holder;
+        final BlogViewHolder openholder = (BlogViewHolder) holder;
 
         openholder.title.setText(data.get(position).getTitle());
         openholder.description.setText(data.get(position).getBody());
-        openholder.aite.setText(data.get(position).getAuthor());
+        openholder.aite.setText(data.get(position).getAuthorname());
         openholder.num.setText(data.get(position).getCommentCount());
 
         SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -84,10 +77,12 @@ public class OpenAdapter extends RecyclerView.Adapter{
         openholder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int pos = openholder.getLayoutPosition();
-                onclickitems.onclickitems(openholder.itemView,pos);
+                Intent intent = new Intent(App.activity, BlogInfoActivity.class);
+                intent.putExtra("id", data.get(position).getId());
+                App.activity.startActivity(intent);
             }
         });
+
 
     }
 

@@ -30,5 +30,13 @@
     <string name="sear_text">搜索博客、软件、资讯、问答、找人</string>
     <string name="cencel_sear">取消</string>
 
+    <!--综合Fragment复用 标题-->
+    <string-array name="newsTitle">
+        <item>开源资讯</item>
+        <item>推荐博客</item>
+        <item>热门资讯</item>
+        <item>最新博客</item>
+    </string-array>
+
 
 </resources>

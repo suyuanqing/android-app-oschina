@@ -16,6 +16,7 @@ public class Urls {
 
     //新闻id
     public static final String NEWS_ID_URL = BASEURL+"action/api/news_detail";
+    public static final String BLOG_ID_URL = BASEURL+"action/api/blog_detail";
 
     //推荐博客
     public static final String RECOMMBLOG = BASEURL+"action/api/blog_list";

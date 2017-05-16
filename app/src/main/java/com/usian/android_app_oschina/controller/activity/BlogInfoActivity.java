@@ -30,7 +30,7 @@ import butterknife.ButterKnife;
 /***
  * 开源资讯下的资讯详情
  */
-public class OpenActivity extends AppCompatActivity {
+public class BlogInfoActivity extends AppCompatActivity {
 
 
     @Bind(R.id.title_back)
@@ -96,9 +96,9 @@ public class OpenActivity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean checked = infoCollection.isChecked();
                 if (checked) {
-                    Toast.makeText(OpenActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BlogInfoActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(OpenActivity.this, "已取消收藏", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BlogInfoActivity.this, "已取消收藏", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -106,11 +106,14 @@ public class OpenActivity extends AppCompatActivity {
     }
 
     public void initData() {
-        dialog = ProgressDialog.show(this, "", "loading");
+        dialog = new ProgressDialog(this);
+        dialog.setMessage("loading");
+        dialog.show();
+
         news_id = getIntent().getStringExtra("id");
 
         iLoadNetNews = new LoadNewsImpl();
-        iLoadNetNews.getNewsId(news_id, new InfoIdCallback() {
+        iLoadNetNews.getBlogId(news_id, new InfoIdCallback() {
 
             @Override
             public void onSuccess(Map<String, String> result) {
@@ -164,7 +167,7 @@ public class OpenActivity extends AppCompatActivity {
         inforWebview.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                LogUtils.e("OpenActivity", "webview：" + url);
+                LogUtils.e("NewsInfoActivity", "webview：" + url);
 
                 view.loadUrl(url);
                 return true;
