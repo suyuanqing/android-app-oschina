@@ -12,11 +12,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
-import com.usian.android_app_oschina.base.BaseActivity;
 import com.usian.android_app_oschina.base.BaseFragment;
+import com.usian.android_app_oschina.base.BaseMainActivity;
 import com.usian.android_app_oschina.controller.activity.SearchActivity;
 import com.usian.android_app_oschina.controller.fragment.dt_fragment.TweetFragnemt;
-import com.usian.android_app_oschina.controller.fragment.fx_fragment.FxFragment;
+import com.usian.android_app_oschina.controller.fragment.fx_fragment.FindFragment;
 import com.usian.android_app_oschina.controller.fragment.my_fragment.MineFragment;
 import com.usian.android_app_oschina.controller.fragment.zh_fragnemt.SynthesizeFragment;
 import com.usian.android_app_oschina.utils.FragmentBuilder;
@@ -24,7 +24,7 @@ import com.usian.android_app_oschina.utils.FragmentBuilder;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseMainActivity {
 
 
     @Bind(R.id.title_name)
@@ -65,7 +65,7 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         titleName.setText(R.string.title_zonghe);
-        FragmentBuilder.getInstance().containerId(R.id.pager).start(SynthesizeFragment.class);
+        FragmentBuilder.getInstance().containerId(R.id.pager).start(SynthesizeFragment.class).build();
     }
 
     @Override
@@ -83,22 +83,22 @@ public class MainActivity extends BaseActivity {
         switch (view.getId()) {
             case R.id.btn_explore_comprehensive:
                 titleName.setText(R.string.title_zonghe);
-                FragmentBuilder.getInstance().containerId(R.id.pager).start(SynthesizeFragment.class);
+                FragmentBuilder.getInstance().containerId(R.id.pager).start(SynthesizeFragment.class).build();
                 break;
             case R.id.btn_explore_move:
                 titleName.setText(R.string.title_dongtan);
-                FragmentBuilder.getInstance().containerId(R.id.pager).start(TweetFragnemt.class);
+                FragmentBuilder.getInstance().containerId(R.id.pager).start(TweetFragnemt.class).build();
                 break;
             case R.id.iv_explore_plus:
 
                 break;
             case R.id.btn_explore_find:
                 titleName.setText(R.string.title_faxian);
-                FragmentBuilder.getInstance().containerId(R.id.pager).start(FxFragment.class);
+                FragmentBuilder.getInstance().containerId(R.id.pager).start(FindFragment.class).build();
                 break;
             case R.id.btn_explore_my:
                 titleName.setText(R.string.title_my);
-                FragmentBuilder.getInstance().containerId(R.id.pager).start(MineFragment.class);
+                FragmentBuilder.getInstance().containerId(R.id.pager).start(MineFragment.class).build();
                 break;
         }
     }
@@ -120,7 +120,7 @@ public class MainActivity extends BaseActivity {
         FragmentManager.BackStackEntry entry = manager.getBackStackEntryAt(manager.getBackStackEntryCount() - 1);
         String name = entry.getName();
         if("SynthesizeFragment".equals(name) || "TweetFragnemt".equals(name)
-                || "MineFragment".equals(name) || "FxFragment".equals(name)){
+                || "MineFragment".equals(name) || "FindFragment".equals(name)){
             Process.killProcess(Process.myPid());
             System.exit(0);
         }else {

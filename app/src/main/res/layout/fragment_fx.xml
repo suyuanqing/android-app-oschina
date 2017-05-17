@@ -119,12 +119,12 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginLeft="50dp"
-        android:background="#DBDBDB"
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginLeft="50dp"
+            android:background="#DBDBDB"
+            />
 
     <LinearLayout
         android:id="@+id/fa_yyy"
@@ -196,12 +196,12 @@
 
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginLeft="50dp"
-        android:background="#DBDBDB"
-        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginLeft="50dp"
+            android:background="#DBDBDB"
+            />
 
     <LinearLayout
         android:id="@+id/fa_xxhd"

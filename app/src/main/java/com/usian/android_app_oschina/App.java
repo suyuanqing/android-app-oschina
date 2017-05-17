@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.usian.android_app_oschina.base.BaseActivity;
+import com.usian.android_app_oschina.base.BaseMainActivity;
 
 /**
  * Created by 苏元庆 on 2017/5/9.
@@ -12,7 +13,8 @@ import com.usian.android_app_oschina.base.BaseActivity;
 public class App extends Application{
 
     //获取全局Activity
-    public static BaseActivity activity;
+    public static BaseActivity subActivity;
+    public static BaseMainActivity activity;
 
     public static Context context;
 

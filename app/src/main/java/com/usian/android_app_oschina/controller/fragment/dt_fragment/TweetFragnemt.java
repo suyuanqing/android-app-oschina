@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
  * 动弹的Fragment。
  */
 
+//TODO 评论 点赞 转发 需要登录后再实现
 public class TweetFragnemt extends BaseFragment {
 
     @Bind(R.id.dt_tab)

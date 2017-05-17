@@ -31,4 +31,8 @@ public class Urls {
     public static final String TWEETURL = BASEURL+"action/api/tweet_list";
 
 
+    //发现 开源软件 分类
+    public static final String FIND_OSS_FL = BASEURL+"action/api/softwarecatalog_list";
+
+
 }

@@ -27,4 +27,7 @@ public class Arguments {
     //我的动弹
     public static final int MINE_TWEET_UID = 1;
 
+    //发现 开源中国 分类
+    public static final String FIND_OSS_TYPE = "0";
+
 }

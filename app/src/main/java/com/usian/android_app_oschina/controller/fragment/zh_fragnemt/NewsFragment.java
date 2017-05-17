@@ -44,7 +44,7 @@ import in.srain.cube.views.ptr.PtrFrameLayout;
  * 综合下开源资讯的Fragmeng
  */
 
-public class OpenFragment extends BaseFragment implements NetworkCallback {
+public class NewsFragment extends BaseFragment implements NetworkCallback {
 
 
     @Bind(R.id.open_pager)
@@ -132,12 +132,16 @@ public class OpenFragment extends BaseFragment implements NetworkCallback {
         iLoadNetNews = new LoadNewsImpl();
 
         if (list.get(flag).equals("开源资讯")){
+
             iLoadNetNews.getNews(index + "", this);
         }else if (list.get(flag).equals("推荐博客")){
+
             iLoadNetNews.getRecommBlog(index + "", this);
         }else if (list.get(flag).equals("热门资讯")){
+
             iLoadNetNews.getHotNews(index + "", this);
         }else if (list.get(flag).equals("最新博客")){
+
             iLoadNetNews.getLatestBlog(index + "", this);
         }
 
@@ -220,7 +224,7 @@ public class OpenFragment extends BaseFragment implements NetworkCallback {
 
     @Override
     public void onError(String errormsg) {
-        LogUtils.e("OpenFragment", "获取失败：" + errormsg);
+        LogUtils.e("NewsFragment", "获取失败：" + errormsg);
     }
 
 
@@ -262,11 +266,11 @@ public class OpenFragment extends BaseFragment implements NetworkCallback {
 
     }
 
-    public static OpenFragment newInstance(List<String> contentList,int flag){
+    public static NewsFragment newInstance(List<String> contentList, int flag){
         Bundle bundle = new Bundle();
         bundle.putStringArrayList("content", (ArrayList<String>) contentList);
         bundle.putInt("flag", flag);
-        OpenFragment testFm = new OpenFragment();
+        NewsFragment testFm = new NewsFragment();
         testFm.setArguments(bundle);
 
         return testFm;

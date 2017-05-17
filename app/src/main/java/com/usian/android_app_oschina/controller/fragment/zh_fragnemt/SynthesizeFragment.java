@@ -64,7 +64,7 @@ public class SynthesizeFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-//        data.add(new OpenFragment());
+//        data.add(new NewsFragment());
 //        data.add(new ReBlogFragment());
 //        data.add(new HotNewsFragment());
 //        data.add(new LatestBlogFragment());
@@ -72,7 +72,7 @@ public class SynthesizeFragment extends BaseFragment {
         initList();
         Log.e("TAG",titleList.size()+"=------=-=-=-==-");
         for(int i=0;i<titleList.size();i++){
-            OpenFragment testFm = OpenFragment.newInstance(contentList, i);
+            NewsFragment testFm = NewsFragment.newInstance(contentList, i);
             fragmentList.add(testFm);
         }
 

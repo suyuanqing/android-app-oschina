@@ -32,18 +32,20 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:background="#C0C0C0"/>
 
     <RadioGroup
         android:id="@+id/btns"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="bottom"
         android:weightSum="5"
         android:background="@color/white"
         android:layout_gravity="center"
+        android:paddingTop="5dp"
+        android:paddingBottom="3dp"
         >
 
         <RadioButton
@@ -56,7 +58,8 @@
             android:gravity="center"
             android:checked="true"
             android:text="@string/title_zonghe"
-            android:textColor="@color/text_xuanzhong"/>
+            android:textColor="@color/text_xuanzhong"
+            android:textSize="13dp"/>
 
         <RadioButton
             android:id="@+id/btn_explore_move"
@@ -67,7 +70,8 @@
             android:drawableTop="@drawable/tab_icon_move"
             android:gravity="center"
             android:text="@string/title_dongtan"
-            android:textColor="@color/text_xuanzhong"/>
+            android:textColor="@color/text_xuanzhong"
+            android:textSize="13dp"/>
 
         <ImageView
             android:id="@+id/iv_explore_plus"
@@ -89,7 +93,8 @@
             android:drawableTop="@drawable/tab_icon_find"
             android:gravity="center"
             android:text="@string/title_faxian"
-            android:textColor="@color/text_xuanzhong"/>
+            android:textColor="@color/text_xuanzhong"
+            android:textSize="13dp"/>
 
         <RadioButton
             android:id="@+id/btn_explore_my"
@@ -100,7 +105,8 @@
             android:drawableTop="@drawable/tab_icon_my"
             android:gravity="center"
             android:text="@string/title_my"
-            android:textColor="@color/text_xuanzhong"/>
+            android:textColor="@color/text_xuanzhong"
+            android:textSize="13dp"/>
     </RadioGroup>
 
 

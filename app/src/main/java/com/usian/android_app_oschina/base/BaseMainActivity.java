@@ -7,13 +7,13 @@ import com.usian.android_app_oschina.App;
 
 import butterknife.ButterKnife;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseMainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        App.subActivity = this;
+        App.activity = this;
         ButterKnife.bind(this);
         initView();
         initData();
