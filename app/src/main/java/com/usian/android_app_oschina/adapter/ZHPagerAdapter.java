@@ -3,6 +3,7 @@ package com.usian.android_app_oschina.adapter;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.view.ViewGroup;
 
 import com.usian.android_app_oschina.base.BaseFragment;
 
@@ -30,6 +31,11 @@ public class ZHPagerAdapter extends FragmentPagerAdapter{
     @Override
     public Fragment getItem(int position) {
         return data.get(position);
+    }
+
+    @Override
+    public void destroyItem(ViewGroup container, int position, Object object) {
+//        super.destroyItem(container, position, object);
     }
 
     @Override

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/find_oss_rongqi">
 
     <ListView
         android:id="@+id/find_oss_fy"
@@ -9,4 +10,10 @@
         android:layout_height="match_parent"
         android:dividerHeight="1.5px"></ListView>
 
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/find_rongqi"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ></FrameLayout>
+
+</FrameLayout>

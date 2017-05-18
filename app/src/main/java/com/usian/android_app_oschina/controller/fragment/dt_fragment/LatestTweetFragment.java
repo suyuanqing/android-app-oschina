@@ -64,16 +64,30 @@ public class LatestTweetFragment extends BaseFragment {
         latestsRecycler.setPullToRefreshListener(new PullToRefreshListener() {
             @Override
             public void onRefresh() {
-                data.clear();
-                flag = false;
-                loadData();
+                latestsRecycler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        data.clear();
+                        flag = false;
+                        loadData();
+                        latestsRecycler.setRefreshComplete();
+                    }
+                }, 2000);
+
             }
 
             @Override
             public void onLoadMore() {
-                index++;
-                flag = true;
-                loadData();
+                latestsRecycler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        index++;
+                        flag = true;
+                        loadData();
+                        latestsRecycler.setLoadMoreComplete();
+                    }
+                }, 1000);
+
             }
         });
         latestsRecycler.setAdapter(adapter);
@@ -99,17 +113,6 @@ public class LatestTweetFragment extends BaseFragment {
                 List<LatestTweetModel.TweetBean> tweets = o.getTweets();
                 datas.addAll(tweets);
                 adapter.notifyDataSetChanged();
-
-                if (isFrist){
-                    if (flag){
-                        latestsRecycler.setLoadMoreComplete();
-                    }else{
-                        latestsRecycler.setRefreshComplete();
-                    }
-                }else{
-                    isFrist = true;
-                }
-
 
             }
 

@@ -62,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/lin"
         android:layout_marginBottom="5sp"
-        android:textSize="11sp"
+        android:textSize="13sp"
         android:ellipsize="end"
         android:maxLines="2"
         />

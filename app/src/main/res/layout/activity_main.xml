@@ -9,6 +9,7 @@
     tools:context="com.usian.android_app_oschina.MainActivity">
 
     <include
+        android:id="@+id/title_include"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         layout="@layout/title_bar"

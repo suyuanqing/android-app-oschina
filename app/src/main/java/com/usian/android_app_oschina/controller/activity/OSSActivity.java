@@ -13,6 +13,7 @@ import com.usian.android_app_oschina.adapter.ZHPagerAdapter;
 import com.usian.android_app_oschina.base.BaseActivity;
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.controller.fragment.fx_fragment.OssFyFragment;
+import com.usian.android_app_oschina.utils.FragmentUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,15 +51,17 @@ public class OSSActivity extends BaseActivity {
         return R.layout.activity_oss;
     }
 
+
     @Override
     protected void initView() {
         initList();
+        OssFyFragment s = new OssFyFragment();
+        FragmentUtils.create().setLastFragment(s);
 
         tvInfoPinglun.setVisibility(View.GONE);
         ivInfoImg.setVisibility(View.GONE);
         titleIconName.setText(R.string.fx_kyrj);
 
-        Log.e("TAG",titleList.size()+"=------=-=-=-==-");
         for(int i=0;i<titleList.size();i++){
             OssFyFragment testFm = OssFyFragment.newInstance(contentList, i);
             fragmentList.add(testFm);

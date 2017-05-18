@@ -41,4 +41,5 @@ dependencies {
     compile files('libs/volleyutils.jar')
     compile 'com.androidkun:pulltorefreshrecyclerview:1.0.6'
     compile files('libs/roundorcircle.jar')
+    compile 'com.kyleduo.switchbutton:library:1.4.6'
 }

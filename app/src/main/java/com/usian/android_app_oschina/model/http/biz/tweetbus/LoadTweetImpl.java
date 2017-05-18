@@ -30,7 +30,7 @@ public class LoadTweetImpl implements ILoadTweet{
     @Override
     public void getHotTweet(String pageIndex, NetworkCallback networkCallback) {
         Map<String, String> params = new HashMap<>();
-        params.put("uid", Arguments.HOT_TWEET_UID+"");
+        params.put("uid", Arguments.LATEST_TWEET_UID+"");
         params.put("pageIndex", pageIndex);
         params.put("pageSize", Arguments.PAGESIZE+"");
 
@@ -40,9 +40,9 @@ public class LoadTweetImpl implements ILoadTweet{
     @Override
     public void getMineTweet(String pageIndex, NetworkCallback networkCallback) {
         Map<String, String> params = new HashMap<>();
-        params.put("uid", Arguments.HOT_TWEET_UID+"");
+        params.put("uid", Arguments.LATEST_TWEET_UID+"");
         params.put("pageIndex", pageIndex);
-        params.put("pageSize", Arguments.MINE_TWEET_UID+"");
+        params.put("pageSize", Arguments.PAGESIZE+"");
 
         HttpFactory.create().doGet(Urls.TWEETURL, params, networkCallback);
     }

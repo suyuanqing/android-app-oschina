@@ -3,7 +3,6 @@ package com.usian.android_app_oschina.controller.fragment.zh_fragnemt;
 import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -71,7 +70,7 @@ public class NewsFragment extends BaseFragment implements NetworkCallback {
 
     @Override
     protected void initData() {
-        openPager.setVisibility(View.GONE);
+
         newsAdapter = new NewsAdapter(getContext(), newsdata);
         blogAdapter = new BlogAdapter(getContext(), blogdata);
 
@@ -98,7 +97,7 @@ public class NewsFragment extends BaseFragment implements NetworkCallback {
             flag = bundle.getInt("flag");
         }
         Log.e("NewsInfoActivity", "当前Fragmeng位置："+list.get(flag));
-
+        openPager.setVisibility(View.GONE);
         initImg();
         ptrShow();
         mLinear = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -112,8 +111,6 @@ public class NewsFragment extends BaseFragment implements NetworkCallback {
         openRecycler.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         newsdata = new ArrayList<>();
         blogdata = new ArrayList<>();
-
-
 
     }
 
@@ -149,11 +146,10 @@ public class NewsFragment extends BaseFragment implements NetworkCallback {
 
     @Override
     public void onSuccess(String result) {
-        ptrNews.refreshComplete();
+
         dialog.dismiss();
 
         if (list.get(flag).equals("开源资讯")){
-
             openPager.setVisibility(View.VISIBLE);
             XStream xstream = new XStream();
             xstream.alias("oschina", OpenNewsModel.class);
@@ -180,7 +176,6 @@ public class NewsFragment extends BaseFragment implements NetworkCallback {
             List<OpenNewsModel.NewsBean> newslist = o.getNewslist();
             newsdata.addAll(newslist);
             newspositioning();
-
         }else if (list.get(flag).equals("最新博客")){
             XStream xstream = new XStream();
             xstream.alias("oschina", ReBlogModel.class);
@@ -190,14 +185,10 @@ public class NewsFragment extends BaseFragment implements NetworkCallback {
             blogdata.addAll(newslist);
             blogpositioning();
 
-            blogpositioning();
         }
-
-
-
-
-
+//        ptrNews.refreshComplete();
     }
+
 
     //定位当前浏览位置
     public void newspositioning(){
@@ -290,36 +281,59 @@ public class NewsFragment extends BaseFragment implements NetworkCallback {
         ptrNews.setPtrHandler(new PtrDefaultHandler2() {
             @Override
             public void onLoadMoreBegin(PtrFrameLayout frame) {
-                index++;
-                loadData();
+
+                ptrNews.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        index++;
+                        loadData();
+                        ptrNews.refreshComplete();
+                        if (list.get(flag).equals("开源资讯") &&
+                                list.get(flag).equals("热门资讯")){
+                            newsAdapter.notifyDataSetChanged();
+                        }else{
+                            blogAdapter.notifyDataSetChanged();
+                        }
+
+                    }
+                }, 2000);
+
             }
 
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
-                ThreadUtils.runOnSubThread(new Runnable() {
+                ptrNews.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        SystemClock.sleep(2000);
-                        ThreadUtils.runOnUIThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                ptrNews.refreshComplete();
-                                if (list.get(flag).equals("开源资讯") &&
-                                        list.get(flag).equals("热门资讯")){
-                                    newsAdapter.notifyDataSetChanged();
-                                    }else{
 
-                                blogAdapter.notifyDataSetChanged();
-                                 }
-                            }
-                        });
+                        ptrNews.refreshComplete();
+                        if (list.get(flag).equals("开源资讯") &&
+                                list.get(flag).equals("热门资讯")){
+                            newsAdapter.notifyDataSetChanged();
+                        }else{
+                            blogAdapter.notifyDataSetChanged();
+                        }
+
                     }
-                });
+                }, 2000);
 
             }
         });
 
     }
 
+    @Override
+    public void onHidden() {
+        super.onHidden();
+    }
 
+    @Override
+    public void onShow() {
+        super.onShow();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 }

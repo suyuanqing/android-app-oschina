@@ -30,7 +30,9 @@
             android:layout_gravity="center"
             android:layout_marginLeft="3dp"
             android:layout_weight="1"
-            android:text="@string/fx_mytj"/>
+            android:text="@string/fx_mytj"
+            android:textColor="@color/black_dan1"
+            android:textSize="15dp"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -68,7 +70,9 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:layout_marginLeft="3dp"
-            android:text="@string/fx_kyrj"/>
+            android:text="@string/fx_kyrj"
+            android:textColor="@color/black_dan1"
+            android:textSize="15dp"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -108,7 +112,9 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:layout_marginLeft="3dp"
-            android:text="@string/fx_sys"/>
+            android:text="@string/fx_sys"
+            android:textColor="@color/black_dan1"
+            android:textSize="15dp"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -146,7 +152,9 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:layout_marginLeft="3dp"
-            android:text="@string/fx_yyy"/>
+            android:text="@string/fx_yyy"
+            android:textColor="@color/black_dan1"
+            android:textSize="15dp"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -185,7 +193,9 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:layout_marginLeft="3dp"
-            android:text="@string/fx_fjcxy"/>
+            android:text="@string/fx_fjcxy"
+            android:textColor="@color/black_dan1"
+            android:textSize="15dp"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -223,7 +233,9 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:layout_marginLeft="3dp"
-            android:text="@string/fx_xxhd"/>
+            android:text="@string/fx_xxhd"
+            android:textColor="@color/black_dan1"
+            android:textSize="15dp"/>
 
         <ImageView
             android:layout_width="wrap_content"

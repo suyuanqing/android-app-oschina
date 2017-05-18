@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">android-app-oschina</string>
+    <string name="app_name">Mr.Su</string>
 
     <!--ToolBar name-->
     <string name="title_dongtan">动弹</string>
@@ -8,6 +8,7 @@
     <string name="title_my">我的</string>
     <string name="title_zixun_info">资讯详情</string>
     <string name="loading">正在加载</string>
+    <string name="dianji_login">点击头像登录</string>
 
 
     <!--SearchView hint-->
@@ -46,5 +47,21 @@
         <item>最新博客</item>
     </string-array>
 
+
+    <!--我的-->
+    <string name="mine_xiaoxis">我的消息</string>
+    <string name="mine_blog">我的博客</string>
+    <string name="mine_wenda">我的问答</string>
+    <string name="mine_huodong">我的活动</string>
+    <string name="mine_tuandui">我的团队</string>
+
+    <!--设置-->
+    <string name="setting_cache">清理缓存</string>
+    <string name="setting_exit">双击退出</string>
+    <string name="setting_yijian">意见反馈</string>
+    <string name="setting_guanyu">关于我们</string>
+    <string name="setting_jiancha">检查更新</string>
+    <string name="setting_zhuxiao">注销</string>
+    <string name="setting">设置</string>
 
 </resources>

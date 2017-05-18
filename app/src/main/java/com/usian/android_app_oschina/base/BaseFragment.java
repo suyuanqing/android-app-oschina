@@ -22,6 +22,7 @@ public abstract class BaseFragment extends Fragment {
     private Bundle params;
     private boolean isFirst = false;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -131,6 +132,7 @@ public abstract class BaseFragment extends Fragment {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+
 
 
 }

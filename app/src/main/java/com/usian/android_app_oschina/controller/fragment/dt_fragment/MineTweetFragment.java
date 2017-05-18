@@ -34,7 +34,7 @@ public class MineTweetFragment extends BaseFragment {
 
     @Bind(R.id.mine_tweet_recycler)
     PullToRefreshRecyclerView mimeTweetRecycler;
-    private int index = 1;
+    private int index = 3;
     private ArrayList<StirModel.TweetBean> data = new ArrayList<>();
     private TweetAdapter adapter;
     private boolean flag = false;
@@ -65,16 +65,30 @@ public class MineTweetFragment extends BaseFragment {
         mimeTweetRecycler.setPullToRefreshListener(new PullToRefreshListener() {
             @Override
             public void onRefresh() {
-                data.clear();
-                flag = false;
-                loadData();
+                mimeTweetRecycler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        data.clear();
+                        flag = false;
+                        loadData();
+                        mimeTweetRecycler.setRefreshComplete();
+                    }
+                }, 2000);
+
             }
 
             @Override
             public void onLoadMore() {
-                index++;
-                flag = true;
-                loadData();
+                mimeTweetRecycler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        index++;
+                        flag = true;
+                        loadData();
+                        mimeTweetRecycler.setLoadMoreComplete();
+                    }
+                }, 1000);
+
             }
         });
         mimeTweetRecycler.setAdapter(adapter);
@@ -100,11 +114,6 @@ public class MineTweetFragment extends BaseFragment {
                 List<LatestTweetModel.TweetBean> tweets = o.getTweets();
                 datas.addAll(tweets);
                 adapter.notifyDataSetChanged();
-                if (flag){
-                    mimeTweetRecycler.setLoadMoreComplete();
-                }else{
-                    mimeTweetRecycler.setRefreshComplete();
-                }
 
             }
 

@@ -6,6 +6,7 @@
 
     <color name="main_green">#24cf5f</color>
     <color name="actionbar_background">@color/main_green</color>
+    <color name="immersion">#167c39</color>
     <color name="white">#ffffff</color>
     <color name="transparent">#00000000</color>
     <color name="black_dan">#999999</color>
@@ -14,5 +15,12 @@
     <color name="black_dan1">#333333</color>
     <color name="dan_bai">#fafafa</color>
     <color name="black">#000</color>
+    <color name="text_yan">#4c4c4c</color>
+
+    <!--登录页面所需颜色-->
+    <color name="account_input_bg_color">#33ffffff</color>
+    <color name="login_input_active">#31b968</color>
+    <color name="login_line_color">#dededf</color>
+    <color name="account_pressed_true">#14b94d</color>
 
 </resources>

@@ -34,7 +34,7 @@ public class HotTweetFragment extends BaseFragment {
 
     @Bind(R.id.hot_tweet_recycler)
     PullToRefreshRecyclerView hotTweetRecycler;
-    private int index = 1;
+    private int index = 6;
     private ArrayList<StirModel.TweetBean> data = new ArrayList<>();
     private TweetAdapter adapter;
     private boolean flag = false;
@@ -68,16 +68,30 @@ public class HotTweetFragment extends BaseFragment {
         hotTweetRecycler.setPullToRefreshListener(new PullToRefreshListener() {
             @Override
             public void onRefresh() {
-                data.clear();
-                flag = false;
-                loadData();
+                hotTweetRecycler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        data.clear();
+                        flag = false;
+                        loadData();
+                        hotTweetRecycler.setRefreshComplete();
+                    }
+                }, 2000);
+
             }
 
             @Override
             public void onLoadMore() {
-                index++;
-                flag = true;
-                loadData();
+                hotTweetRecycler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        index++;
+                        flag = true;
+                        loadData();
+                        hotTweetRecycler.setLoadMoreComplete();
+                    }
+                }, 1000);
+
             }
         });
         hotTweetRecycler.setAdapter(adapter);
@@ -104,17 +118,6 @@ public class HotTweetFragment extends BaseFragment {
                 List<LatestTweetModel.TweetBean> tweets = o.getTweets();
                 datas.addAll(tweets);
                 adapter.notifyDataSetChanged();
-
-
-                if (isFrist){
-                    if (flag){
-                        hotTweetRecycler.setLoadMoreComplete();
-                    }else{
-                        hotTweetRecycler.setRefreshComplete();
-                    }
-                }else{
-                    isFrist = true;
-                }
 
             }
 

@@ -82,10 +82,12 @@ public class MainActivity extends BaseMainActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.btn_explore_comprehensive:
+                findViewById(R.id.title_include).setVisibility(View.VISIBLE);
                 titleName.setText(R.string.title_zonghe);
                 FragmentBuilder.getInstance().containerId(R.id.pager).start(SynthesizeFragment.class).build();
                 break;
             case R.id.btn_explore_move:
+                findViewById(R.id.title_include).setVisibility(View.VISIBLE);
                 titleName.setText(R.string.title_dongtan);
                 FragmentBuilder.getInstance().containerId(R.id.pager).start(TweetFragnemt.class).build();
                 break;
@@ -93,11 +95,12 @@ public class MainActivity extends BaseMainActivity {
 
                 break;
             case R.id.btn_explore_find:
+                findViewById(R.id.title_include).setVisibility(View.VISIBLE);
                 titleName.setText(R.string.title_faxian);
                 FragmentBuilder.getInstance().containerId(R.id.pager).start(FindFragment.class).build();
                 break;
             case R.id.btn_explore_my:
-                titleName.setText(R.string.title_my);
+                findViewById(R.id.title_include).setVisibility(View.GONE);
                 FragmentBuilder.getInstance().containerId(R.id.pager).start(MineFragment.class).build();
                 break;
         }
