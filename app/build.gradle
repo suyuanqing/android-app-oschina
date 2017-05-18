@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.usian.android_app_oschina"
         minSdkVersion 21
-        targetSdkVersion 25
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -42,4 +42,8 @@ dependencies {
     compile 'com.androidkun:pulltorefreshrecyclerview:1.0.6'
     compile files('libs/roundorcircle.jar')
     compile 'com.kyleduo.switchbutton:library:1.4.6'
+
+    compile 'com.google.zxing:core:3.2.1'
+    compile 'cn.bingoogolapple:bga-qrcodecore:1.0.7@aar'
+    compile 'cn.bingoogolapple:bga-zxing:1.0.7@aar'
 }

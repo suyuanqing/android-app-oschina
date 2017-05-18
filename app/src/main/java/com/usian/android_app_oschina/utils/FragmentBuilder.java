@@ -12,9 +12,6 @@ import com.usian.android_app_oschina.exception.NotFoundContainerException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_CLOSE;
-import static android.support.v4.app.FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
-
 /**
  * Created by xingge on 2017/5/12.
  *
@@ -62,9 +59,12 @@ public class FragmentBuilder {
         if(containerViewId == 0)
             throw new NotFoundContainerException("containerId不能为0");
         transaction = fragmentManager.beginTransaction();
-        transaction.setTransition(TRANSIT_FRAGMENT_OPEN);
-        transaction.setTransition(TRANSIT_FRAGMENT_CLOSE);
         simpleName = fragmentClass.getSimpleName();
+
+//       进入退出动画
+//        transaction.setTransition(TRANSIT_FRAGMENT_OPEN);
+//        transaction.setTransition(TRANSIT_FRAGMENT_CLOSE);
+
         fragment = (BaseFragment) fragmentManager.findFragmentByTag(simpleName);
         try {
             if(fragment == null){

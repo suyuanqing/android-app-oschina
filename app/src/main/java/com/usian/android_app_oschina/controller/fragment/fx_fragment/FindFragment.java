@@ -8,6 +8,8 @@ import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.controller.activity.OSSActivity;
+import com.usian.android_app_oschina.controller.activity.QrCodeActivity;
+import com.usian.android_app_oschina.controller.activity.ShakeActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -74,8 +76,14 @@ public class FindFragment extends BaseFragment {
 
                 break;
             case R.id.fa_sys:
+
+                startActivity(new Intent(App.activity, QrCodeActivity.class));
+
                 break;
             case R.id.fa_yyy:
+
+                startActivity(new Intent(App.activity, ShakeActivity.class));
+
                 break;
             case R.id.fa_fj:
                 break;
@@ -83,4 +91,5 @@ public class FindFragment extends BaseFragment {
                 break;
         }
     }
+
 }

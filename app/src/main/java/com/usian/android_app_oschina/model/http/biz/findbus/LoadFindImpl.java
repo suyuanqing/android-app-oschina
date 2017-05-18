@@ -36,4 +36,13 @@ public class LoadFindImpl implements ILoadFind{
         HttpFactory.create().doGet(Urls.FIND_OSS_FL, params, networkCallback);
 
     }
+
+    @Override
+    public void getShakeNews(NetworkCallback networkCallback) {
+
+        Map<String, String> params = new HashMap<>();
+
+        HttpFactory.create().doGet(Urls.SHAKE_NEWS, params, networkCallback);
+
+    }
 }

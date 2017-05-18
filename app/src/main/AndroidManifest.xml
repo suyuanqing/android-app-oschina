@@ -4,6 +4,12 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" /> <!-- 使用照相机权限 -->
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".App"
@@ -26,7 +32,9 @@
         <activity android:name=".controller.activity.BlogInfoActivity" />
         <activity android:name=".controller.activity.OSSActivity" />
         <activity android:name=".controller.activity.LoginActivity" />
-        <activity android:name=".controller.activity.SettingActivity"></activity>
+        <activity android:name=".controller.activity.SettingActivity" />
+        <activity android:name=".controller.activity.QrCodeActivity" />
+        <activity android:name=".controller.activity.ShakeActivity"></activity>
     </application>
 
 </manifest>

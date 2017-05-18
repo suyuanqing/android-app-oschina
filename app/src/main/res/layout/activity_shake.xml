@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_shake"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.usian.android_app_oschina.controller.activity.ShakeActivity">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        layout="@layout/title_bar_icon"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ImageView
+            android:id="@+id/iv_shake"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_shake"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"/>
+
+        <TextView
+            android:id="@+id/tv_yyy_choose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/iv_shake"
+            android:text="@string/fx_text_lipin"
+            android:layout_marginTop="10dp"/>
+        
+        <LinearLayout
+            android:id="@+id/yyy_net_news"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_alignParentBottom="true"
+            android:padding="10dp"
+            android:layout_marginBottom="70dp"
+            android:background="@drawable/yyy_shake_news">
+
+            <ImageView
+                android:id="@+id/yyy_net_img"
+                android:layout_width="60dp"
+                android:layout_height="60dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_marginLeft="5dp"
+                >
+
+                <TextView
+                    android:id="@+id/yyy_net_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black_dan1"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:layout_gravity="center_vertical"/>
+
+                <TextView
+                    android:id="@+id/yyy_net_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="11sp"
+                    android:layout_weight="1"
+                    android:padding="5dp"
+                    android:layout_marginLeft="1dp"
+                    android:layout_gravity="center_vertical"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_arrow_right"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
+        
+
+    </RelativeLayout>
+    
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/login_line_color"/>
+    
+    <RadioGroup
+        android:id="@+id/rg_yyy_choose"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:background="#f0f0f0"
+        android:padding="5dp">
+
+        <RadioButton
+            android:id="@+id/rb_yyy_lipin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/tab_yyy_lipin"
+            android:gravity="center"
+            android:checked="true"
+            android:text="@string/fx_yyy_lipin"
+            android:textColor="@color/text_yyy_xuanzhong"
+            android:textSize="13dp"/>
+
+        <RadioButton
+            android:id="@+id/rb_yyy_news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/tab_yyy_news"
+            android:gravity="center"
+            android:text="@string/fx_yyy_news"
+            android:textColor="@color/text_yyy_xuanzhong"
+            android:textSize="13dp"/>
+
+    </RadioGroup>
+
+</LinearLayout>

@@ -19,6 +19,11 @@
     <string name="fx_kyrj">开源软件</string>
     <string name="fx_sys">扫一扫</string>
     <string name="fx_yyy">摇一摇</string>
+    <string name="fx_yyy_lipin">礼品</string>
+    <string name="fx_text_lipin">摇一摇抢礼品</string>
+    <string name="fx_text_news">摇一摇获取资讯</string>
+    <string name="fx_text_huodong">抽奖活动已结束，请期待下次活动！</string>
+    <string name="fx_yyy_news">资讯</string>
     <string name="fx_fjcxy">附近的程序员</string>
     <string name="fx_xxhd">线下活动</string>
 

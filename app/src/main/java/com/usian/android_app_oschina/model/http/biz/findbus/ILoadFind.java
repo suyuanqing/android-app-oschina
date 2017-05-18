@@ -12,6 +12,10 @@ public interface ILoadFind {
     //分类
     void getClassify(NetworkCallback networkCallback);
 
-    //
+    //二级分类
     void getTwoClassify(String tag, NetworkCallback networkCallback);
+
+    //摇一摇资讯
+    void getShakeNews(NetworkCallback networkCallback);
+
 }
