@@ -26,6 +26,8 @@
     <string name="fx_yyy_news">资讯</string>
     <string name="fx_fjcxy">附近的程序员</string>
     <string name="fx_xxhd">线下活动</string>
+    <string name="fx_to_sign_up">正在报名</string>
+    <string name="fx_to_sign_down">截止报名</string>
 
     <string-array name="find_tab_titlename">
         <item>分类</item>

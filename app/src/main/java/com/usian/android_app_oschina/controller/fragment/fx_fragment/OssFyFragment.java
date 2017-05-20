@@ -3,9 +3,7 @@ package com.usian.android_app_oschina.controller.fragment.fx_fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.ListView;
@@ -30,7 +28,7 @@ import butterknife.ButterKnife;
 /**
  * Created by 苏元庆 on 2017/5/17.
  */
-
+// TODO 有bug未修复
 public class OssFyFragment extends BaseFragment implements NetworkCallback {
 
 
@@ -122,13 +120,6 @@ public class OssFyFragment extends BaseFragment implements NetworkCallback {
 
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // TODO: inflate a fragment view
-        View rootView = super.onCreateView(inflater, container, savedInstanceState);
-        ButterKnife.bind(this, rootView);
-        return rootView;
-    }
 
     @Override
     public void onDestroyView() {

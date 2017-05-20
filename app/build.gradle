@@ -42,8 +42,10 @@ dependencies {
     compile 'com.androidkun:pulltorefreshrecyclerview:1.0.6'
     compile files('libs/roundorcircle.jar')
     compile 'com.kyleduo.switchbutton:library:1.4.6'
-
     compile 'com.google.zxing:core:3.2.1'
     compile 'cn.bingoogolapple:bga-qrcodecore:1.0.7@aar'
     compile 'cn.bingoogolapple:bga-zxing:1.0.7@aar'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile 'org.xutils:xutils:3.5.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

@@ -1,9 +1,8 @@
-package com.usian.android_app_oschina.controller.activity;
+package com.usian.android_app_oschina.controller.activity.news_activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -30,7 +29,7 @@ import butterknife.ButterKnife;
 /***
  * 开源资讯下的资讯详情
  */
-public class NewsInfoActivity extends AppCompatActivity {
+public class BlogInfoActivity extends AppCompatActivity {
 
 
     @Bind(R.id.title_back)
@@ -46,7 +45,7 @@ public class NewsInfoActivity extends AppCompatActivity {
     @Bind(R.id.infor_webview)
     WebView inforWebview;
     @Bind(R.id.send_comment)
-    SearchView sendComment;
+    LinearLayout sendComment;
     @Bind(R.id.info_collection)
     CheckBox infoCollection;
     @Bind(R.id.info_share)
@@ -96,9 +95,9 @@ public class NewsInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean checked = infoCollection.isChecked();
                 if (checked) {
-                    Toast.makeText(NewsInfoActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BlogInfoActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(NewsInfoActivity.this, "已取消收藏", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BlogInfoActivity.this, "已取消收藏", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -113,13 +112,13 @@ public class NewsInfoActivity extends AppCompatActivity {
         news_id = getIntent().getStringExtra("id");
 
         iLoadNetNews = new LoadNewsImpl();
-        iLoadNetNews.getNewsId(news_id, new InfoIdCallback() {
+        iLoadNetNews.getBlogId(news_id, new InfoIdCallback() {
 
             @Override
             public void onSuccess(Map<String, String> result) {
 
-                for (String s : result.keySet()){
-                    if (s.equals("id")){
+                for (String s : result.keySet()) {
+                    if (s.equals("id")) {
                         url = result.get(s);
                     }
 

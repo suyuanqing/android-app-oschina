@@ -7,9 +7,10 @@ import android.widget.LinearLayout;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.base.BaseFragment;
-import com.usian.android_app_oschina.controller.activity.OSSActivity;
-import com.usian.android_app_oschina.controller.activity.QrCodeActivity;
-import com.usian.android_app_oschina.controller.activity.ShakeActivity;
+import com.usian.android_app_oschina.controller.activity.find_activity.OSSActivity;
+import com.usian.android_app_oschina.controller.activity.find_activity.OffEventActivity;
+import com.usian.android_app_oschina.controller.activity.find_activity.QrCodeActivity;
+import com.usian.android_app_oschina.controller.activity.find_activity.ShakeActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -86,8 +87,14 @@ public class FindFragment extends BaseFragment {
 
                 break;
             case R.id.fa_fj:
+
+
+
                 break;
             case R.id.fa_xxhd:
+
+                startActivity(new Intent(App.activity, OffEventActivity.class));
+
                 break;
         }
     }

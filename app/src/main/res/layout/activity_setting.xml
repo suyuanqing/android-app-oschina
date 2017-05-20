@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.usian.android_app_oschina.controller.activity.SettingActivity">
+    tools:context="com.usian.android_app_oschina.controller.activity.mine_activity.SettingActivity">
 
     <include
         android:layout_width="match_parent"

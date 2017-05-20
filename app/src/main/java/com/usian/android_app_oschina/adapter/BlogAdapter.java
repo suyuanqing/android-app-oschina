@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
-import com.usian.android_app_oschina.controller.activity.BlogInfoActivity;
+import com.usian.android_app_oschina.controller.activity.news_activity.BlogInfoActivity;
 import com.usian.android_app_oschina.model.entity.ReBlogModel;
 import com.usian.android_app_oschina.utils.DateUtils;
 

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_tweet_info"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.usian.android_app_oschina.controller.activity.tweet_activity.TweetUserActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:background="@mipmap/bg_my"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_tweet_user"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_login_username"
+            android:scaleType="centerInside"
+            android:background="@drawable/title_name_iv"/>
+
+        <TextView
+            android:id="@+id/tv_tweet_qianming"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="#FFF"
+            android:textSize="14sp"
+            tools:text="不要被骄傲，遮蔽了双眼" />
+
+        <TextView
+            android:id="@+id/tv_tweet_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="bottom"
+            android:textColor="#FFF"
+            android:textSize="14sp"
+            tools:text="积分 88888" />
+
+    <LinearLayout
+        android:layout_width="205dp"
+        android:layout_height="32dp"
+        android:layout_marginBottom="56dp"
+        android:background="@drawable/shape_other_user_wrapper"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_centerInParent="true"
+        >
+
+        <TextView
+            android:id="@+id/tv_tweet_guanzhu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_other_user_left_half_wrapper"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:textColor="#FFF"
+            android:textSize="16sp"
+            tools:text="关注 0" />
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:background="#88FFFFFF" />
+
+        <TextView
+            android:id="@+id/tv_tweet_fensi"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_other_user_right_half_wrapper"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:textColor="#FFF"
+            android:textSize="16sp"
+            tools:text="粉丝0" />
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tweet_info_tab"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="#20B955"
+        app:tabBackground="@drawable/selector_user_info_tab_item"
+        app:tabIndicatorHeight="0dp"
+        app:tabSelectedTextColor="#FFF"
+        app:tabTextColor="#92EABC"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/tweet_info_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        />
+
+</LinearLayout>

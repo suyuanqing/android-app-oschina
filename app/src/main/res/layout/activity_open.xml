@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#F6F6F6"
     android:orientation="vertical"
-    tools:context=".controller.activity.NewsInfoActivity">
+    tools:context=".controller.activity.news_activity.NewsInfoActivity">
 
     <include
         android:layout_width="match_parent"
@@ -28,15 +28,37 @@
         android:orientation="horizontal"
         android:padding="8dp">
 
-        <android.support.v7.widget.SearchView
-            android:id="@+id/send_comment"
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="match_parent"
             android:layout_weight="1"
-            app:queryBackground="@color/transparent"
-            app:iconifiedByDefault="false"
-            android:background="@drawable/shape_search_view"
-            app:queryHint="@string/search_send_comment"></android.support.v7.widget.SearchView>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/send_comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:orientation="horizontal"
+                android:background="@drawable/shape_search_view"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_comment_30"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="发表评论"
+                    android:layout_marginLeft="10dp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
         <CheckBox
             android:id="@+id/info_collection"

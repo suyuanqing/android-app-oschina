@@ -18,5 +18,6 @@ public interface ILoadTweet {
     //我的动弹
     void getMineTweet(String pageIndex, NetworkCallback networkCallback);
 
+    //动弹中用户详情
 
 }

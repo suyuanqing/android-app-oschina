@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina.controller.activity;
+package com.usian.android_app_oschina.controller.activity.news_activity;
 
 import android.support.v7.widget.SearchView;
 import android.view.View;

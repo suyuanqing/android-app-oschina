@@ -76,7 +76,7 @@ public class SynthesizeFragment extends BaseFragment {
             fragmentList.add(testFm);
         }
 
-
+        zhViewpager.setOffscreenPageLimit(4);
         title_adapter = new ZHPagerAdapter(getActivity().getSupportFragmentManager(), fragmentList, titleList);
 
         zhTab.setupWithViewPager(zhViewpager);

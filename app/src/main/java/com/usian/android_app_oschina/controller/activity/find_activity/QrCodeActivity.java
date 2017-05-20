@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina.controller.activity;
+package com.usian.android_app_oschina.controller.activity.find_activity;
 
 import android.os.Bundle;
 import android.os.Vibrator;
@@ -13,6 +13,9 @@ import butterknife.ButterKnife;
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zxing.ZXingView;
 
+/**
+ * 扫描二维码
+ */
 public class QrCodeActivity extends BaseActivity implements QRCodeView.Delegate {
 
     @Bind(R.id.zxingview)

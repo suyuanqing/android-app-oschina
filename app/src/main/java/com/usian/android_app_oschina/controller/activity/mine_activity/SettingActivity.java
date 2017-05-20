@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina.controller.activity;
+package com.usian.android_app_oschina.controller.activity.mine_activity;
 
 import android.view.View;
 import android.widget.ImageView;

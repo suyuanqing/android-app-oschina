@@ -12,8 +12,8 @@ import android.widget.TextView;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.base.BaseFragment;
-import com.usian.android_app_oschina.controller.activity.LoginActivity;
-import com.usian.android_app_oschina.controller.activity.SettingActivity;
+import com.usian.android_app_oschina.controller.activity.mine_activity.LoginActivity;
+import com.usian.android_app_oschina.controller.activity.mine_activity.SettingActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

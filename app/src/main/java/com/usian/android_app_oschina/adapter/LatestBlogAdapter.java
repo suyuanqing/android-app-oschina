@@ -8,7 +8,7 @@ import com.androidkun.adapter.BaseAdapter;
 import com.androidkun.adapter.ViewHolder;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
-import com.usian.android_app_oschina.controller.activity.NewsInfoActivity;
+import com.usian.android_app_oschina.controller.activity.news_activity.NewsInfoActivity;
 import com.usian.android_app_oschina.model.entity.LatestModel;
 import com.usian.android_app_oschina.utils.DateUtils;
 

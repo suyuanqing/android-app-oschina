@@ -54,7 +54,10 @@ public class MineTweetFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-        dialog = ProgressDialog.show(App.activity, "", "loading");
+        dialog = new ProgressDialog(App.activity);
+        dialog.setMessage("loading");
+        dialog.show();
+
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(App.activity, LinearLayoutManager.VERTICAL,false);
         mimeTweetRecycler.setLayoutManager(linearLayoutManager);
         mimeTweetRecycler.addItemDecoration(new DividerItemDecoration(App.activity, DividerItemDecoration.VERTICAL));

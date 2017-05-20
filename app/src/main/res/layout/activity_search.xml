@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white"
-    tools:context="com.usian.android_app_oschina.controller.activity.SearchActivity">
+    tools:context="com.usian.android_app_oschina.controller.activity.news_activity.SearchActivity">
 
     
     <LinearLayout

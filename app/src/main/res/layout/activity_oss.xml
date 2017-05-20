@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.usian.android_app_oschina.controller.activity.OSSActivity">
+    tools:context="com.usian.android_app_oschina.controller.activity.find_activity.OSSActivity">
 
     <include
         android:layout_width="match_parent"

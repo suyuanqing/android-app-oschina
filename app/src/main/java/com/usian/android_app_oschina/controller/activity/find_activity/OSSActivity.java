@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina.controller.activity;
+package com.usian.android_app_oschina.controller.activity.find_activity;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;

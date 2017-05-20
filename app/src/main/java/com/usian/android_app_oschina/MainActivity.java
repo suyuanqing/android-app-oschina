@@ -14,7 +14,7 @@ import android.widget.Toolbar;
 
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.base.BaseMainActivity;
-import com.usian.android_app_oschina.controller.activity.SearchActivity;
+import com.usian.android_app_oschina.controller.activity.news_activity.SearchActivity;
 import com.usian.android_app_oschina.controller.fragment.dt_fragment.TweetFragnemt;
 import com.usian.android_app_oschina.controller.fragment.fx_fragment.FindFragment;
 import com.usian.android_app_oschina.controller.fragment.my_fragment.MineFragment;
@@ -51,6 +51,8 @@ public class MainActivity extends BaseMainActivity {
     RadioGroup btns;
     @Bind(R.id.activity_main)
     LinearLayout activityMain;
+
+    private long clickTime = 0;
 
     @Override
     protected int getLayoutId() {
@@ -125,7 +127,9 @@ public class MainActivity extends BaseMainActivity {
         if("SynthesizeFragment".equals(name) || "TweetFragnemt".equals(name)
                 || "MineFragment".equals(name) || "FindFragment".equals(name)){
             Process.killProcess(Process.myPid());
+
             System.exit(0);
+
         }else {
             manager.popBackStackImmediate();
             String fragmentName = manager.getBackStackEntryAt(manager.getBackStackEntryCount() - 1).getName();

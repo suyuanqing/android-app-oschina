@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina.controller.activity;
+package com.usian.android_app_oschina.controller.activity.find_activity;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -66,7 +66,7 @@ public class ShakeActivity extends BaseActivity implements NetworkCallback{
     private SensorManager sensorManager;
     private Sensor sensor;
     private Vibrator vibrator;
-    private static final int UPTATE_INTERVAL_TIME = 50;
+    private static final int UPTATE_INTERVAL_TIME = 100;
     private static final int SPEED_SHRESHOLD = 40;//这个值调节灵敏度
     private long lastUpdateTime;
     private float lastX;
@@ -159,7 +159,7 @@ public class ShakeActivity extends BaseActivity implements NetworkCallback{
 
                     tvYyyChoose.setText(R.string.fx_text_huodong);
                 } else if (rbYyyNews.isChecked()) {
-                    yyyNetNews.setVisibility(View.VISIBLE);
+
                     tvYyyChoose.setText("正在获取资讯");
                     ILoadFind iLoadFind = new LoadFindImpl();
                     iLoadFind.getShakeNews(ShakeActivity.this);
@@ -178,6 +178,7 @@ public class ShakeActivity extends BaseActivity implements NetworkCallback{
 
     @Override
     public void onSuccess(String result) {
+        yyyNetNews.setVisibility(View.VISIBLE);
         tvYyyChoose.setText(R.string.fx_text_news);
         XStream xStream = new XStream();
         xStream.alias("oschina", ShakeNewsModel.class);

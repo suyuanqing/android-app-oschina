@@ -23,5 +23,6 @@
     <color name="login_input_active">#31b968</color>
     <color name="login_line_color">#dededf</color>
     <color name="account_pressed_true">#14b94d</color>
+    <color name="background_tab">#20B955</color>
 
 </resources>

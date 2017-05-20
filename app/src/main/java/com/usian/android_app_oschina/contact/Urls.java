@@ -35,6 +35,7 @@ public class Urls {
     public static final String FIND_OSS_FL = BASEURL+"action/api/softwarecatalog_list";
     //摇一摇资讯
     public static final String SHAKE_NEWS = BASEURL+"action/api/rock_rock";
-
+    //线下活动
+    public static final String OFF_EVENT_URL = BASEURL+"action/api/event_list";
 
 }

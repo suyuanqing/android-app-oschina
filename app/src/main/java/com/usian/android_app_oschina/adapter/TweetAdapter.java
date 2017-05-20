@@ -1,8 +1,10 @@
 package com.usian.android_app_oschina.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.androidkun.adapter.BaseAdapter;
 import com.androidkun.adapter.ViewHolder;
@@ -10,6 +12,7 @@ import com.bumptech.glide.Glide;
 import com.jiyun.lenovo.roundorcirle.GlideCircleTransform;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
+import com.usian.android_app_oschina.controller.activity.tweet_activity.TweetInfoActivity;
 import com.usian.android_app_oschina.model.entity.LatestTweetModel;
 import com.usian.android_app_oschina.utils.DateUtils;
 
@@ -30,7 +33,7 @@ public class TweetAdapter extends BaseAdapter<LatestTweetModel.TweetBean> {
 
 
     @Override
-    public void convert(ViewHolder holder, LatestTweetModel.TweetBean tweetBean) {
+    public void convert(ViewHolder holder, final LatestTweetModel.TweetBean tweetBean) {
 
         ImageView userImage = (ImageView) holder.itemView.findViewById(R.id.iv_tweet_userTitle);
         ImageView img = (ImageView) holder.itemView.findViewById(R.id.iv_tweet_image);
@@ -59,6 +62,29 @@ public class TweetAdapter extends BaseAdapter<LatestTweetModel.TweetBean> {
         }
 
         holder.setText(R.id.btn_tweet_dianzan_pinglun, tweetBean.getCommentCount());
+        holder.setText(R.id.btn_tweet_dianzan, tweetBean.getAppclient());
+
+        final String finalTime = time;
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(context, "你好"+tweetBean.getAuthor(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(App.activity, TweetInfoActivity.class);
+                intent.putExtra("userInfo", tweetBean);
+                intent.putExtra("time", finalTime);
+                App.activity.startActivity(intent);
+            }
+        });
+
+
+        ImageView imgtitle = (ImageView) holder.itemView.findViewById(R.id.iv_tweet_userTitle);
+
+        imgtitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "tupian"+tweetBean.getAuthor(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 }

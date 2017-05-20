@@ -1,5 +1,6 @@
 package com.usian.android_app_oschina.model.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -36,7 +37,7 @@ public class LatestTweetModel {
         this.tweets = tweets;
     }
 
-    public static class TweetBean {
+    public static class TweetBean implements Serializable{
         private String id;
         private String portrait;
         private String author;

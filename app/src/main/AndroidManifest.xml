@@ -10,6 +10,7 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".App"
@@ -27,14 +28,17 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".base.BaseActivity" />
-        <activity android:name=".controller.activity.NewsInfoActivity" />
-        <activity android:name=".controller.activity.SearchActivity" />
-        <activity android:name=".controller.activity.BlogInfoActivity" />
-        <activity android:name=".controller.activity.OSSActivity" />
-        <activity android:name=".controller.activity.LoginActivity" />
-        <activity android:name=".controller.activity.SettingActivity" />
-        <activity android:name=".controller.activity.QrCodeActivity" />
-        <activity android:name=".controller.activity.ShakeActivity"></activity>
+        <activity android:name=".controller.activity.news_activity.NewsInfoActivity" />
+        <activity android:name=".controller.activity.news_activity.SearchActivity" />
+        <activity android:name=".controller.activity.news_activity.BlogInfoActivity" />
+        <activity android:name=".controller.activity.find_activity.OSSActivity" />
+        <activity android:name=".controller.activity.mine_activity.LoginActivity" />
+        <activity android:name=".controller.activity.mine_activity.SettingActivity" />
+        <activity android:name=".controller.activity.find_activity.QrCodeActivity" />
+        <activity android:name=".controller.activity.find_activity.ShakeActivity" />
+        <activity android:name=".controller.activity.tweet_activity.TweetUserActivity" />
+        <activity android:name=".controller.activity.tweet_activity.TweetInfoActivity" />
+        <activity android:name=".controller.activity.find_activity.OffEventActivity"></activity>
     </application>
 
 </manifest>
