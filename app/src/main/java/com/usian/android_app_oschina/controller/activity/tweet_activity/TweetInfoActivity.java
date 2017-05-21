@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 //TODO  发表评论还未完成 分享 还有bug未修复
@@ -90,7 +89,10 @@ public class TweetInfoActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-        datas.add(new TweetZanFragment());
+        TweetZanFragment tweetZanFragment = new TweetZanFragment();
+        Bundle bundle = new Bundle();
+        tweetZanFragment.setParams(bundle);
+        datas.add(tweetZanFragment);
         datas.add(new TweetZanFragment());
         tweetInfoTab.setupWithViewPager(tweetInfoPager);
         ZHPagerAdapter adapter = new ZHPagerAdapter(getSupportFragmentManager(), datas, titles);
@@ -133,12 +135,5 @@ public class TweetInfoActivity extends BaseActivity {
                 finish();
                 break;
         }
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

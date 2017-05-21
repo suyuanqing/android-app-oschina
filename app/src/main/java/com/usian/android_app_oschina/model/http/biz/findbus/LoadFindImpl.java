@@ -57,4 +57,12 @@ public class LoadFindImpl implements ILoadFind{
         HttpFactory.create().doGet(Urls.OFF_EVENT_URL, params, networkCallback);
 
     }
+
+    @Override
+    public void getEventInfo(String id, NetworkCallback networkCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id);
+
+        HttpFactory.create().doGet(Urls.EVENT_INFO_URL, params, networkCallback);
+    }
 }

@@ -79,4 +79,15 @@ public class LoadNewsImpl implements ILoadNetNews {
 
         HttpFactory.create().doXml(Urls.BLOG_ID_URL, params, infoIdCallback);
     }
+
+    @Override
+    public void getQnn(String pageIndex, String catalog, NetworkCallback networkCallback) {
+
+        Map<String, String> params = new HashMap<>();
+        params.put("catalog",catalog);
+        params.put("pageIndex",pageIndex);
+        params.put("pageSize",Arguments.PAGESIZE+"");
+
+        HttpFactory.create().doGet(Urls.QNN_URL, params, networkCallback);
+    }
 }

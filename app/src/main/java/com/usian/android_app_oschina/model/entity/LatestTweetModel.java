@@ -13,6 +13,16 @@ public class LatestTweetModel {
     private String pagesize;
     private List<TweetBean> tweets;
 
+    private String notice;
+
+    public String getNotice() {
+        return notice;
+    }
+
+    public void setNotice(String notice) {
+        this.notice = notice;
+    }
+
     public String getTweetCount() {
         return tweetCount;
     }

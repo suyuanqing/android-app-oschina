@@ -27,6 +27,9 @@ public class Urls {
     //热门资讯
     public static final String HOTNEWS = BASEURL+"action/api/news_list";
 
+    //技术问答
+    public static final String QNN_URL = BASEURL+"action/api/post_list";
+
     //动弹apiurl
     public static final String TWEETURL = BASEURL+"action/api/tweet_list";
 
@@ -37,5 +40,13 @@ public class Urls {
     public static final String SHAKE_NEWS = BASEURL+"action/api/rock_rock";
     //线下活动
     public static final String OFF_EVENT_URL = BASEURL+"action/api/event_list";
+    //活动详情
+    public static final String EVENT_INFO_URL = BASEURL+"action/api/post_detail";
+
+    //登录
+    public static final String LOGIN_URL = BASEURL+"action/api/login_validate";
+
+    //获取用户资料，我的信息
+    public static final String MYINFO_URL = BASEURL+"action/api/my_information";
 
 }

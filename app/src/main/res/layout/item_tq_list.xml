@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp"
+    android:background="@color/white">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:id="@+id/iv_tq_userTitle"
+        android:layout_marginRight="8dp"
+        />
+
+        <LinearLayout
+            android:id="@+id/tweet_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/iv_tq_userTitle"
+            >
+
+            <TextView
+                android:id="@+id/tv_tq_problem"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:text="苏元庆"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_tq_content"
+                android:layout_marginTop="5dp"
+                android:textSize="13sp"
+                android:text="天气真好"/>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tweet_linear1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tweet_linear"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/iv_tq_userTitle">
+
+        <TextView
+            android:id="@+id/tv_tq_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:id="@+id/tv_tq_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:textSize="11sp"
+            android:layout_marginLeft="5dp"/>
+
+        <ImageView
+            android:id="@+id/iv_pinglun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_comment_30"
+            android:layout_toLeftOf="@id/tv_num"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:id="@+id/tv_num_tq"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="11sp"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

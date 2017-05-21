@@ -305,12 +305,16 @@ public class NewsFragment extends BaseFragment implements NetworkCallback {
                 ptrNews.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
+                        newsdata.clear();
                         ptrNews.refreshComplete();
                         if (list.get(flag).equals("开源资讯") &&
                                 list.get(flag).equals("热门资讯")){
+                            newsdata.clear();
+                            loadData();
                             newsAdapter.notifyDataSetChanged();
                         }else{
+                            blogdata.clear();
+                            loadData();
                             blogAdapter.notifyDataSetChanged();
                         }
 

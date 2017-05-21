@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.thoughtworks.xstream.XStream;
+import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.base.BaseActivity;
 import com.usian.android_app_oschina.model.entity.ShakeNewsModel;
@@ -66,7 +67,7 @@ public class ShakeActivity extends BaseActivity implements NetworkCallback{
     private SensorManager sensorManager;
     private Sensor sensor;
     private Vibrator vibrator;
-    private static final int UPTATE_INTERVAL_TIME = 100;
+    private static final int UPTATE_INTERVAL_TIME = 50;
     private static final int SPEED_SHRESHOLD = 40;//这个值调节灵敏度
     private long lastUpdateTime;
     private float lastX;
@@ -102,6 +103,12 @@ public class ShakeActivity extends BaseActivity implements NetworkCallback{
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+    }
+
+    @Override
     protected void initListener() {
 
     }
@@ -116,6 +123,7 @@ public class ShakeActivity extends BaseActivity implements NetworkCallback{
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.title_back:
+                vibrator.cancel();
                 finish();
                 break;
             case R.id.rb_yyy_lipin:
@@ -193,7 +201,7 @@ public class ShakeActivity extends BaseActivity implements NetworkCallback{
 
         String format = DateUtils.format(parse);
 
-        Glide.with(ShakeActivity.this).load(o.getImage()).error(R.mipmap.ic_split_graph)
+        Glide.with(App.subActivity).load(o.getImage()).error(R.mipmap.ic_split_graph)
                 .placeholder(R.mipmap.ic_split_graph).into(yyyNetImg);
         yyyNetTitle.setText(o.getTitle());
         yyyNetDate.setText(format);
@@ -203,5 +211,13 @@ public class ShakeActivity extends BaseActivity implements NetworkCallback{
     @Override
     public void onError(String errormsg) {
 
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (sensorManager != null) {// 取消监听器
+            sensorManager.unregisterListener(sensorEventListener);
+        }
     }
 }

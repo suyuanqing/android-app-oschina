@@ -64,10 +64,6 @@ public class SynthesizeFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-//        data.add(new NewsFragment());
-//        data.add(new ReBlogFragment());
-//        data.add(new HotNewsFragment());
-//        data.add(new LatestBlogFragment());
 
         initList();
         Log.e("TAG",titleList.size()+"=------=-=-=-==-");
@@ -75,12 +71,13 @@ public class SynthesizeFragment extends BaseFragment {
             NewsFragment testFm = NewsFragment.newInstance(contentList, i);
             fragmentList.add(testFm);
         }
+        fragmentList.add(new TqFragment());
 
         zhViewpager.setOffscreenPageLimit(4);
-        title_adapter = new ZHPagerAdapter(getActivity().getSupportFragmentManager(), fragmentList, titleList);
+        title_adapter = new ZHPagerAdapter(getActivity().getSupportFragmentManager(), fragmentList, contentList);
 
         zhTab.setupWithViewPager(zhViewpager);
-
+        zhTab.setTabMode(TabLayout.MODE_SCROLLABLE);
         zhViewpager.setAdapter(title_adapter);
     }
 
@@ -96,6 +93,7 @@ public class SynthesizeFragment extends BaseFragment {
         contentList.add(1,"推荐博客");
         contentList.add(2,"热门资讯");
         contentList.add(3,"最新博客");
+        contentList.add(4,"技术问答");
 
     }
 

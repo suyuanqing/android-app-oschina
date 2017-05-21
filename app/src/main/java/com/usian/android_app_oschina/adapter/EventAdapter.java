@@ -1,6 +1,8 @@
 package com.usian.android_app_oschina.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -8,6 +10,7 @@ import com.androidkun.adapter.BaseAdapter;
 import com.androidkun.adapter.ViewHolder;
 import com.bumptech.glide.Glide;
 import com.usian.android_app_oschina.R;
+import com.usian.android_app_oschina.controller.activity.find_activity.EventInfoActivity;
 import com.usian.android_app_oschina.model.entity.OffEventModel;
 
 import java.text.ParseException;
@@ -28,7 +31,7 @@ public class EventAdapter extends BaseAdapter<OffEventModel.EventBean>{
 
 
     @Override
-    public void convert(ViewHolder holder, OffEventModel.EventBean eventBean) {
+    public void convert(ViewHolder holder, final OffEventModel.EventBean eventBean) {
 
         ImageView img = (ImageView) holder.itemView.findViewById(R.id.item_event_img);
         TextView tosignup = (TextView) holder.itemView.findViewById(R.id.item_event_tosign);
@@ -59,6 +62,15 @@ public class EventAdapter extends BaseAdapter<OffEventModel.EventBean>{
 
         holder.setText(R.id.item_event_title, eventBean.getTitle());
         holder.setText(R.id.item_event_date, eventBean.getStartTime());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, EventInfoActivity.class);
+                intent.putExtra("eventid", eventBean.getId());
+                context.startActivity(intent);
+            }
+        });
 
     }
 }

@@ -1,5 +1,6 @@
 package com.usian.android_app_oschina.model.util;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -7,6 +8,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.usian.android_app_oschina.App;
+import com.usian.android_app_oschina.contact.Arguments;
 import com.usian.android_app_oschina.costom.XMLRequest;
 import com.usian.android_app_oschina.model.http.Ihttp;
 import com.usian.android_app_oschina.model.http.callback.InfoIdCallback;
@@ -43,6 +45,7 @@ public class VolleyUtil implements Ihttp {
         return volleyUtil;
     }
 
+    //get请求
     @Override
     public void doGet(String url, Map<String, String> params, final NetworkCallback networkCallback) {
 
@@ -71,16 +74,47 @@ public class VolleyUtil implements Ihttp {
                 //获取数据失败的回调
                 networkCallback.onError(volleyError.getMessage());
             }
-        });
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String, String> headerMap = new HashMap<>();
+                headerMap.put("Cookie", Arguments.MY_COOKIE);
+                return headerMap;
+            }
+        };
 
+        stringRequest.setTag("GET");
         requestQueue.add(stringRequest);
     }
 
+
+    //POST请求
     @Override
-    public void doPost(String url, Map<String, String> params, NetworkCallback networkCallback) {
+    public void doPost(final String url, final Map<String, String> params, final NetworkCallback networkCallback) {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                LogUtils.e("你好啊",url);
+                networkCallback.onSuccess(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                networkCallback.onError(error.getMessage());
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
 
     }
 
+    //get请求xml数据
     @Override
     public void doXml(String url, Map<String, String> params, final InfoIdCallback infoIdCallback) {
         StringBuffer apiurl = new StringBuffer();

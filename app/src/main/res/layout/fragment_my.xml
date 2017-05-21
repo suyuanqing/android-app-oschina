@@ -26,7 +26,7 @@
             android:layout_margin="15dp"/>
 
         <ImageView
-            android:id="@+id/iv_mima_login"
+            android:id="@+id/iv_mima_userimg"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_centerInParent="true"
@@ -35,17 +35,136 @@
             android:background="@drawable/title_name_iv"/>
 
         <TextView
-            android:id="@+id/tv_mine_tishi"
+            android:id="@+id/tv_mine_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/iv_mima_login"
+            android:layout_below="@id/iv_mima_userimg"
             android:layout_centerInParent="true"
             android:layout_marginTop="10dp"
             android:textColor="@color/white"
             android:text="@string/dianji_login"
             android:textSize="10dp"/>
 
+        <TextView
+            android:id="@+id/tv_mine_jifen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_mine_username"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            android:text="@string/jifen"
+            android:textSize="10dp"/>
+
     </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/actionbar_background"
+        />
+
+    <LinearLayout
+        android:id="@+id/mime_userinfo"
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_weight="1"
+        android:background="@color/background_tab">
+
+        <LinearLayout
+            android:id="@+id/mime_tweet"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/mine_tweet_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@color/white"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/mine_tweet"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mime_shoucang"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/mine_shoucang_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@color/white"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/mine_shoucang"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mime_guanzhu"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/mine_guanzhu_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@color/white"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/mine_guanzhu"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/mime_fensi"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/mine_fensi_num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textColor="@color/white"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/mine_fensi"/>
+        </LinearLayout>
+
+
+    </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
@@ -258,7 +377,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="horizontal"
-        android:layout_weight="2"
+        android:layout_weight="1"
         />
 
 

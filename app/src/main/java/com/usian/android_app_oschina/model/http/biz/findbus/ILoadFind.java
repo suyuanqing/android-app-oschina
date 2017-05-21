@@ -18,7 +18,11 @@ public interface ILoadFind {
     //摇一摇资讯
     void getShakeNews(NetworkCallback networkCallback);
 
-
+    //线下活动
     void getOffEvent(String index, NetworkCallback networkCallback);
+
+    //活动详情
+    void getEventInfo(String id, NetworkCallback networkCallback);
+
 
 }
