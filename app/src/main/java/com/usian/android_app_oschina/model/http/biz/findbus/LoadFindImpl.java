@@ -1,6 +1,7 @@
 package com.usian.android_app_oschina.model.http.biz.findbus;
 
 import com.usian.android_app_oschina.contact.Arguments;
+import com.usian.android_app_oschina.contact.NetWork;
 import com.usian.android_app_oschina.contact.Urls;
 import com.usian.android_app_oschina.model.http.HttpFactory;
 import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
@@ -22,7 +23,7 @@ public class LoadFindImpl implements ILoadFind{
         Map<String, String> params = new HashMap<>();
         params.put("type", Arguments.FIND_OSS_TYPE);
 
-        HttpFactory.create().doGet(Urls.FIND_OSS_FL, params, networkCallback);
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.FIND_OSS_FL, params, networkCallback);
 
     }
 
@@ -33,7 +34,7 @@ public class LoadFindImpl implements ILoadFind{
         Map<String, String> params = new HashMap<>();
         params.put("tag", tag);
 
-        HttpFactory.create().doGet(Urls.FIND_OSS_FL, params, networkCallback);
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.FIND_OSS_FL, params, networkCallback);
 
     }
 
@@ -42,7 +43,7 @@ public class LoadFindImpl implements ILoadFind{
 
         Map<String, String> params = new HashMap<>();
 
-        HttpFactory.create().doGet(Urls.SHAKE_NEWS, params, networkCallback);
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.SHAKE_NEWS, params, networkCallback);
 
     }
 
@@ -54,7 +55,7 @@ public class LoadFindImpl implements ILoadFind{
         params.put("uid", "0");
         params.put("pageSize", Arguments.PAGESIZE+"");
 
-        HttpFactory.create().doGet(Urls.OFF_EVENT_URL, params, networkCallback);
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.OFF_EVENT_URL, params, networkCallback);
 
     }
 
@@ -63,6 +64,6 @@ public class LoadFindImpl implements ILoadFind{
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
 
-        HttpFactory.create().doGet(Urls.EVENT_INFO_URL, params, networkCallback);
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.EVENT_INFO_URL, params, networkCallback);
     }
 }

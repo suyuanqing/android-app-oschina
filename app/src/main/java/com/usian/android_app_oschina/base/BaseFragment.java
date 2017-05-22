@@ -6,8 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import com.usian.android_app_oschina.App;
+import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.exception.NotFoundContainerException;
+import com.usian.android_app_oschina.utils.NetUtils;
 
 import butterknife.ButterKnife;
 
@@ -72,7 +76,7 @@ public abstract class BaseFragment extends Fragment {
      */
     protected abstract void loadData();
 
-   /* @Override
+    @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
         if (hidden){
@@ -81,8 +85,11 @@ public abstract class BaseFragment extends Fragment {
         }else{
             //当前Fragment显示
             onShow();
+            if (!NetUtils.isConnected(App.getContext())) {
+                Toast.makeText(App.getContext(), R.string.isNet, Toast.LENGTH_SHORT).show();
+            }
         }
-    }*/
+    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -90,11 +97,16 @@ public abstract class BaseFragment extends Fragment {
         if (isVisibleToUser) {
             //相当于Fragment的onResume
             onShow();
+            if (!NetUtils.isConnected(App.getContext())) {
+                Toast.makeText(App.getContext(), R.string.isNet, Toast.LENGTH_SHORT).show();
+            }
         } else {
             //相当于Fragment的onPause
             onHidden();
         }
     }
+
+
 
     public void onShow(){
 

@@ -1,6 +1,8 @@
 package com.usian.android_app_oschina.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.androidkun.adapter.BaseAdapter;
@@ -9,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.jiyun.lenovo.roundorcirle.GlideCircleTransform;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
+import com.usian.android_app_oschina.controller.activity.news_activity.TqInfoActivity;
 import com.usian.android_app_oschina.model.entity.TQModel;
 import com.usian.android_app_oschina.utils.DateUtils;
 
@@ -28,7 +31,7 @@ public class TqAdapter extends BaseAdapter<TQModel.PostBean>{
     }
 
     @Override
-    public void convert(ViewHolder holder, TQModel.PostBean postBean) {
+    public void convert(ViewHolder holder, final TQModel.PostBean postBean) {
 
         ImageView img = (ImageView) holder.itemView.findViewById(R.id.iv_tq_userTitle);
         Glide.with(App.activity).load(postBean.getPortrait())
@@ -50,6 +53,15 @@ public class TqAdapter extends BaseAdapter<TQModel.PostBean>{
         }
 
         holder.setText(R.id.tv_num_tq, postBean.getAnswerCount());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(App.activity, TqInfoActivity.class);
+                intent.putExtra("Qnnid", postBean.getId());
+                App.activity.startActivity(intent);
+            }
+        });
 
     }
 }

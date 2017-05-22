@@ -29,6 +29,8 @@ public class Urls {
 
     //技术问答
     public static final String QNN_URL = BASEURL+"action/api/post_list";
+    //技术问答详情
+    public static final String QNNINFO_URL = BASEURL+"action/api/post_detail";
 
     //动弹apiurl
     public static final String TWEETURL = BASEURL+"action/api/tweet_list";
@@ -48,5 +50,9 @@ public class Urls {
 
     //获取用户资料，我的信息
     public static final String MYINFO_URL = BASEURL+"action/api/my_information";
+
+    //弹一弹
+    public static final String PUBTWEET_URL = BASEURL+"action/api/tweet_pub";
+
 
 }

@@ -1,6 +1,7 @@
 package com.usian.android_app_oschina.model.http.biz.tweetbus;
 
 import com.usian.android_app_oschina.contact.Arguments;
+import com.usian.android_app_oschina.contact.NetWork;
 import com.usian.android_app_oschina.contact.Urls;
 import com.usian.android_app_oschina.model.http.HttpFactory;
 import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
@@ -23,7 +24,7 @@ public class LoadTweetImpl implements ILoadTweet{
         params.put("pageIndex", pageIndex);
         params.put("pageSize", Arguments.PAGESIZE+"");
 
-        HttpFactory.create().doGet(Urls.TWEETURL, params, networkCallback);
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.TWEETURL, params, networkCallback);
     }
 
     //获取热门动弹
@@ -34,7 +35,7 @@ public class LoadTweetImpl implements ILoadTweet{
         params.put("pageIndex", pageIndex);
         params.put("pageSize", Arguments.PAGESIZE+"");
 
-        HttpFactory.create().doGet(Urls.TWEETURL, params, networkCallback);
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.TWEETURL, params, networkCallback);
     }
 
     @Override
@@ -44,7 +45,7 @@ public class LoadTweetImpl implements ILoadTweet{
         params.put("pageIndex", pageIndex);
         params.put("pageSize", Arguments.PAGESIZE+"");
 
-        HttpFactory.create().doGet(Urls.TWEETURL, params, networkCallback);
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.TWEETURL, params, networkCallback);
     }
 
 

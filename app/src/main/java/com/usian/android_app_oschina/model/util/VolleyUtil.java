@@ -8,7 +8,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.usian.android_app_oschina.App;
-import com.usian.android_app_oschina.contact.Arguments;
 import com.usian.android_app_oschina.costom.XMLRequest;
 import com.usian.android_app_oschina.model.http.Ihttp;
 import com.usian.android_app_oschina.model.http.callback.InfoIdCallback;
@@ -74,14 +73,7 @@ public class VolleyUtil implements Ihttp {
                 //获取数据失败的回调
                 networkCallback.onError(volleyError.getMessage());
             }
-        }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String, String> headerMap = new HashMap<>();
-                headerMap.put("Cookie", Arguments.MY_COOKIE);
-                return headerMap;
-            }
-        };
+        });
 
         stringRequest.setTag("GET");
         requestQueue.add(stringRequest);

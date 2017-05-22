@@ -1,5 +1,6 @@
 package com.usian.android_app_oschina.model.http;
 
+import com.usian.android_app_oschina.model.util.OkhttpUtils;
 import com.usian.android_app_oschina.model.util.VolleyUtil;
 
 /**
@@ -14,15 +15,15 @@ public class HttpFactory {
     private static final int RETROFIT = 2;
     private static final int TYPE = VOLLEY;
 
-    public static Ihttp create(){
+    public static Ihttp create(int type){
         Ihttp ihttp = null;
-        switch (TYPE){
+        switch (type){
             case VOLLEY:
                 ihttp = VolleyUtil.getInstance();
                 break;
 
             case OKTTP:
-
+                ihttp = OkhttpUtils.getInstance();
                 break;
         }
         return ihttp;

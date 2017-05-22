@@ -48,4 +48,7 @@ dependencies {
     compile 'com.google.code.gson:gson:2.2.4'
     compile 'org.xutils:xutils:3.5.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    compile 'com.squareup.okio:okio:1.7.0'
+    compile 'com.github.franmontiel:PersistentCookieJar:v1.0.1'
 }

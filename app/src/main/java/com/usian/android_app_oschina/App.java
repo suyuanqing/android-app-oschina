@@ -15,6 +15,7 @@ public class App extends Application{
     //获取全局Activity
     public static BaseActivity subActivity;
     public static BaseMainActivity activity;
+    public static boolean isLogin;
 
     public static Context context;
 

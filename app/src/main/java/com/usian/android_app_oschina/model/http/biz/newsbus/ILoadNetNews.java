@@ -31,4 +31,8 @@ public interface ILoadNetNews {
     //技术问答
     void getQnn(String pageIndex, String catalog, NetworkCallback networkCallback);
 
+    //技术问答详情
+    void getQnnInfo(String id, NetworkCallback networkCallback);
+
+
 }

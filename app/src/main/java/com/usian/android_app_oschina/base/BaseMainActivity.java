@@ -27,6 +27,15 @@ public abstract class BaseMainActivity extends AppCompatActivity {
         loadData();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!NetUtils.isConnected(this)) {
+            Toast.makeText(this, R.string.isNet, Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     //加载布局ID
     protected abstract int getLayoutId();
 

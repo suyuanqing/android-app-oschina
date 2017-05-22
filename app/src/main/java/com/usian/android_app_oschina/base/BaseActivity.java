@@ -42,4 +42,11 @@ public abstract class BaseActivity extends AppCompatActivity {
     //加载数据
     protected abstract void loadData();
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!NetUtils.isConnected(this)) {
+            Toast.makeText(this, R.string.isNet, Toast.LENGTH_SHORT).show();
+        }
+    }
 }

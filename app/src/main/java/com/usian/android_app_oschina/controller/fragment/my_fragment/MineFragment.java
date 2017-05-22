@@ -1,6 +1,12 @@
 package com.usian.android_app_oschina.controller.fragment.my_fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,13 +23,16 @@ import com.thoughtworks.xstream.XStream;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.base.BaseFragment;
+import com.usian.android_app_oschina.contact.ATotalOf;
 import com.usian.android_app_oschina.controller.activity.mine_activity.LoginActivity;
 import com.usian.android_app_oschina.controller.activity.mine_activity.SettingActivity;
 import com.usian.android_app_oschina.model.entity.UserInfoModel;
 import com.usian.android_app_oschina.model.http.biz.minebus.ILoadLogin;
 import com.usian.android_app_oschina.model.http.biz.minebus.LoginImpl;
 import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
+import com.usian.android_app_oschina.utils.NetUtils;
 import com.usian.android_app_oschina.utils.SPUtils;
+import com.usian.android_app_oschina.utils.ThreadUtils;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -76,7 +85,12 @@ public class MineFragment extends BaseFragment {
     @Bind(R.id.lin_mime_tuandui)
     LinearLayout linMimeTuandui;
     private AlertDialog qrCodedialog;
+    private Object isLogin;
     private Object uid;
+    private boolean flag;
+    private IntentFilter intentFilter;
+    private LocalBroadcastManager broadcastManager;
+    private BroadcastReceiver mReceiver;
 
     @Override
     protected int getLayoutId() {
@@ -85,19 +99,25 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-
+        isLogin = SPUtils.getParam(App.getContext(), "isLogin", "");
+        uid = SPUtils.getParam(App.getContext(), "uid", "");
+        Log.e("TAG", isLogin+"--------------------");
+        Log.e("TAG", uid+"--------------------");
+        flag = isLogin.equals("已登录");
+        if (flag) {
+            mimeUserinfo.setVisibility(View.VISIBLE);
+            loadData();
+        } else {
+            mimeUserinfo.setVisibility(View.GONE);
+        }
     }
 
     @Override
     protected void initView(View view) {
-        uid = SPUtils.getParam(App.getContext(), "uid", "");
-        Log.e("TAG", uid+"--------------------");
-        if (uid != null) {
-
-            mimeUserinfo.setVisibility(View.VISIBLE);
-        } else {
-            mimeUserinfo.setVisibility(View.GONE);
-        }
+        tvMineJifen.setVisibility(View.GONE);
+        Glide.with(App.activity).load(R.mipmap.widget_default_face)
+                .transform(new GlideCircleTransform(App.activity))
+                .into(ivMimaUserimg);
     }
 
     @Override
@@ -106,9 +126,18 @@ public class MineFragment extends BaseFragment {
     }
 
     @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden){
+        }else{
+            initData();
+        }
+    }
+
+    @Override
     protected void loadData() {
         ILoadLogin iLoadLogin = new LoginImpl();
-        if (uid != null) {
+        if (flag) {
             iLoadLogin.getUserInfo(uid + "", new NetworkCallback() {
                 @Override
                 public void onSuccess(String result) {
@@ -117,9 +146,18 @@ public class MineFragment extends BaseFragment {
                     xStream.alias("user", UserInfoModel.UserBean.class);
                     xStream.alias("notice", UserInfoModel.NoticeBean.class);
 
+                    if (!NetUtils.isConnected(App.activity)) {
+                        ThreadUtils.runOnUIThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(App.activity, R.string.isNet, Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
-                    UserInfoModel o = (UserInfoModel) xStream.fromXML(result);
-                    setMimeUserinfo(o);
+                    }else{
+                        UserInfoModel o = (UserInfoModel) xStream.fromXML(result);
+                        setMimeUserinfo(o);
+                    }
 
                 }
 
@@ -152,7 +190,7 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.iv_mima_userimg:
 
-                if (uid != null){
+                if (flag){
                     Toast.makeText(App.activity, "你好", Toast.LENGTH_SHORT).show();
                 }else{
 
@@ -195,16 +233,41 @@ public class MineFragment extends BaseFragment {
 
 
 
-    public void setMimeUserinfo(UserInfoModel o){
-        Glide.with(App.activity).load(o.getUser().getPortrait())
-                .transform(new GlideCircleTransform(App.activity))
-                .into(ivMimaUserimg);
-        tvMineUsername.setText(o.getUser().getName());
-        tvMineJifen.setText("积分 "+o.getUser().getScore());
-        mineTweetNum.setText(o.getUser().getScore());
-        mineFensiNum.setText(o.getUser().getFans());
-        mineGuanzhuNum.setText(o.getUser().getFollowers());
-        mineShoucangNum.setText("0");
+    public void setMimeUserinfo(final UserInfoModel o){
+        ThreadUtils.runOnUIThread(new Runnable() {
+            @Override
+            public void run() {
+                Glide.with(App.activity).load(o.getUser().getPortrait())
+                        .transform(new GlideCircleTransform(App.activity))
+                        .error(R.mipmap.ic_default_image)
+                        .into(ivMimaUserimg);
+                tvMineUsername.setText(o.getUser().getName());
+                tvMineJifen.setText("积分 "+o.getUser().getScore());
+                mineTweetNum.setText(o.getUser().getFollowers());
+                mineFensiNum.setText(o.getUser().getFans());
+                mineGuanzhuNum.setText(o.getUser().getFollowers());
+                mineShoucangNum.setText(o.getUser().getFavoritecount());
+                tvMineJifen.setVisibility(View.VISIBLE);
+            }
+        });
 
+
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        broadcastManager = LocalBroadcastManager.getInstance(getActivity());
+        intentFilter = new IntentFilter();
+        intentFilter.addAction(ATotalOf.SENTBROADACTION);
+        //收到广播后所作的操作
+        mReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent){
+                //收到广播后所作的操作
+                initData();
+            }
+        };
+        broadcastManager.registerReceiver(mReceiver, intentFilter);
     }
 }

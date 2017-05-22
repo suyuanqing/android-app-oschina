@@ -3,6 +3,7 @@
 
     <!--ToolBar name-->
     <string name="title_dongtan">动弹</string>
+    <string name="title_play">弹一弹</string>
     <string name="title_zonghe">综合</string>
     <string name="title_faxian">发现</string>
     <string name="title_my">我的</string>
@@ -11,6 +12,7 @@
     <string name="dianji_login">点击头像登录</string>
     <string name="jifen">积分</string>
     <string name="isNet">当前无网络连接</string>
+    <string name="send">发送</string>
 
 
     <!--SearchView hint-->

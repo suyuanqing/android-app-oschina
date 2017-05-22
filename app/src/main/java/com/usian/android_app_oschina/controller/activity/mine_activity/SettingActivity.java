@@ -1,13 +1,23 @@
 package com.usian.android_app_oschina.controller.activity.mine_activity;
 
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.franmontiel.persistentcookiejar.ClearableCookieJar;
 import com.kyleduo.switchbutton.SwitchButton;
+import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.base.BaseActivity;
+import com.usian.android_app_oschina.contact.ATotalOf;
+import com.usian.android_app_oschina.contact.DoubleClickExit;
+import com.usian.android_app_oschina.model.http.Cookie.ClearCookiejar;
+import com.usian.android_app_oschina.utils.SPUtils;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -53,7 +63,11 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-
+        if (SPUtils.getParam(App.getContext(), "isLogin", "").equals("已登录")){
+            settingZhuxiao.setVisibility(View.VISIBLE);
+        }else{
+            settingZhuxiao.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -65,6 +79,17 @@ public class SettingActivity extends BaseActivity {
 
     @Override
     protected void initListener() {
+
+        settindDefault.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    DoubleClickExit.setAgainBack(true);
+                }else{
+                    DoubleClickExit.setAgainBack(false);
+                }
+            }
+        });
 
     }
 
@@ -85,6 +110,21 @@ public class SettingActivity extends BaseActivity {
             case R.id.setting_update:
                 break;
             case R.id.setting_zhuxiao:
+
+                Intent intent = new Intent(ATotalOf.SENTBROADACTION);
+                intent.putExtra("zhuxiao", 0);
+                LocalBroadcastManager.getInstance(App.subActivity).sendBroadcast(intent);
+
+                if (SPUtils.getParam(App.getContext(), "isLogin", "").equals("已登录")){
+                    ClearableCookieJar clear = new ClearCookiejar();
+                    clear.clear();
+                    SPUtils.remove(App.getContext(), "isLogin");
+                    Toast.makeText(this, "注销成功", Toast.LENGTH_SHORT).show();
+                    settingZhuxiao.setVisibility(View.GONE);
+                }else{
+                    settingZhuxiao.setVisibility(View.GONE);
+                }
+
                 break;
             case R.id.title_back:
                 finish();

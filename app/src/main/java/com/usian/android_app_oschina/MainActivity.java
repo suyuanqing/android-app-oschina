@@ -10,16 +10,21 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.base.BaseMainActivity;
+import com.usian.android_app_oschina.contact.DoubleClickExit;
+import com.usian.android_app_oschina.controller.activity.mine_activity.LoginActivity;
 import com.usian.android_app_oschina.controller.activity.news_activity.SearchActivity;
+import com.usian.android_app_oschina.controller.activity.play_activity.PlayActivity;
 import com.usian.android_app_oschina.controller.fragment.dt_fragment.TweetFragnemt;
 import com.usian.android_app_oschina.controller.fragment.fx_fragment.FindFragment;
 import com.usian.android_app_oschina.controller.fragment.my_fragment.MineFragment;
 import com.usian.android_app_oschina.controller.fragment.zh_fragnemt.SynthesizeFragment;
 import com.usian.android_app_oschina.utils.FragmentBuilder;
+import com.usian.android_app_oschina.utils.SPUtils;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -51,6 +56,8 @@ public class MainActivity extends BaseMainActivity {
     RadioGroup btns;
     @Bind(R.id.activity_main)
     LinearLayout activityMain;
+
+    private long firsttime;
 
     private long clickTime = 0;
 
@@ -95,6 +102,12 @@ public class MainActivity extends BaseMainActivity {
                 break;
             case R.id.iv_explore_plus:
 
+                if (SPUtils.getParam(App.activity, "isLogin", "").equals("已登录")) {
+                    startActivity(new Intent(App.activity, PlayActivity.class));
+                }else{
+                    startActivity(new Intent(App.activity, LoginActivity.class));
+                }
+
                 break;
             case R.id.btn_explore_find:
                 findViewById(R.id.title_include).setVisibility(View.VISIBLE);
@@ -126,9 +139,25 @@ public class MainActivity extends BaseMainActivity {
         String name = entry.getName();
         if("SynthesizeFragment".equals(name) || "TweetFragnemt".equals(name)
                 || "MineFragment".equals(name) || "FindFragment".equals(name)){
-            Process.killProcess(Process.myPid());
 
-            System.exit(0);
+            if(DoubleClickExit.isAgainBack()){
+                if(DoubleClickExit.isBack()){
+                    firsttime = System.currentTimeMillis();
+                    Toast.makeText(this, "再次点击退出应用", Toast.LENGTH_SHORT).show();
+                    DoubleClickExit.setIsBack(false);
+                }else {
+                    if(System.currentTimeMillis()-firsttime >2000){
+                        firsttime = System.currentTimeMillis();
+                        Toast.makeText(this, "再次点击退出应用", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Process.killProcess(Process.myPid());
+                        System.exit(0);
+                    }
+                }
+            }else{
+                Process.killProcess(Process.myPid());
+                System.exit(0);
+            }
 
         }else {
             manager.popBackStackImmediate();

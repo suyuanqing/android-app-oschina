@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textColor="@color/white"
-            android:textSize="20dp"/>
+            android:textSize="16dp"/>
 
         <ImageView
             android:id="@+id/iv_btn_search_normal"
@@ -27,6 +27,7 @@
             android:src="@mipmap/btn_search_normal"
             android:layout_marginRight="10dp"
             />
+
 
     </Toolbar>
 

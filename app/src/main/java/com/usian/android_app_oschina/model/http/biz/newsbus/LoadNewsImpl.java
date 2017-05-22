@@ -1,6 +1,7 @@
 package com.usian.android_app_oschina.model.http.biz.newsbus;
 
 import com.usian.android_app_oschina.contact.Arguments;
+import com.usian.android_app_oschina.contact.NetWork;
 import com.usian.android_app_oschina.contact.Urls;
 import com.usian.android_app_oschina.model.http.HttpFactory;
 import com.usian.android_app_oschina.model.http.callback.InfoIdCallback;
@@ -24,7 +25,7 @@ public class LoadNewsImpl implements ILoadNetNews {
         params.put("pageIndex", pageIndex);
         params.put("pageSize", Arguments.PAGESIZE+"");
 
-        HttpFactory.create().doGet(Urls.NEWSURL,params,networkCallback);
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.NEWSURL,params,networkCallback);
 
     }
 
@@ -37,7 +38,7 @@ public class LoadNewsImpl implements ILoadNetNews {
         params.put("pageIndex", pageIndex);
         params.put("pageSize", Arguments.PAGESIZE+"");
 
-        HttpFactory.create().doGet(Urls.RECOMMBLOG,params,networkCallback);
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.RECOMMBLOG,params,networkCallback);
     }
 
     //热门资讯
@@ -49,7 +50,7 @@ public class LoadNewsImpl implements ILoadNetNews {
         params.put("pageSize", Arguments.PAGESIZE+"");
         params.put("show", Arguments.SHOW);
 
-        HttpFactory.create().doGet(Urls.HOTNEWS,params,networkCallback);
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.HOTNEWS,params,networkCallback);
     }
 
     //最新博客
@@ -60,7 +61,7 @@ public class LoadNewsImpl implements ILoadNetNews {
         params.put("pageIndex", pageIndex);
         params.put("pageSize", Arguments.PAGESIZE+"");
 
-        HttpFactory.create().doGet(Urls.LATESTBLOG,params,networkCallback);
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.LATESTBLOG,params,networkCallback);
     }
 
     //获取新闻id
@@ -69,7 +70,7 @@ public class LoadNewsImpl implements ILoadNetNews {
         Map<String, String> params = new HashMap<>();
         params.put("id",id);
 
-        HttpFactory.create().doXml(Urls.NEWS_ID_URL, params, infoIdCallback);
+        HttpFactory.create(NetWork.VOLLEY).doXml(Urls.NEWS_ID_URL, params, infoIdCallback);
     }
 
     @Override
@@ -77,7 +78,7 @@ public class LoadNewsImpl implements ILoadNetNews {
         Map<String, String> params = new HashMap<>();
         params.put("id",id);
 
-        HttpFactory.create().doXml(Urls.BLOG_ID_URL, params, infoIdCallback);
+        HttpFactory.create(NetWork.VOLLEY).doXml(Urls.BLOG_ID_URL, params, infoIdCallback);
     }
 
     @Override
@@ -88,6 +89,14 @@ public class LoadNewsImpl implements ILoadNetNews {
         params.put("pageIndex",pageIndex);
         params.put("pageSize",Arguments.PAGESIZE+"");
 
-        HttpFactory.create().doGet(Urls.QNN_URL, params, networkCallback);
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.QNN_URL, params, networkCallback);
+    }
+
+    @Override
+    public void getQnnInfo(String id, NetworkCallback networkCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id);
+
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.QNNINFO_URL, params, networkCallback);
     }
 }

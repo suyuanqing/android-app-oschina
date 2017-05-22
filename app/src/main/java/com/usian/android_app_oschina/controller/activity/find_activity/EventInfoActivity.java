@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.thoughtworks.xstream.XStream;
+import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.base.BaseActivity;
 import com.usian.android_app_oschina.model.entity.EventInfoModel;
@@ -121,7 +122,7 @@ public class EventInfoActivity extends BaseActivity implements NetworkCallback {
 
         EventInfoModel o = (EventInfoModel) xStream.fromXML(result);
         url = o.getPost().getUrl();
-        Glide.with(this).load(o.getPost().getEvent().getCover()).into(eventTitle);
+        Glide.with(App.subActivity).load(o.getPost().getEvent().getCover()).into(eventTitle);
         eventTextPinglun.setText("评论"+"("+o.getPost().getAnswerCount()+")");
         getWebView(url);
     }

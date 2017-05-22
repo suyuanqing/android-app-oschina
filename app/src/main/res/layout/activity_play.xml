@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_play"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.usian.android_app_oschina.controller.activity.play_activity.PlayActivity">
+
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        layout="@layout/title_bar_play"/>
+        
+    <EditText
+        android:id="@+id/play_editweet"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="top"
+        android:padding="20dp"
+        android:hint="今天想动弹什么？"
+        android:textSize="15dp"
+        android:background="@color/white"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/black_dan"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/play_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_tweet_picture_normal"/>
+
+        <ImageView
+            android:id="@+id/play_aite"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_tweet_mention_normal"/>
+
+        <ImageView
+            android:id="@+id/play_huati"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_tweet_topic_normal"/>
+
+        <ImageView
+            android:id="@+id/play_em"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_tweet_expression_normal"/>
+
+    </LinearLayout>
+
+</LinearLayout>

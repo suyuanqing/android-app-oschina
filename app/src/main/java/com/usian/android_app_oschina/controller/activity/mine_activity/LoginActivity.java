@@ -1,6 +1,8 @@
 package com.usian.android_app_oschina.controller.activity.mine_activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -15,12 +17,14 @@ import com.thoughtworks.xstream.XStream;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.base.BaseActivity;
+import com.usian.android_app_oschina.contact.ATotalOf;
 import com.usian.android_app_oschina.model.entity.LoginModel;
 import com.usian.android_app_oschina.model.http.biz.minebus.ILoadLogin;
 import com.usian.android_app_oschina.model.http.biz.minebus.LoginImpl;
 import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.utils.LogUtils;
 import com.usian.android_app_oschina.utils.SPUtils;
+import com.usian.android_app_oschina.utils.ThreadUtils;
 
 import butterknife.Bind;
 import butterknife.OnClick;
@@ -126,17 +130,32 @@ public class LoginActivity extends BaseActivity implements NetworkCallback{
         LoginModel o = (LoginModel) xStream.fromXML(result);
 
         if (o.getResult().getErrorCode().equals("1")){
+
+            Intent intent = new Intent(ATotalOf.SENTBROADACTION);
+            intent.putExtra("userlogin", 1);
+            LocalBroadcastManager.getInstance(App.subActivity).sendBroadcast(intent);
+
             LogUtils.e("Login", username+"-----"+password);
-            SPUtils.putParam(this, "username", username);
-            SPUtils.putParam(this, "password", password);
-            Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+           ThreadUtils.runOnUIThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+            }
+        });
             SPUtils.putParam(App.getContext(), "username", username);
             SPUtils.putParam(App.getContext(), "password", password);
             SPUtils.putParam(App.getContext(), "uid", o.getUser().getUid());
+            SPUtils.putParam(App.getContext(), "isLogin", "已登录");
             finish();
         }else{
             LogUtils.e("Login", username+"-----"+password);
-            Toast.makeText(this, "用户名密码不正确", Toast.LENGTH_SHORT).show();
+            ThreadUtils.runOnUIThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(LoginActivity.this, "用户名密码不正确", Toast.LENGTH_SHORT).show();
+                }
+            });
+
         }
 
     }

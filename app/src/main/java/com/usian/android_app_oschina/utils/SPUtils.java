@@ -78,4 +78,18 @@ public class SPUtils {
         return null;
     }
 
+
+    /**
+     * 移除某个key值已经对应的值
+     * @param context
+     * @param key
+     */
+    public static void remove(Context context, String key) {
+        SharedPreferences sp = context.getSharedPreferences(FILE_NAME,
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.remove(key);
+        editor.commit();
+    }
+
 }
