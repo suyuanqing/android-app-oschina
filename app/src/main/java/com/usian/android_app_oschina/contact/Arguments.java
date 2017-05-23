@@ -30,10 +30,14 @@ public class Arguments {
     //发现 开源中国 分类
     public static final String FIND_OSS_TYPE = "0";
 
+    public static final String FIND_OSS_RECOMMEND = "recommend";
+    public static final String FIND_OSS_TIME = "time";
+    public static final String FIND_OSS_VIEW = "view";
+    public static final String FIND_OSS_LIST_CN = "list_cn";
+
+
     //登录
     public static final String KEEP_LOGIN = "1";
 
-    //苏大庆 cookie
-    public static final String MY_COOKIE = "_user_behavior_=30540bad-8a5a-46a1-bf1a-229b20a12bf9; oscid=ZeHER3eFvZH5sLjZfjw7ZD%2FNdmK1dG5HWiyY9gVae1F4htQaKSwCYP8KS4fMNoiaowQGngZRaYo93Gr7SMMGb0O0ryCfkkMJ%2FLl2uJpSf5UAj0k%2B%2Bh512DaQQ1l37pleMJUh0LP8b%2BycW4m%2B9R8WLw%3D%3D";
 
 }

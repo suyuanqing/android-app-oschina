@@ -33,33 +33,34 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal"
-        android:gravity="center">
+        android:gravity="center"
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/play_image"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_weight="1"
             android:src="@mipmap/ic_tweet_picture_normal"/>
 
         <ImageView
             android:id="@+id/play_aite"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_weight="1"
             android:src="@mipmap/ic_tweet_mention_normal"/>
 
         <ImageView
             android:id="@+id/play_huati"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_weight="1"
             android:src="@mipmap/ic_tweet_topic_normal"/>
 
         <ImageView
             android:id="@+id/play_em"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_weight="1"
             android:src="@mipmap/ic_tweet_expression_normal"/>
 

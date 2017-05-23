@@ -13,7 +13,7 @@ import com.usian.android_app_oschina.adapter.ZHPagerAdapter;
 import com.usian.android_app_oschina.base.BaseActivity;
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.controller.fragment.fx_fragment.OssFyFragment;
-import com.usian.android_app_oschina.utils.FragmentUtils;
+import com.usian.android_app_oschina.controller.fragment.fx_fragment.SubListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,19 +55,22 @@ public class OSSActivity extends BaseActivity {
     @Override
     protected void initView() {
         initList();
-        OssFyFragment s = new OssFyFragment();
-        FragmentUtils.create().setLastFragment(s);
 
         tvInfoPinglun.setVisibility(View.GONE);
         ivInfoImg.setVisibility(View.GONE);
         titleIconName.setText(R.string.fx_kyrj);
+        findOssPager.setOffscreenPageLimit(5);
 
-        for(int i=0;i<titleList.size();i++){
-            OssFyFragment testFm = OssFyFragment.newInstance(contentList, i);
-            fragmentList.add(testFm);
+        OssFyFragment testFm = OssFyFragment.newInstance(contentList, 0);
+        fragmentList.add(0, testFm);
+
+        for(int i=1;i<titleList.size()+1;i++){
+
+            SubListFragment testsub = SubListFragment.newInstance(contentList,i);
+            fragmentList.add(testsub);
         }
 
-        title_adapter = new ZHPagerAdapter(getSupportFragmentManager(), fragmentList, titleList);
+        title_adapter = new ZHPagerAdapter(getSupportFragmentManager(), fragmentList, contentList);
 
         findOssTab.setupWithViewPager(findOssPager);
 

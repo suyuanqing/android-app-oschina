@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.usian.android_app_oschina.base.BaseActivity;
+import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.base.BaseMainActivity;
 
 /**
@@ -15,6 +16,7 @@ public class App extends Application{
     //获取全局Activity
     public static BaseActivity subActivity;
     public static BaseMainActivity activity;
+    public static BaseFragment fragment;
     public static boolean isLogin;
 
     public static Context context;

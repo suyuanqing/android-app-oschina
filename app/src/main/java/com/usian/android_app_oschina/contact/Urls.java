@@ -38,6 +38,8 @@ public class Urls {
 
     //发现 开源软件 分类
     public static final String FIND_OSS_FL = BASEURL+"action/api/softwarecatalog_list";
+    //开源软件
+    public static final String FIND_OSS_SOFT = BASEURL+"action/api/software_list";
     //摇一摇资讯
     public static final String SHAKE_NEWS = BASEURL+"action/api/rock_rock";
     //线下活动

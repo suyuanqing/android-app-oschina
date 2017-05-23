@@ -24,5 +24,7 @@ public interface ILoadFind {
     //活动详情
     void getEventInfo(String id, NetworkCallback networkCallback);
 
+    //开源软件下
+    void getSoftwareList(String index, String searchTag, NetworkCallback networkCallback);
 
 }

@@ -111,15 +111,14 @@ public class SettingActivity extends BaseActivity {
                 break;
             case R.id.setting_zhuxiao:
 
-                Intent intent = new Intent(ATotalOf.SENTBROADACTION);
-                intent.putExtra("zhuxiao", 0);
-                LocalBroadcastManager.getInstance(App.subActivity).sendBroadcast(intent);
-
                 if (SPUtils.getParam(App.getContext(), "isLogin", "").equals("已登录")){
+                    SPUtils.putParam(App.getContext(), "isLogin", "注销");
                     ClearableCookieJar clear = new ClearCookiejar();
                     clear.clear();
-                    SPUtils.remove(App.getContext(), "isLogin");
                     Toast.makeText(this, "注销成功", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(ATotalOf.SENTBROADACTION);
+                    intent.putExtra("zhuxiao", 0);
+                    LocalBroadcastManager.getInstance(App.subActivity).sendBroadcast(intent);
                     settingZhuxiao.setVisibility(View.GONE);
                 }else{
                     settingZhuxiao.setVisibility(View.GONE);

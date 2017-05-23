@@ -131,10 +131,6 @@ public class LoginActivity extends BaseActivity implements NetworkCallback{
 
         if (o.getResult().getErrorCode().equals("1")){
 
-            Intent intent = new Intent(ATotalOf.SENTBROADACTION);
-            intent.putExtra("userlogin", 1);
-            LocalBroadcastManager.getInstance(App.subActivity).sendBroadcast(intent);
-
             LogUtils.e("Login", username+"-----"+password);
            ThreadUtils.runOnUIThread(new Runnable() {
             @Override
@@ -142,10 +138,14 @@ public class LoginActivity extends BaseActivity implements NetworkCallback{
                 Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
             }
         });
+            SPUtils.putParam(App.getContext(), "isLogin", "已登录");
             SPUtils.putParam(App.getContext(), "username", username);
             SPUtils.putParam(App.getContext(), "password", password);
             SPUtils.putParam(App.getContext(), "uid", o.getUser().getUid());
-            SPUtils.putParam(App.getContext(), "isLogin", "已登录");
+            Intent intent = new Intent(ATotalOf.SENTBROADACTION);
+            intent.putExtra("userlogin", 1);
+            LocalBroadcastManager.getInstance(App.subActivity).sendBroadcast(intent);
+
             finish();
         }else{
             LogUtils.e("Login", username+"-----"+password);

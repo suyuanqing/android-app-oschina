@@ -17,7 +17,6 @@ import com.usian.android_app_oschina.model.entity.FindOssFLModel;
 import com.usian.android_app_oschina.model.http.biz.findbus.ILoadFind;
 import com.usian.android_app_oschina.model.http.biz.findbus.LoadFindImpl;
 import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
-import com.usian.android_app_oschina.utils.FragmentUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,10 +33,10 @@ public class OssFyFragment extends BaseFragment implements NetworkCallback {
 
     @Bind(R.id.find_oss_fy)
     ListView findOssFy;
-    @Bind(R.id.find_rongqi)
-    FrameLayout findRongqi;
     @Bind(R.id.find_oss_rongqi)
     FrameLayout findOssRongqi;
+    @Bind(R.id.find_rongqi)
+    FrameLayout findRongqi;
     private ILoadFind iLoadFind;
     private ArrayList<FindOssFLModel.SoftwareTypeBean> fldata = new ArrayList<>();
     private FindOssFlAdapter adapter;
@@ -56,21 +55,22 @@ public class OssFyFragment extends BaseFragment implements NetworkCallback {
 
     @Override
     protected void initView(View view) {
-        manager = getChildFragmentManager();
+
         adapter = new FindOssFlAdapter(App.activity, fldata);
 
         findOssFy.setAdapter(adapter);
     }
 
-
     @Override
     protected void initListener() {
         findOssFy.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Bundle bundle = new Bundle();
                 bundle.putString("tag", fldata.get(position).getTag());
-                FragmentUtils.create().containerViewId(R.id.find_rongqi).start(FLTagFragment.class).params(bundle).build();
+
+
 
             }
 
@@ -78,7 +78,7 @@ public class OssFyFragment extends BaseFragment implements NetworkCallback {
     }
 
 
-     @Override
+    @Override
     public void onHidden() {
         super.onHidden();
 
@@ -117,7 +117,6 @@ public class OssFyFragment extends BaseFragment implements NetworkCallback {
         testFm.setArguments(bundle);
 
         return testFm;
-
     }
 
 
@@ -131,4 +130,6 @@ public class OssFyFragment extends BaseFragment implements NetworkCallback {
         transaction.remove(f);
         transaction.commitAllowingStateLoss();
     }
+
+
 }

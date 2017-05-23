@@ -51,4 +51,5 @@ public abstract class BaseMainActivity extends AppCompatActivity {
     //加载数据
     protected abstract void loadData();
 
+
 }

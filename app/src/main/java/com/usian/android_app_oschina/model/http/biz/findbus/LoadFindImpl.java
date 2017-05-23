@@ -66,4 +66,14 @@ public class LoadFindImpl implements ILoadFind{
 
         HttpFactory.create(NetWork.VOLLEY).doGet(Urls.EVENT_INFO_URL, params, networkCallback);
     }
+
+    @Override
+    public void getSoftwareList(String index, String searchTag, NetworkCallback networkCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("searchTag", searchTag);
+        params.put("pageIndex", index);
+        params.put("pageSize", Arguments.PAGESIZE+"");
+
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.FIND_OSS_SOFT, params, networkCallback);
+    }
 }

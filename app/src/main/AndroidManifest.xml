@@ -12,6 +12,7 @@
 
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <application
         android:name=".App"
@@ -42,7 +43,8 @@
         <activity android:name=".controller.activity.find_activity.OffEventActivity" />
         <activity android:name=".controller.activity.find_activity.EventInfoActivity" />
         <activity android:name=".controller.activity.news_activity.TqInfoActivity" />
-        <activity android:name=".controller.activity.play_activity.PlayActivity"></activity>
+        <activity android:name=".controller.activity.play_activity.PlayActivity" />
+        <activity android:name=".controller.activity.find_activity.SoftInfoActivity"></activity>
     </application>
 
 </manifest>

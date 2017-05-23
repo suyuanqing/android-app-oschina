@@ -1,13 +1,17 @@
 package com.usian.android_app_oschina.utils;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.base.BaseFragment;
+import com.usian.android_app_oschina.controller.fragment.fx_fragment.OssFyFragment;
 import com.usian.android_app_oschina.exception.NotFoundContainerException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by xingge on 2017/5/12.
@@ -15,70 +19,105 @@ import com.usian.android_app_oschina.exception.NotFoundContainerException;
  * 用于Fragment切换跳转 Activity跳转Fragment、Fragment跳转Fragment、普通类跳转Fragment
  */
 public class FragmentUtils {
-    private FragmentManager manager;
-    private FragmentTransaction transaction;
-    private static FragmentUtils turing;
-    private int containerViewId;
-    private BaseFragment lastFragment;
-    private BaseFragment fragment;
-    private boolean isDefault = true;
 
+
+    private static FragmentUtils builder;
+    private int containerViewId;
+    private static BaseFragment lastFragment;
+    private FragmentTransaction transaction;
+    private FragmentManager fragmentManager;
+    private BaseFragment fragment;
+    private String simpleName;
+    private boolean isDefault = true;
+    private boolean isBack = true;
+    private Map<String,Integer> fragments;
+    private OssFyFragment ossFyFragment;
 
     private FragmentUtils(){
-        manager = App.subActivity.getSupportFragmentManager();
+
+        fragmentManager = App.fragment.getChildFragmentManager();
+        fragments = new HashMap<>();
     }
 
+    public static FragmentUtils getInstance(){
+        if(builder == null) {
+            synchronized (FragmentUtils.class) {
 
-    public static FragmentUtils create(){
-        if (turing == null){
-            synchronized (FragmentUtils.class){
-                if(turing == null)
-                    turing = new FragmentUtils();
+                if (builder == null)
+                    builder = new FragmentUtils();
             }
         }
-        return turing;
+
+        return builder;
     }
 
-    public FragmentUtils containerViewId(int containerViewId){
+    public FragmentUtils containerId(int containerViewId){
         this.containerViewId = containerViewId;
         return this;
     }
 
-    public FragmentUtils start(Class<? extends Fragment> fragmentClass) throws NotFoundContainerException {
+    public FragmentUtils start(Class<? extends BaseFragment> fragmentClass){
+
         if(containerViewId == 0)
-            throw new NotFoundContainerException("Please add containerViewId before invoking start(Class<? extends Fragment> fragmentClass)");
-        transaction = manager.beginTransaction();
-        String simpleName = fragmentClass.getSimpleName();
-        fragment = (BaseFragment) manager.findFragmentByTag(simpleName);
-        if(fragment == null){
-            try {
-                //动态代理 动态创建对象
-                fragment = (BaseFragment) fragmentClass.newInstance();
-                transaction.add(containerViewId,fragment,simpleName);
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
+            throw new NotFoundContainerException("containerId不能为0");
+        transaction = fragmentManager.beginTransaction();
+        simpleName = fragmentClass.getSimpleName();
+
+//       进入退出动画
+//        transaction.setTransition(TRANSIT_FRAGMENT_OPEN);
+//        transaction.setTransition(TRANSIT_FRAGMENT_CLOSE);
+
+        fragment = (BaseFragment) fragmentManager.findFragmentByTag(simpleName);
+        try {
+            if(fragment == null){
+
+                    //Java动态代理创建对象
+                    fragment = fragmentClass.newInstance();
+                    transaction.add(containerViewId,fragment,simpleName);
+                    fragments.put(simpleName,containerViewId);
+
+            }else {
+
+                Integer containerId = fragments.get(simpleName);
+                if(containerId != containerViewId){
+                    fragment = null;
+                    //Java动态代理创建对象
+                    fragment = fragmentClass.newInstance();
+                    transaction.add(containerViewId,fragment,simpleName);
+					fragments.put(simpleName, containerId);
+                }
+
             }
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
-        setLastFragment(lastFragment);
+
+
         return this;
     }
 
-    public FragmentUtils hide(){
-        if (lastFragment != null){
-            transaction.hide(lastFragment);
+    //隐藏上一个fragment
+    public FragmentUtils show(){
+        if(isBack) {
+            Log.d("FragmentBuilder", "lastFragment = "+lastFragment);
+            //隐藏上一个fragment
+            if (lastFragment != null)
+                transaction.hide(lastFragment);
+
         }
-        transaction.show(fragment);
         return this;
     }
 
+    //替换上一个fragment
     public FragmentUtils replace(){
         isDefault = false;
-        transaction.replace(containerViewId,fragment,fragment.getClass().getSimpleName());
+        transaction.replace(containerViewId,fragment,simpleName);
         return this;
     }
 
+    //传递参数
     public FragmentUtils params(Bundle bundle){
         if (bundle != null)
             fragment.setParams(bundle);
@@ -86,28 +125,40 @@ public class FragmentUtils {
     }
 
     public FragmentUtils isBack(boolean isBack){
-        if(isBack)
-            transaction.addToBackStack(fragment.getClass().getSimpleName());
+
+        this.isBack = isBack;
+        if(isBack) {
+            //添加fragment到回退栈
+            transaction.addToBackStack(simpleName);
+        }
         return this;
     }
 
-    public Fragment build(){
-        if (isDefault) {
-            hide();
-            isBack(true);
-        }
-        transaction.commit();
-        lastFragment = fragment;
-        isDefault = true;
-        return fragment;
-    }
-
-    public void setLastFragment(BaseFragment lastFragment){
-        this.lastFragment = lastFragment;
-    }
-
-    public Fragment getLastFragment() {
+    public BaseFragment getLastFragment() {
         return lastFragment;
     }
 
+    public static void setLastFragment(BaseFragment slastFragment) {
+        lastFragment = slastFragment;
+    }
+
+    public BaseFragment build(){
+        if(isDefault){
+            show();
+        }
+        //有bug
+        if(isBack) {
+            isBack(true);
+        }
+
+        Log.d("FragmentBuilder", "fragment = "+fragment);
+        //显示当前的Fragment
+        transaction.show(fragment);
+        transaction.commit();
+        if(isBack)
+            lastFragment = fragment;
+        isDefault = true;
+        isBack = true;
+        return fragment;
+    }
 }

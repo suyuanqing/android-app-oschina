@@ -2,18 +2,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/find_oss_rongqi">
+    android:id="@+id/find_oss_rongqi"
+    android:background="@color/white">
 
     <ListView
         android:id="@+id/find_oss_fy"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:dividerHeight="1.5px"></ListView>
+        android:layout_height="match_parent"></ListView>
 
     <FrameLayout
         android:id="@+id/find_rongqi"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        ></FrameLayout>
+        android:layout_height="match_parent"></FrameLayout>
 
 </FrameLayout>

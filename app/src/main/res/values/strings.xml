@@ -34,8 +34,8 @@
     <string name="fx_to_sign_down">截止报名</string>
     <string name="fx_my_sign_down">我要报名</string>
 
+    <string name="fx_oss_fl">分类</string>
     <string-array name="find_tab_titlename">
-        <item>分类</item>
         <item>推荐</item>
         <item>最新</item>
         <item>热门</item>

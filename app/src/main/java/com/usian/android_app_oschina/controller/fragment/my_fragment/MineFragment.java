@@ -30,6 +30,7 @@ import com.usian.android_app_oschina.model.entity.UserInfoModel;
 import com.usian.android_app_oschina.model.http.biz.minebus.ILoadLogin;
 import com.usian.android_app_oschina.model.http.biz.minebus.LoginImpl;
 import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
+import com.usian.android_app_oschina.utils.LogUtils;
 import com.usian.android_app_oschina.utils.NetUtils;
 import com.usian.android_app_oschina.utils.SPUtils;
 import com.usian.android_app_oschina.utils.ThreadUtils;
@@ -109,30 +110,25 @@ public class MineFragment extends BaseFragment {
             loadData();
         } else {
             mimeUserinfo.setVisibility(View.GONE);
+            tvMineJifen.setVisibility(View.GONE);
+            tvMineUsername.setText(R.string.dianji_login);
+            Glide.with(App.activity).load(R.mipmap.widget_default_face)
+                    .transform(new GlideCircleTransform(App.activity))
+                    .into(ivMimaUserimg);
         }
     }
 
     @Override
     protected void initView(View view) {
-        tvMineJifen.setVisibility(View.GONE);
-        Glide.with(App.activity).load(R.mipmap.widget_default_face)
-                .transform(new GlideCircleTransform(App.activity))
-                .into(ivMimaUserimg);
+//        SPUtils.remove(App.getContext(), "isLogin");
     }
+
 
     @Override
     protected void initListener() {
 
     }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if (hidden){
-        }else{
-            initData();
-        }
-    }
 
     @Override
     protected void loadData() {
@@ -265,7 +261,14 @@ public class MineFragment extends BaseFragment {
             @Override
             public void onReceive(Context context, Intent intent){
                 //收到广播后所作的操作
-                initData();
+                if (SPUtils.getParam(App.activity, "isLogin", "").equals("已登录")) {
+                    initData();
+                    LogUtils.e("TAG", "登录广播");
+                } else {
+                    LogUtils.e("TAG", "注销广播");
+                    initData();
+                }
+
             }
         };
         broadcastManager.registerReceiver(mReceiver, intentFilter);
