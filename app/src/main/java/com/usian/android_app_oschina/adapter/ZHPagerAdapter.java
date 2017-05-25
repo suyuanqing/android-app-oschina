@@ -2,7 +2,7 @@ package com.usian.android_app_oschina.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.view.ViewGroup;
 
 import com.usian.android_app_oschina.base.BaseFragment;
@@ -14,18 +14,19 @@ import java.util.List;
  * Created by 苏元庆 on 2017/5/9.
  */
 
-public class ZHPagerAdapter extends FragmentPagerAdapter{
+public class ZHPagerAdapter extends FragmentStatePagerAdapter {
     private ArrayList<BaseFragment> data;
     private List<String> titleList;
     public ZHPagerAdapter(FragmentManager fm, ArrayList<BaseFragment> data, List<String> titleList) {
         super(fm);
         this.data = data;
         this.titleList = titleList;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemPosition(Object object) {
-        return POSITION_NONE;
+        return data.size();
     }
 
     @Override
@@ -35,7 +36,7 @@ public class ZHPagerAdapter extends FragmentPagerAdapter{
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        super.destroyItem(container, position, object);
+//        super.destroyItem(container, position, object);
     }
 
     @Override
@@ -47,4 +48,6 @@ public class ZHPagerAdapter extends FragmentPagerAdapter{
     public CharSequence getPageTitle(int position) {
         return titleList.get(position);
     }
+
+
 }

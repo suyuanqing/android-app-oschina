@@ -15,18 +15,24 @@
         layout="@layout/title_bar_icon"
         />
 
-    <WebView
-        android:id="@+id/infor_webview"
+    <FrameLayout
+        android:id="@+id/info_rongqi"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"></WebView>
-
+        android:layout_weight="1">
+        <WebView
+            android:id="@+id/infor_webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            ></WebView>
+    </FrameLayout>
     
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:padding="8dp">
+        android:padding="8dp"
+       >
 
         <LinearLayout
             android:layout_width="0dp"
@@ -40,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
                 android:orientation="horizontal"
-                android:background="@drawable/shape_search_view"
+                android:background="@drawable/subscribe_item_bg"
                 android:padding="10dp">
 
                 <ImageView

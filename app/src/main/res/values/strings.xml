@@ -13,6 +13,7 @@
     <string name="jifen">积分</string>
     <string name="isNet">当前无网络连接</string>
     <string name="send">发送</string>
+    <string name="pub_comment">评论成功</string>
 
 
     <!--SearchView hint-->
@@ -50,6 +51,7 @@
     <!--搜索-->
     <string name="sear_text">搜索博客、软件、资讯、问答、找人</string>
     <string name="cencel_sear">取消</string>
+    <string name="empty_search">清空搜索历史</string>
 
     <!--综合Fragment复用 标题-->
     <string-array name="newsTitle">

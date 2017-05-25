@@ -13,7 +13,6 @@ import java.util.Map;
  * Created by 苏元庆 on 2017/5/20.
  *  业务的具体实现类
  */
-// TODO 登录需要改为okhttp请求
 public class LoginImpl implements ILoadLogin {
 
     @Override

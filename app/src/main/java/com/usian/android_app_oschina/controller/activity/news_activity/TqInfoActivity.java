@@ -2,24 +2,30 @@ package com.usian.android_app_oschina.controller.activity.news_activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.thoughtworks.xstream.XStream;
+import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.model.entity.TqInfoModel;
+import com.usian.android_app_oschina.model.http.biz.comment.SendNewsComment;
 import com.usian.android_app_oschina.model.http.biz.newsbus.ILoadNetNews;
 import com.usian.android_app_oschina.model.http.biz.newsbus.LoadNewsImpl;
 import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.utils.LogUtils;
+import com.usian.android_app_oschina.utils.SPUtils;
 import com.usian.android_app_oschina.utils.ThreadUtils;
 
 import butterknife.Bind;
@@ -51,6 +57,8 @@ public class TqInfoActivity extends AppCompatActivity {
     LinearLayout activityTqInfo;
     @Bind(R.id.tq_webview)
     WebView tqWebview;
+    @Bind(R.id.tq_qongqi)
+    FrameLayout tqQongqi;
     private String qnn_id;
     private ILoadNetNews iLoadNetNews;
     private String url;
@@ -100,7 +108,43 @@ public class TqInfoActivity extends AppCompatActivity {
             }
         });
 
+        sendComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uid = (String) SPUtils.getParam(App.activity, "uid", "");
+                SendNewsComment sendNewsComment = SendNewsComment.getInstance();
+                sendNewsComment.popupView(TqInfoActivity.this, 2 + "", qnn_id, uid);
+
+            }
+        });
+
+        ivInfoImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                infoCollection.setVisibility(View.GONE);
+//                infoShare.setVisibility(View.GONE);
+//                ivInfoImg.setVisibility(View.GONE);
+//                tvInfoPinglun.setVisibility(View.GONE);
+//                titleIconName.setText("返回");
+//                FragmentUtils.getInstance().containerId(R.id.info_rongqi).start(CommentFragment.class).build();
+                CommentFragment commentFragment = new CommentFragment();
+                FragmentManager manager = getSupportFragmentManager();
+                Bundle bun = new Bundle();
+                bun.putString("blog_comment_id", qnn_id);
+                bun.putString("news_count", commentCount);
+                bun.putString("news_catalog", 2 + "");
+                bun.putBoolean("flag", false);
+                commentFragment.setParams(bun);
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.add(R.id.tq_qongqi, commentFragment, "CommentFragment").show(commentFragment);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+            }
+        });
+
     }
+
 
     public void initData() {
         dialog = new ProgressDialog(this);
@@ -120,7 +164,7 @@ public class TqInfoActivity extends AppCompatActivity {
                 xStream.alias("notice", TqInfoModel.NoticeBean.class);
                 TqInfoModel o = (TqInfoModel) xStream.fromXML(result);
                 url = o.getPost().getUrl();
-                LogUtils.e("TAG","tq="+url);
+                LogUtils.e("TAG", "tq=" + url);
                 loadData();
             }
 

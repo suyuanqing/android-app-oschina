@@ -1,6 +1,5 @@
 package com.usian.android_app_oschina.model.http.biz.newsbus;
 
-import com.usian.android_app_oschina.model.http.callback.InfoIdCallback;
 import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 
 /**
@@ -23,10 +22,10 @@ public interface ILoadNetNews {
     void getLatestBlog(String pageIndex, NetworkCallback networkCallback);
 
     //请求新闻详情ID
-    void getNewsId(String id, InfoIdCallback infoIdCallback);
+    void getNewsId(String id, NetworkCallback networkCallback);
 
     //请求博客详情ID
-    void getBlogId(String id, InfoIdCallback infoIdCallback);
+    void getBlogId(String id, NetworkCallback networkCallback);
 
     //技术问答
     void getQnn(String pageIndex, String catalog, NetworkCallback networkCallback);

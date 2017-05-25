@@ -27,4 +27,7 @@ public interface ILoadFind {
     //开源软件下
     void getSoftwareList(String index, String searchTag, NetworkCallback networkCallback);
 
+    //软件详情
+    void getSoftInfo(String inent, NetworkCallback networkCallback);
+
 }

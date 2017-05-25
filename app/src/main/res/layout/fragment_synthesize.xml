@@ -8,24 +8,71 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <android.support.design.widget.TabLayout
-            android:id="@+id/zh_tab"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:background="@color/white">
+        
+        <RelativeLayout
             android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            app:tabSelectedTextColor="@color/actionbar_background"
-            app:tabIndicatorColor="@color/actionbar_background"
-            />
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/zh_tab"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                app:tabSelectedTextColor="@color/actionbar_background"
+                app:tabIndicatorColor="@color/actionbar_background"
+                android:background="@color/white"/>
+
+            <LinearLayout
+                android:id="@+id/zh_lanmu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:padding="5dp">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/white"
+                    android:text="切换栏目"
+                    android:gravity="center_vertical"
+                    android:layout_gravity="left"
+                    android:layout_marginLeft="15dp"
+                    />
+                <Button
+                    android:id="@+id/zh_delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/to_sign_up_color"
+                    android:text="排序删除"
+                    android:layout_gravity="center"
+                    android:textColor="@color/actionbar_background"
+                    />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
         <ImageView
             android:id="@+id/iv_ic_add"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:src="@mipmap/ic_subscribe"
             android:layout_gravity="center"
-            android:layout_marginRight="10dp"/>
+            android:layout_margin="10dp"
+            android:background="@color/white"/>
+
     </LinearLayout>
+    
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/login_line_color"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/zh_viewpager"

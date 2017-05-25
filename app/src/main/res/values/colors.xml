@@ -6,6 +6,7 @@
 
     <color name="main_green">#24cf5f</color>
     <color name="actionbar_background">@color/main_green</color>
+    <color name="subscribe_item_pressed_bg">#fff9f9f9</color>
     <color name="immersion">#167c39</color>
     <color name="white">#ffffff</color>
     <color name="transparent">#00000000</color>

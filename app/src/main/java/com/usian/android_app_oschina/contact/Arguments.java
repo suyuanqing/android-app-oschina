@@ -39,5 +39,10 @@ public class Arguments {
     //登录
     public static final String KEEP_LOGIN = "1";
 
+    public static final String SEARCH_SOFTWARE = "software";
+    public static final String SEARCH_POST = "post";
+    public static final String SEARCH_BLOG = "blog";
+    public static final String SEARCH_NEWS = "news";
+
 
 }

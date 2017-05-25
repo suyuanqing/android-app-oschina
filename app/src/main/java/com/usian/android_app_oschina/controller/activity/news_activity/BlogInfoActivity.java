@@ -2,6 +2,8 @@ package com.usian.android_app_oschina.controller.activity.news_activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -13,22 +15,27 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.thoughtworks.xstream.XStream;
+import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
+import com.usian.android_app_oschina.model.entity.BlogInfoModel;
 import com.usian.android_app_oschina.model.entity.NewsInfoModel;
+import com.usian.android_app_oschina.model.http.biz.comment.SendBlogComment;
 import com.usian.android_app_oschina.model.http.biz.newsbus.ILoadNetNews;
 import com.usian.android_app_oschina.model.http.biz.newsbus.LoadNewsImpl;
-import com.usian.android_app_oschina.model.http.callback.InfoIdCallback;
+import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.utils.LogUtils;
+import com.usian.android_app_oschina.utils.SPUtils;
 import com.usian.android_app_oschina.utils.ThreadUtils;
-
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 /***
  * 开源资讯下的资讯详情
+ *
  */
+//TODO 尚未实现点赞   如果有时间， 就把动画完善
 public class BlogInfoActivity extends AppCompatActivity {
 
 
@@ -58,6 +65,7 @@ public class BlogInfoActivity extends AppCompatActivity {
     private NewsInfoModel o;
     private ProgressDialog dialog;
     private String commentCount;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +110,47 @@ public class BlogInfoActivity extends AppCompatActivity {
             }
         });
 
+
+        sendComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uid = (String) SPUtils.getParam(App.activity, "uid", "");
+//                SendNewsComment sendComment = SendNewsComment.getInstance();
+//                sendComment.popupView(BlogInfoActivity.this, 1+"", news_id, uid);
+
+                SendBlogComment sendBlogComment = SendBlogComment.getInstance();
+                sendBlogComment.popupView(BlogInfoActivity.this, news_id, uid);
+
+            }
+        });
+
+        ivInfoImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                infoCollection.setVisibility(View.GONE);
+//                infoShare.setVisibility(View.GONE);
+//                ivInfoImg.setVisibility(View.GONE);
+//                tvInfoPinglun.setVisibility(View.GONE);
+//                titleIconName.setText("返回");
+//                FragmentUtils.getInstance().containerId(R.id.info_rongqi).start(CommentFragment.class).build();
+                CommentFragment commentFragment = new CommentFragment();
+                FragmentManager manager = getSupportFragmentManager();
+                Bundle bun = new Bundle();
+                bun.putString("blog_comment_id", news_id);
+                bun.putString("news_count", commentCount);
+                bun.putBoolean("flag", false);
+                commentFragment.setParams(bun);
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.add(R.id.info_rongqi, commentFragment, "CommentFragment").show(commentFragment);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+            }
+        });
+
     }
+
+
 
     public void initData() {
         dialog = new ProgressDialog(this);
@@ -110,23 +158,19 @@ public class BlogInfoActivity extends AppCompatActivity {
         dialog.show();
 
         news_id = getIntent().getStringExtra("id");
-
+        LogUtils.e("BlogInfoActivity", news_id);
         iLoadNetNews = new LoadNewsImpl();
-        iLoadNetNews.getBlogId(news_id, new InfoIdCallback() {
-
+        iLoadNetNews.getBlogId(news_id, new NetworkCallback() {
             @Override
-            public void onSuccess(Map<String, String> result) {
-
-                for (String s : result.keySet()) {
-                    if (s.equals("id")) {
-                        url = result.get(s);
-                    }
-
-                }
-
+            public void onSuccess(String result) {
                 dialog.dismiss();
-
-                tvInfoPinglun.setText(commentCount);
+                XStream xStream = new XStream();
+                xStream.alias("oschina", BlogInfoModel.class);
+                xStream.alias("blog", BlogInfoModel.BlogBean.class);
+                BlogInfoModel o = (BlogInfoModel) xStream.fromXML(result);
+                url = o.getBlog().getUrl();
+                commentCount = o.getBlog().getCommentCount();
+                LogUtils.e("BlogInfoActivity", url);
                 loadData();
             }
 

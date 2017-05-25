@@ -4,7 +4,6 @@ import com.usian.android_app_oschina.contact.Arguments;
 import com.usian.android_app_oschina.contact.NetWork;
 import com.usian.android_app_oschina.contact.Urls;
 import com.usian.android_app_oschina.model.http.HttpFactory;
-import com.usian.android_app_oschina.model.http.callback.InfoIdCallback;
 import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 
 import java.util.HashMap;
@@ -66,19 +65,19 @@ public class LoadNewsImpl implements ILoadNetNews {
 
     //获取新闻id
     @Override
-    public void getNewsId(String id, InfoIdCallback infoIdCallback) {
+    public void getNewsId(String id, NetworkCallback networkCallback) {
         Map<String, String> params = new HashMap<>();
         params.put("id",id);
 
-        HttpFactory.create(NetWork.VOLLEY).doXml(Urls.NEWS_ID_URL, params, infoIdCallback);
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.NEWS_ID_URL, params, networkCallback);
     }
 
     @Override
-    public void getBlogId(String id, InfoIdCallback infoIdCallback) {
+    public void getBlogId(String id, NetworkCallback networkCallback) {
         Map<String, String> params = new HashMap<>();
         params.put("id",id);
 
-        HttpFactory.create(NetWork.VOLLEY).doXml(Urls.BLOG_ID_URL, params, infoIdCallback);
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.BLOG_ID_URL, params, networkCallback);
     }
 
     @Override

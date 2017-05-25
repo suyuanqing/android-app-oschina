@@ -2,26 +2,31 @@ package com.usian.android_app_oschina.controller.activity.news_activity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.CheckBox;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.thoughtworks.xstream.XStream;
+import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.model.entity.NewsInfoModel;
+import com.usian.android_app_oschina.model.http.biz.comment.SendNewsComment;
 import com.usian.android_app_oschina.model.http.biz.newsbus.ILoadNetNews;
 import com.usian.android_app_oschina.model.http.biz.newsbus.LoadNewsImpl;
-import com.usian.android_app_oschina.model.http.callback.InfoIdCallback;
+import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.utils.LogUtils;
+import com.usian.android_app_oschina.utils.SPUtils;
 import com.usian.android_app_oschina.utils.ThreadUtils;
-
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -44,6 +49,8 @@ public class NewsInfoActivity extends AppCompatActivity {
     LinearLayout titleIconToolbar;
     @Bind(R.id.infor_webview)
     WebView inforWebview;
+    @Bind(R.id.info_rongqi)
+    FrameLayout infoRongqi;
     @Bind(R.id.send_comment)
     LinearLayout sendComment;
     @Bind(R.id.info_collection)
@@ -58,6 +65,7 @@ public class NewsInfoActivity extends AppCompatActivity {
     private NewsInfoModel o;
     private ProgressDialog dialog;
     private String commentCount;
+    private String catalog = "1";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +110,42 @@ public class NewsInfoActivity extends AppCompatActivity {
             }
         });
 
+
+        sendComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uid = (String) SPUtils.getParam(App.activity, "uid", "");
+                SendNewsComment sendComment = SendNewsComment.getInstance();
+                sendComment.popupView(NewsInfoActivity.this, catalog, news_id, uid);
+            }
+        });
+
+        ivInfoImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                infoCollection.setVisibility(View.GONE);
+//                infoShare.setVisibility(View.GONE);
+//                ivInfoImg.setVisibility(View.GONE);
+//                tvInfoPinglun.setVisibility(View.GONE);
+//                titleIconName.setText("返回");
+//                FragmentUtils.getInstance().containerId(R.id.info_rongqi).start(CommentFragment.class).build();
+
+                CommentFragment commentFragment = new CommentFragment();
+                FragmentManager manager = getSupportFragmentManager();
+                Bundle bun = new Bundle();
+                bun.putString("news_comment_id", news_id);
+                bun.putString("news_catalog", catalog);
+                bun.putString("news_count", commentCount);
+                bun.putBoolean("flag", true);
+                commentFragment.setParams(bun);
+                FragmentTransaction transaction = manager.beginTransaction();
+                transaction.add(R.id.info_rongqi, commentFragment, "CommentFragment").show(commentFragment);
+                transaction.addToBackStack(null);
+
+                transaction.commit();
+            }
+        });
+
     }
 
     public void initData() {
@@ -112,21 +156,17 @@ public class NewsInfoActivity extends AppCompatActivity {
         news_id = getIntent().getStringExtra("id");
 
         iLoadNetNews = new LoadNewsImpl();
-        iLoadNetNews.getNewsId(news_id, new InfoIdCallback() {
-
+        iLoadNetNews.getNewsId(news_id, new NetworkCallback() {
             @Override
-            public void onSuccess(Map<String, String> result) {
-
-                for (String s : result.keySet()) {
-                    if (s.equals("id")) {
-                        url = result.get(s);
-                    }
-
-                }
-
+            public void onSuccess(String result) {
                 dialog.dismiss();
-
-                tvInfoPinglun.setText(commentCount);
+                XStream xStream = new XStream();
+                xStream.alias("oschina", NewsInfoModel.class);
+                xStream.alias("news", NewsInfoModel.NewsBean.class);
+                NewsInfoModel o = (NewsInfoModel) xStream.fromXML(result);
+                url = o.getNews().getUrl();
+                commentCount = o.getNews().getCommentCount();
+                LogUtils.e("NewsInfoModel", url);
                 loadData();
             }
 
@@ -161,6 +201,7 @@ public class NewsInfoActivity extends AppCompatActivity {
         webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
 
         inforWebview.loadUrl(url);
+        LogUtils.e("NewsInfoActivity", "webview：" + url);
 
 //步骤3. 复写shouldOverrideUrlLoading()方法，使得打开网页时不调用系统浏览器， 而是在本WebView中显示
         inforWebview.setWebViewClient(new WebViewClient() {

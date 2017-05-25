@@ -40,6 +40,8 @@ public class Urls {
     public static final String FIND_OSS_FL = BASEURL+"action/api/softwarecatalog_list";
     //开源软件
     public static final String FIND_OSS_SOFT = BASEURL+"action/api/software_list";
+    //软件详情
+    public static final String SOFT_INFO_URL = BASEURL+"action/api/software_detail";
     //摇一摇资讯
     public static final String SHAKE_NEWS = BASEURL+"action/api/rock_rock";
     //线下活动
@@ -56,5 +58,17 @@ public class Urls {
     //弹一弹
     public static final String PUBTWEET_URL = BASEURL+"action/api/tweet_pub";
 
+    //发表新闻评论
+    public static final String NEWS_COMMENT_URL = BASEURL+"action/api/comment_pub";
+    //发表博客评论
+    public static final String BLOG_COMMENT_URL = BASEURL+"action/api/blogcomment_pub";
+    //获取新闻评论列表
+    public static final String NEWS_COMMENTLIST_URL = BASEURL+"action/api/comment_list";
+    //获取博客评论列表
+    public static final String BLOG_COMMENTLIST_URL = BASEURL+"action/api/blogcomment_list";
+
+    //搜索的接口
+    public static final String SEARCH_URL = BASEURL+"action/api/search_list";
+    public static final String LOOK_PERSON_URL = BASEURL+"action/api/find_user";
 
 }

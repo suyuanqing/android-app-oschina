@@ -25,7 +25,10 @@
             app:iconifiedByDefault="false"
             android:background="@drawable/shape_search_view"
             app:queryHint="@string/sear_text"
-            android:layout_marginRight="10dp"></android.support.v7.widget.SearchView>
+            android:layout_marginRight="10dp"
+            android:iconifiedByDefault="true"
+            android:inputType="textCapWords"
+            android:imeOptions="actionSearch"></android.support.v7.widget.SearchView>
 
         <TextView
             android:id="@+id/tv_cencel"
@@ -41,5 +44,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/black_dan"/>
+
+    <ListView
+        android:id="@+id/search_history_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/search_tab"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        app:tabSelectedTextColor="@color/actionbar_background"
+        app:tabIndicatorColor="@color/actionbar_background"
+        android:background="@color/white"></android.support.design.widget.TabLayout>
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/search_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
 
 </LinearLayout>

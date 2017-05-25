@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <EditText
+        android:layout_margin="10dp"
+        android:id="@+id/send_pinglun_edi"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:hint="发表评论"
+        android:gravity="top"
+        android:padding="10dp"
+        android:background="@drawable/send_miaobian"/>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp">
+
+        <ImageView
+            android:id="@+id/send_pinglun_aite"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/ic_tweet_mention_normal"
+            android:layout_marginTop="10dp"/>
+
+        <CheckBox
+            android:id="@+id/send_che"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/send_pinglun_aite"
+            android:button="@null"
+            android:drawableLeft="@drawable/send_pinglun_fabiao"
+            android:text="转发到动弹"
+            android:textColor="@color/black_dan"/>
+        
+        <Button
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/send_pinglun_btn"
+            android:enabled="false"
+            android:textColor="@drawable/btn_dianji"
+            android:text="发送"
+            android:background="@color/actionbar_background"
+            android:layout_margin="5dp"/>
+    </RelativeLayout>
+
+</LinearLayout>

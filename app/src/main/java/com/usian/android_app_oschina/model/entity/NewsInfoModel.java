@@ -1,7 +1,5 @@
 package com.usian.android_app_oschina.model.entity;
 
-import java.util.List;
-
 /**
  * Created by 苏元庆 on 2017/5/14.
  */
@@ -10,6 +8,15 @@ public class NewsInfoModel {
 
 
     private NewsBean news;
+    private String blog;
+
+    public String getBlog() {
+        return blog;
+    }
+
+    public void setBlog(String blog) {
+        this.blog = blog;
+    }
 
     public NewsBean getNews() {
         return news;
@@ -32,7 +39,15 @@ public class NewsInfoModel {
         private String softwarelink;
         private String softwarename;
         private String favorite;
-        private List<RelativeBean> relativies;
+        private String relativies;
+
+        public String getRelativies() {
+            return relativies;
+        }
+
+        public void setRelativies(String relativies) {
+            this.relativies = relativies;
+        }
 
         public String getId() {
             return id;
@@ -122,33 +137,5 @@ public class NewsInfoModel {
             this.favorite = favorite;
         }
 
-        public List<RelativeBean> getRelativies() {
-            return relativies;
-        }
-
-        public void setRelativies(List<RelativeBean> relativies) {
-            this.relativies = relativies;
-        }
-
-        public static class RelativeBean {
-            private String rtitle;
-            private String rurl;
-
-            public String getRtitle() {
-                return rtitle;
-            }
-
-            public void setRtitle(String rtitle) {
-                this.rtitle = rtitle;
-            }
-
-            public String getRurl() {
-                return rurl;
-            }
-
-            public void setRurl(String rurl) {
-                this.rurl = rurl;
-            }
-        }
     }
 }

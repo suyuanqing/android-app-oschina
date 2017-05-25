@@ -116,14 +116,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
 
         <LinearLayout
             android:id="@+id/tweet_info_send"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@drawable/shape_search_view"
+            android:background="@drawable/subscribe_item_bg"
             android:padding="10dp">
 
             <ImageView

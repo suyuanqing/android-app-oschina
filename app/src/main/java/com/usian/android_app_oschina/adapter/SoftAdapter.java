@@ -8,6 +8,7 @@ import com.androidkun.adapter.BaseAdapter;
 import com.androidkun.adapter.ViewHolder;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
+import com.usian.android_app_oschina.controller.activity.find_activity.SoftInfoActivity;
 import com.usian.android_app_oschina.model.entity.SoftInfoModel;
 
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class SoftAdapter extends BaseAdapter<SoftInfoModel.SoftwareBean>{
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(App.subActivity, SoftInfoActivity.class);
                 intent.putExtra("ident", softwareBean.getId());
                 App.subActivity.startActivity(intent);
             }

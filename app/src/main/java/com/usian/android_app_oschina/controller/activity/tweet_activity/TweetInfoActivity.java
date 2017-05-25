@@ -11,13 +11,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.jiyun.lenovo.roundorcirle.GlideCircleTransform;
+import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.adapter.ZHPagerAdapter;
 import com.usian.android_app_oschina.base.BaseActivity;
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.controller.fragment.dt_fragment.TweetZanFragment;
 import com.usian.android_app_oschina.model.entity.LatestTweetModel;
+import com.usian.android_app_oschina.model.http.biz.comment.SendNewsComment;
 import com.usian.android_app_oschina.utils.LogUtils;
+import com.usian.android_app_oschina.utils.SPUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +70,7 @@ public class TweetInfoActivity extends BaseActivity {
     private String time;
     private ArrayList<BaseFragment> datas = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
+    private String tweetid;
 
     @Override
     protected int getLayoutId() {
@@ -85,6 +89,7 @@ public class TweetInfoActivity extends BaseActivity {
 
         titles.add("赞" + "(" + userInfo.getAppclient() + ")");
         titles.add("评论" + "(" + userInfo.getCommentCount() + ")");
+        tweetid = userInfo.getId();
     }
 
     @Override
@@ -102,7 +107,16 @@ public class TweetInfoActivity extends BaseActivity {
     @Override
     protected void initListener() {
 
+        tweetInfoSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String uid = (String) SPUtils.getParam(App.activity, "uid", "");
+                SendNewsComment sendNewsComment = SendNewsComment.getInstance();
+                sendNewsComment.popupView(TweetInfoActivity.this, 3+"", tweetid, uid);
+            }
+        });
     }
+
 
     @Override
     protected void loadData() {

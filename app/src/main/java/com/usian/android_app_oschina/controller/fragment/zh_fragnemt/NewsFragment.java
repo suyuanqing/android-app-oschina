@@ -84,7 +84,6 @@ public class NewsFragment extends BaseFragment implements NetworkCallback {
 
             openRecycler.setAdapter(newsAdapter);
         }else if (list.get(flag).equals("最新博客")){
-
             openRecycler.setAdapter(blogAdapter);
         }
     }
@@ -129,7 +128,7 @@ public class NewsFragment extends BaseFragment implements NetworkCallback {
         iLoadNetNews = new LoadNewsImpl();
 
         if (list.get(flag).equals("开源资讯")){
-
+            openPager.setVisibility(View.VISIBLE);
             iLoadNetNews.getNews(index + "", this);
         }else if (list.get(flag).equals("推荐博客")){
 
@@ -141,7 +140,6 @@ public class NewsFragment extends BaseFragment implements NetworkCallback {
 
             iLoadNetNews.getLatestBlog(index + "", this);
         }
-
     }
 
     @Override
@@ -150,7 +148,7 @@ public class NewsFragment extends BaseFragment implements NetworkCallback {
         dialog.dismiss();
 
         if (list.get(flag).equals("开源资讯")){
-            openPager.setVisibility(View.VISIBLE);
+
             XStream xstream = new XStream();
             xstream.alias("oschina", OpenNewsModel.class);
             xstream.alias("news", OpenNewsModel.NewsBean.class);

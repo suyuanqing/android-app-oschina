@@ -76,4 +76,14 @@ public class LoadFindImpl implements ILoadFind{
 
         HttpFactory.create(NetWork.VOLLEY).doGet(Urls.FIND_OSS_SOFT, params, networkCallback);
     }
+
+    @Override
+    public void getSoftInfo(String inent, NetworkCallback networkCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("inent", inent);
+
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.SOFT_INFO_URL, params, networkCallback);
+    }
+
+
 }

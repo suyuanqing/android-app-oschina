@@ -30,6 +30,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".base.BaseActivity" />
+        <activity android:name=".controller.fragment.search_fragment.DetailsActivity"/>
         <activity android:name=".controller.activity.news_activity.NewsInfoActivity" />
         <activity android:name=".controller.activity.news_activity.SearchActivity" />
         <activity android:name=".controller.activity.news_activity.BlogInfoActivity" />
