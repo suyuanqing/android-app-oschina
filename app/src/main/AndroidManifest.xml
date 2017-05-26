@@ -21,16 +21,16 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        <activity android:name=".ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".ui.MainActivity" />
         <activity android:name=".base.BaseActivity" />
-        <activity android:name=".controller.fragment.search_fragment.DetailsActivity"/>
+        <activity android:name=".controller.fragment.search_fragment.DetailsActivity" />
         <activity android:name=".controller.activity.news_activity.NewsInfoActivity" />
         <activity android:name=".controller.activity.news_activity.SearchActivity" />
         <activity android:name=".controller.activity.news_activity.BlogInfoActivity" />
@@ -45,7 +45,12 @@
         <activity android:name=".controller.activity.find_activity.EventInfoActivity" />
         <activity android:name=".controller.activity.news_activity.TqInfoActivity" />
         <activity android:name=".controller.activity.play_activity.PlayActivity" />
-        <activity android:name=".controller.activity.find_activity.SoftInfoActivity"></activity>
+        <activity android:name=".controller.activity.find_activity.SoftInfoActivity" />
+        <activity android:name=".controller.activity.mine_activity.MineMsgActivity" />
+        <activity android:name=".controller.activity.mine_activity.MineFnsActivity" />
+        <activity android:name=".controller.activity.mine_activity.MineGZActivity" />
+        <activity android:name=".controller.activity.mine_activity.MineSCActivity" />
+        <activity android:name=".controller.activity.mine_activity.MineTweetActivity"></activity>
     </application>
 
 </manifest>

@@ -54,6 +54,12 @@ public class Urls {
 
     //获取用户资料，我的信息
     public static final String MYINFO_URL = BASEURL+"action/api/my_information";
+    //获取用户消息
+    public static final String USER_MSG_URL = BASEURL+"action/api/active_list";
+    public static final String DIR_MSG_URL = BASEURL+"action/api/message_list";
+    //获取粉丝列表
+    public static final String FNS_LIST_URL = BASEURL+"action/api/friends_list";
+    public static final String SC_LIST_URL = BASEURL+"action/api/favorite_list";
 
     //弹一弹
     public static final String PUBTWEET_URL = BASEURL+"action/api/tweet_pub";
@@ -70,5 +76,10 @@ public class Urls {
     //搜索的接口
     public static final String SEARCH_URL = BASEURL+"action/api/search_list";
     public static final String LOOK_PERSON_URL = BASEURL+"action/api/find_user";
+
+    //添加收藏
+    public static final String ADD_COLLECIOTN_URL = BASEURL+"action/api/favorite_add";
+    //删除收藏
+    public static final String DELETE_COLLECIOTN_URL = BASEURL+"action/api/favorite_delete";
 
 }

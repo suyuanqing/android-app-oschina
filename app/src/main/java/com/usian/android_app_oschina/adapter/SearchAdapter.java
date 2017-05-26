@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina;
+package com.usian.android_app_oschina.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

@@ -19,8 +19,8 @@ import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.base.BaseActivity;
 import com.usian.android_app_oschina.contact.ATotalOf;
 import com.usian.android_app_oschina.model.entity.LoginModel;
-import com.usian.android_app_oschina.model.http.biz.minebus.ILoadLogin;
-import com.usian.android_app_oschina.model.http.biz.minebus.LoginImpl;
+import com.usian.android_app_oschina.model.http.biz.minebus.ILoadMine;
+import com.usian.android_app_oschina.model.http.biz.minebus.LoadMineImpl;
 import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.utils.LogUtils;
 import com.usian.android_app_oschina.utils.SPUtils;
@@ -114,7 +114,7 @@ public class LoginActivity extends BaseActivity implements NetworkCallback{
                     return;
                 }
 
-                ILoadLogin iloadlogin = new LoginImpl();
+                ILoadMine iloadlogin = new LoadMineImpl();
                 iloadlogin.getLoginInfo(username, password, this);
 
 

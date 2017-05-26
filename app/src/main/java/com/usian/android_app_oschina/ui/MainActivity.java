@@ -1,6 +1,7 @@
-package com.usian.android_app_oschina;
+package com.usian.android_app_oschina.ui;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Process;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.usian.android_app_oschina.App;
+import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.base.BaseMainActivity;
 import com.usian.android_app_oschina.contact.DoubleClickExit;
@@ -27,6 +30,7 @@ import com.usian.android_app_oschina.utils.FragmentBuilder;
 import com.usian.android_app_oschina.utils.SPUtils;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseMainActivity {
@@ -54,9 +58,8 @@ public class MainActivity extends BaseMainActivity {
     RadioButton btnExploreMy;
     @Bind(R.id.btns)
     RadioGroup btns;
-    @Bind(R.id.activity_main)
-    LinearLayout activityMain;
-
+    @Bind(R.id.activity_homes)
+    LinearLayout activityHome;
     private long firsttime;
 
     private long clickTime = 0;
@@ -104,7 +107,7 @@ public class MainActivity extends BaseMainActivity {
 
                 if (SPUtils.getParam(App.activity, "isLogin", "").equals("已登录")) {
                     startActivity(new Intent(App.activity, PlayActivity.class));
-                }else{
+                } else {
                     startActivity(new Intent(App.activity, LoginActivity.class));
                 }
 
@@ -137,29 +140,29 @@ public class MainActivity extends BaseMainActivity {
         FragmentManager manager = getSupportFragmentManager();
         FragmentManager.BackStackEntry entry = manager.getBackStackEntryAt(manager.getBackStackEntryCount() - 1);
         String name = entry.getName();
-        if("SynthesizeFragment".equals(name) || "TweetFragnemt".equals(name)
-                || "MineFragment".equals(name) || "FindFragment".equals(name)){
+        if ("SynthesizeFragment".equals(name) || "TweetFragnemt".equals(name)
+                || "MineFragment".equals(name) || "FindFragment".equals(name)) {
 
-            if(DoubleClickExit.isAgainBack()){
-                if(DoubleClickExit.isBack()){
+            if (DoubleClickExit.isAgainBack()) {
+                if (DoubleClickExit.isBack()) {
                     firsttime = System.currentTimeMillis();
                     Toast.makeText(this, "再次点击退出应用", Toast.LENGTH_SHORT).show();
                     DoubleClickExit.setIsBack(false);
-                }else {
-                    if(System.currentTimeMillis()-firsttime >2000){
+                } else {
+                    if (System.currentTimeMillis() - firsttime > 2000) {
                         firsttime = System.currentTimeMillis();
                         Toast.makeText(this, "再次点击退出应用", Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
                         Process.killProcess(Process.myPid());
                         System.exit(0);
                     }
                 }
-            }else{
+            } else {
                 Process.killProcess(Process.myPid());
                 System.exit(0);
             }
 
-        }else {
+        } else {
             manager.popBackStackImmediate();
             String fragmentName = manager.getBackStackEntryAt(manager.getBackStackEntryCount() - 1).getName();
             BaseFragment fragment = (BaseFragment) manager.findFragmentByTag(fragmentName);
@@ -168,4 +171,10 @@ public class MainActivity extends BaseMainActivity {
 
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
+    }
 }

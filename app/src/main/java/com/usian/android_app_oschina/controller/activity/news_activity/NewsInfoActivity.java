@@ -14,12 +14,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.thoughtworks.xstream.XStream;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
+import com.usian.android_app_oschina.contact.Arguments;
 import com.usian.android_app_oschina.model.entity.NewsInfoModel;
+import com.usian.android_app_oschina.model.http.biz.comment.CollectionBus;
 import com.usian.android_app_oschina.model.http.biz.comment.SendNewsComment;
 import com.usian.android_app_oschina.model.http.biz.newsbus.ILoadNetNews;
 import com.usian.android_app_oschina.model.http.biz.newsbus.LoadNewsImpl;
@@ -66,6 +67,7 @@ public class NewsInfoActivity extends AppCompatActivity {
     private ProgressDialog dialog;
     private String commentCount;
     private String catalog = "1";
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +96,7 @@ public class NewsInfoActivity extends AppCompatActivity {
                 tvInfoPinglun.setText(pinglun);
             }
         });
-
+        uid = (String) SPUtils.getParam(App.activity, "uid", "");
     }
 
     public void initListener() {
@@ -103,9 +105,9 @@ public class NewsInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean checked = infoCollection.isChecked();
                 if (checked) {
-                    Toast.makeText(NewsInfoActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                    CollectionBus.getInstance().addCollection(NewsInfoActivity.this, uid, news_id, Arguments.COLLECTION_NEWS);
                 } else {
-                    Toast.makeText(NewsInfoActivity.this, "已取消收藏", Toast.LENGTH_SHORT).show();
+                    CollectionBus.getInstance().deleteCollection(NewsInfoActivity.this, uid, news_id, Arguments.COLLECTION_NEWS);
                 }
             }
         });
@@ -114,7 +116,7 @@ public class NewsInfoActivity extends AppCompatActivity {
         sendComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uid = (String) SPUtils.getParam(App.activity, "uid", "");
+
                 SendNewsComment sendComment = SendNewsComment.getInstance();
                 sendComment.popupView(NewsInfoActivity.this, catalog, news_id, uid);
             }

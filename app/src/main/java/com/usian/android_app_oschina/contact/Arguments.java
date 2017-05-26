@@ -44,5 +44,14 @@ public class Arguments {
     public static final String SEARCH_BLOG = "blog";
     public static final String SEARCH_NEWS = "news";
 
+    //收藏类型
+    public static final String COLLECTION_BLOG = "0x03";
+    public static final String COLLECTION_TQ = "0x02";
+    public static final String COLLECTION_NEWS = "0x04";
+    public static final String COLLECTION_SOFT = "0x01";
+
+    //粉丝类型
+    public static final String MINE_FNS = "0";
+    public static final String MINE_GZ = "1";
 
 }

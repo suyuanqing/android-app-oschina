@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -25,10 +26,15 @@ import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.base.BaseFragment;
 import com.usian.android_app_oschina.contact.ATotalOf;
 import com.usian.android_app_oschina.controller.activity.mine_activity.LoginActivity;
+import com.usian.android_app_oschina.controller.activity.mine_activity.MineFnsActivity;
+import com.usian.android_app_oschina.controller.activity.mine_activity.MineGZActivity;
+import com.usian.android_app_oschina.controller.activity.mine_activity.MineMsgActivity;
+import com.usian.android_app_oschina.controller.activity.mine_activity.MineSCActivity;
+import com.usian.android_app_oschina.controller.activity.mine_activity.MineTweetActivity;
 import com.usian.android_app_oschina.controller.activity.mine_activity.SettingActivity;
 import com.usian.android_app_oschina.model.entity.UserInfoModel;
-import com.usian.android_app_oschina.model.http.biz.minebus.ILoadLogin;
-import com.usian.android_app_oschina.model.http.biz.minebus.LoginImpl;
+import com.usian.android_app_oschina.model.http.biz.minebus.ILoadMine;
+import com.usian.android_app_oschina.model.http.biz.minebus.LoadMineImpl;
 import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.utils.LogUtils;
 import com.usian.android_app_oschina.utils.NetUtils;
@@ -92,6 +98,8 @@ public class MineFragment extends BaseFragment {
     private IntentFilter intentFilter;
     private LocalBroadcastManager broadcastManager;
     private BroadcastReceiver mReceiver;
+    private FragmentTransaction transaction;
+    private MineMsgActivity mineMsgFragment;
 
     @Override
     protected int getLayoutId() {
@@ -120,7 +128,6 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void initView(View view) {
-//        SPUtils.remove(App.getContext(), "isLogin");
     }
 
 
@@ -132,7 +139,7 @@ public class MineFragment extends BaseFragment {
 
     @Override
     protected void loadData() {
-        ILoadLogin iLoadLogin = new LoginImpl();
+        ILoadMine iLoadLogin = new LoadMineImpl();
         if (flag) {
             iLoadLogin.getUserInfo(uid + "", new NetworkCallback() {
                 @Override
@@ -190,11 +197,14 @@ public class MineFragment extends BaseFragment {
                     Toast.makeText(App.activity, "你好", Toast.LENGTH_SHORT).show();
                 }else{
 
-                    startActivity(new Intent(App.subActivity, LoginActivity.class));
+                    startActivity(new Intent(App.activity, LoginActivity.class));
                 }
 
                 break;
             case R.id.lin_mime_xiaoxi:
+
+                startActivity(new Intent(App.activity, MineMsgActivity.class));
+
                 break;
             case R.id.lin_mime_blog:
                 break;
@@ -205,12 +215,16 @@ public class MineFragment extends BaseFragment {
             case R.id.lin_mime_tuandui:
                 break;
             case R.id.mime_tweet:
+                startActivity(new Intent(App.activity, MineTweetActivity.class));
                 break;
             case R.id.mime_shoucang:
+                startActivity(new Intent(App.activity, MineSCActivity.class));
                 break;
             case R.id.mime_guanzhu:
+                startActivity(new Intent(App.activity, MineGZActivity.class));
                 break;
             case R.id.mime_fensi:
+                startActivity(new Intent(App.activity, MineFnsActivity.class));
                 break;
         }
     }
@@ -226,8 +240,6 @@ public class MineFragment extends BaseFragment {
         qrCodedialog.getWindow().setAttributes(params);
 
     }
-
-
 
     public void setMimeUserinfo(final UserInfoModel o){
         ThreadUtils.runOnUIThread(new Runnable() {

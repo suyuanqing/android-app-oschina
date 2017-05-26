@@ -1,6 +1,5 @@
 package com.usian.android_app_oschina.controller.fragment.search_fragment;
 
-import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -24,7 +23,6 @@ import com.usian.android_app_oschina.model.http.biz.newsbus.LoadNewsImpl;
 import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 /**
  * 详情页面
@@ -182,7 +180,7 @@ public class DetailsActivity extends BaseActivity implements View.OnClickListene
                     xStream.alias("software", FenLeiThree.SoftwareBean.class);
                     FenLeiThree o = (FenLeiThree) xStream.fromXML(result);
                     url = o.getSoftware().getUrl();
-
+                    loadWebView();
                 }
 
                 @Override
@@ -215,13 +213,5 @@ public class DetailsActivity extends BaseActivity implements View.OnClickListene
                 });
             }
         }
-
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

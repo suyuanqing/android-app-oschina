@@ -16,7 +16,7 @@ public interface ILoadTweet {
     void getHotTweet(String pageIndex, NetworkCallback networkCallback);
 
     //我的动弹
-    void getMineTweet(String pageIndex, NetworkCallback networkCallback);
+    void getMineTweet(String pageIndex, String uid, NetworkCallback networkCallback);
 
     //动弹中用户详情
 

@@ -39,13 +39,13 @@ public class LoadTweetImpl implements ILoadTweet{
     }
 
     @Override
-    public void getMineTweet(String pageIndex, NetworkCallback networkCallback) {
+    public void getMineTweet(String pageIndex, String uid, NetworkCallback networkCallback) {
         Map<String, String> params = new HashMap<>();
-        params.put("uid", Arguments.LATEST_TWEET_UID+"");
+        params.put("uid", uid);
         params.put("pageIndex", pageIndex);
         params.put("pageSize", Arguments.PAGESIZE+"");
 
-        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.TWEETURL, params, networkCallback);
+        HttpFactory.create(NetWork.OKHTTP).doGet(Urls.TWEETURL, params, networkCallback);
     }
 
 

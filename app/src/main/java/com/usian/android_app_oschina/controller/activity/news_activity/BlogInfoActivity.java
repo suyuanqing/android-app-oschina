@@ -13,13 +13,14 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.thoughtworks.xstream.XStream;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
+import com.usian.android_app_oschina.contact.Arguments;
 import com.usian.android_app_oschina.model.entity.BlogInfoModel;
 import com.usian.android_app_oschina.model.entity.NewsInfoModel;
+import com.usian.android_app_oschina.model.http.biz.comment.CollectionBus;
 import com.usian.android_app_oschina.model.http.biz.comment.SendBlogComment;
 import com.usian.android_app_oschina.model.http.biz.newsbus.ILoadNetNews;
 import com.usian.android_app_oschina.model.http.biz.newsbus.LoadNewsImpl;
@@ -65,6 +66,7 @@ public class BlogInfoActivity extends AppCompatActivity {
     private NewsInfoModel o;
     private ProgressDialog dialog;
     private String commentCount;
+    private String uid;
 
 
     @Override
@@ -94,6 +96,7 @@ public class BlogInfoActivity extends AppCompatActivity {
                 tvInfoPinglun.setText(pinglun);
             }
         });
+        uid = (String) SPUtils.getParam(App.activity, "uid", "");
 
     }
 
@@ -103,9 +106,9 @@ public class BlogInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 boolean checked = infoCollection.isChecked();
                 if (checked) {
-                    Toast.makeText(BlogInfoActivity.this, "收藏成功", Toast.LENGTH_SHORT).show();
+                    CollectionBus.getInstance().addCollection(BlogInfoActivity.this, uid, news_id, Arguments.COLLECTION_BLOG);
                 } else {
-                    Toast.makeText(BlogInfoActivity.this, "已取消收藏", Toast.LENGTH_SHORT).show();
+                    CollectionBus.getInstance().deleteCollection(BlogInfoActivity.this, uid, news_id, Arguments.COLLECTION_BLOG);
                 }
             }
         });
@@ -114,9 +117,6 @@ public class BlogInfoActivity extends AppCompatActivity {
         sendComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String uid = (String) SPUtils.getParam(App.activity, "uid", "");
-//                SendNewsComment sendComment = SendNewsComment.getInstance();
-//                sendComment.popupView(BlogInfoActivity.this, 1+"", news_id, uid);
 
                 SendBlogComment sendBlogComment = SendBlogComment.getInstance();
                 sendBlogComment.popupView(BlogInfoActivity.this, news_id, uid);

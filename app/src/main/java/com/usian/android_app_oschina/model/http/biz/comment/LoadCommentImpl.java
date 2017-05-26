@@ -61,4 +61,28 @@ public class LoadCommentImpl implements ILoadComment{
         HttpFactory.create(NetWork.OKHTTP).doGet(Urls.BLOG_COMMENTLIST_URL, params, networkCallback);
     }
 
+    //添加收藏
+    @Override
+    public void addCollection(String uid, String objid, String type, NetworkCallback networkCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("uid", uid);
+        params.put("objid", objid);
+        params.put("type", type);
+
+        HttpFactory.create(NetWork.OKHTTP).doPost(Urls.ADD_COLLECIOTN_URL, params, networkCallback);
+
+
+    }
+
+    //删除收藏
+    @Override
+    public void deleteCollection(String uid, String objid, String type, NetworkCallback networkCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("uid", uid);
+        params.put("objid", objid);
+        params.put("type", type);
+
+        HttpFactory.create(NetWork.OKHTTP).doPost(Urls.DELETE_COLLECIOTN_URL, params, networkCallback);
+    }
+
 }

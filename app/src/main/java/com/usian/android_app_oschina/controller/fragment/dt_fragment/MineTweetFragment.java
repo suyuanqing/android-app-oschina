@@ -17,6 +17,9 @@ import com.usian.android_app_oschina.model.entity.StirModel;
 import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.model.http.biz.tweetbus.ILoadTweet;
 import com.usian.android_app_oschina.model.http.biz.tweetbus.LoadTweetImpl;
+import com.usian.android_app_oschina.utils.LogUtils;
+import com.usian.android_app_oschina.utils.SPUtils;
+import com.usian.android_app_oschina.utils.ThreadUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +37,7 @@ public class MineTweetFragment extends BaseFragment {
 
     @Bind(R.id.mine_tweet_recycler)
     PullToRefreshRecyclerView mimeTweetRecycler;
-    private int index = 3;
+    private int index = 0;
     private ArrayList<StirModel.TweetBean> data = new ArrayList<>();
     private TweetAdapter adapter;
     private boolean flag = false;
@@ -106,17 +109,25 @@ public class MineTweetFragment extends BaseFragment {
     protected void loadData() {
 
         iLoadTweet = new LoadTweetImpl();
-        iLoadTweet.getMineTweet(index + "", new NetworkCallback() {
+        String uid = (String) SPUtils.getParam(App.getContext(), "uid", "");
+        iLoadTweet.getMineTweet(index + "", uid,new NetworkCallback() {
             @Override
             public void onSuccess(String result) {
                 dialog.dismiss();
+                LogUtils.e("TAG", result);
                 XStream xStream = new XStream();
                 xStream.alias("oschina", LatestTweetModel.class);
                 xStream.alias("tweet", LatestTweetModel.TweetBean.class);
                 LatestTweetModel o = (LatestTweetModel) xStream.fromXML(result);
                 List<LatestTweetModel.TweetBean> tweets = o.getTweets();
                 datas.addAll(tweets);
-                adapter.notifyDataSetChanged();
+                ThreadUtils.runOnUIThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+
 
             }
 

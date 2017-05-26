@@ -1,4 +1,4 @@
-package com.usian.android_app_oschina;
+package com.usian.android_app_oschina.ui;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -23,6 +23,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.base.BaseActivity;
 import com.usian.android_app_oschina.model.entity.InfoVerSion;
 

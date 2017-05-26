@@ -37,4 +37,7 @@ public class App extends Application{
         return context;
     }
 
+    //获取一个全局的用户id
+//    public static String myUid = (String) SPUtils.getParam(getContext(), "uid", "");
+
 }

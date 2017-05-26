@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.j256.ormlite.dao.Dao;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
-import com.usian.android_app_oschina.SearchAdapter;
+import com.usian.android_app_oschina.adapter.SearchAdapter;
 import com.usian.android_app_oschina.adapter.SearchHistoryAdapter;
 import com.usian.android_app_oschina.base.BaseActivity;
 import com.usian.android_app_oschina.base.BaseFragment;
@@ -28,6 +28,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
+//TODO 仍有bug尚未解决
 public class SearchActivity extends BaseActivity {
 
 

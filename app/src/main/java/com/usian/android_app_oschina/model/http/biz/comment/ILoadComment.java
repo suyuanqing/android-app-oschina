@@ -21,4 +21,10 @@ public interface ILoadComment {
     //获取博客评论列表
     void getBlogCommentList(String id, String pageIndex, NetworkCallback networkCallback);
 
+    //添加收藏
+    void addCollection(String uid, String objid, String type, NetworkCallback networkCallback);
+
+    //删除收藏
+    void deleteCollection(String uid, String objid, String type, NetworkCallback networkCallback);
+
 }
