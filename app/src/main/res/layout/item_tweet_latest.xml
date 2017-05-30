@@ -70,7 +70,7 @@
             android:layout_gravity="center"
             >
 
-            <CheckBox
+            <Button
                 android:id="@+id/btn_tweet_dianzan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -79,9 +79,10 @@
                 android:drawableLeft="@drawable/dianzan_icon"
                 android:gravity="center"
                 android:text="@string/dianzan"
-                android:textColor="@color/black_dan"/>
+                android:textColor="@color/black_dan"
+                android:background="@color/white"/>
 
-            <CheckBox
+            <Button
                 android:id="@+id/btn_tweet_dianzan_pinglun"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,15 +90,17 @@
                 android:button="@null"
                 android:drawableLeft="@mipmap/ic_comment_30"
                 android:gravity="center"
+                android:background="@color/white"
                 android:text="@string/pinglun"
                 android:textColor="@color/black_dan"/>
 
-            <CheckBox
+            <Button
                 android:id="@+id/btn_tweet_zhuanfa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:button="@null"
+                android:background="@color/white"
                 android:drawableLeft="@mipmap/ic_forward"
                 android:gravity="center"
                 android:text="@string/zhuanfa"

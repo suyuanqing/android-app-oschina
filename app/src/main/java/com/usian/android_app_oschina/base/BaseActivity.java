@@ -24,7 +24,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         initView();
         initData();
         initListener();
-        loadData();
+
     }
 
     //加载布局ID
@@ -47,6 +47,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onResume();
         if (!NetUtils.isConnected(this)) {
             Toast.makeText(this, R.string.isNet, Toast.LENGTH_SHORT).show();
+        }else{
+            loadData();
         }
     }
 }

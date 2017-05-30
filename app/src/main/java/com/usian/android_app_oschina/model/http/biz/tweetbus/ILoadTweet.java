@@ -18,6 +18,8 @@ public interface ILoadTweet {
     //我的动弹
     void getMineTweet(String pageIndex, String uid, NetworkCallback networkCallback);
 
-    //动弹中用户详情
+    //点赞 取消点赞
+    void addLike(String uid, String tweetid, String tweetisid, NetworkCallback networkCallback);
+    void deleteLike(String uid, String tweetid, String tweetisid, NetworkCallback networkCallback);
 
 }

@@ -34,6 +34,7 @@ public class SoftAdapter extends BaseAdapter<SoftInfoModel.SoftwareBean>{
             public void onClick(View v) {
                 Intent intent = new Intent(App.subActivity, SoftInfoActivity.class);
                 intent.putExtra("ident", softwareBean.getId());
+                intent.putExtra("inurl", softwareBean.getUrl());
                 App.subActivity.startActivity(intent);
             }
         });

@@ -1,6 +1,5 @@
 package com.usian.android_app_oschina.controller.activity.find_activity;
 
-import android.os.Bundle;
 import android.os.Vibrator;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -9,7 +8,6 @@ import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.base.BaseActivity;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import cn.bingoogolapple.qrcode.core.QRCodeView;
 import cn.bingoogolapple.qrcode.zxing.ZXingView;
 
@@ -65,12 +63,5 @@ public class QrCodeActivity extends BaseActivity implements QRCodeView.Delegate 
     private void vibrate() {
         Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
         vibrator.vibrate(200);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }

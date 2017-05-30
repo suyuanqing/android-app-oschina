@@ -1,7 +1,6 @@
 package com.usian.android_app_oschina.ui;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Process;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
@@ -30,7 +29,6 @@ import com.usian.android_app_oschina.utils.FragmentBuilder;
 import com.usian.android_app_oschina.utils.SPUtils;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseMainActivity {
@@ -124,7 +122,6 @@ public class MainActivity extends BaseMainActivity {
         }
     }
 
-    //    TODO 搜索
     @OnClick(R.id.iv_btn_search_normal)
     public void onViewClicked() {
         startActivity(new Intent(this, SearchActivity.class));
@@ -171,10 +168,4 @@ public class MainActivity extends BaseMainActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

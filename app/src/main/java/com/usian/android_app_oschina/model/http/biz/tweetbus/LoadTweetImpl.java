@@ -48,5 +48,25 @@ public class LoadTweetImpl implements ILoadTweet{
         HttpFactory.create(NetWork.OKHTTP).doGet(Urls.TWEETURL, params, networkCallback);
     }
 
+    @Override
+    public void addLike(String uid, String tweetid, String tweetisid, NetworkCallback networkCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("uid", uid);
+        params.put("tweetid", tweetid);
+        params.put("ownerOfTweet", tweetisid);
+
+        HttpFactory.create(NetWork.OKHTTP).doPost(Urls.ADDTWEETLIKE, params, networkCallback);
+    }
+
+    @Override
+    public void deleteLike(String uid, String tweetid, String tweetisid, NetworkCallback networkCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("uid", uid);
+        params.put("tweetid", tweetid);
+        params.put("ownerOfTweet", tweetisid);
+
+        HttpFactory.create(NetWork.OKHTTP).doPost(Urls.DELETETWEETLIKE, params, networkCallback);
+    }
+
 
 }

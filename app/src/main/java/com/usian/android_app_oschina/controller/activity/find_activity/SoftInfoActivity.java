@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.CheckBox;
@@ -60,6 +59,7 @@ public class SoftInfoActivity extends AppCompatActivity {
     private String url;
     private ProgressDialog dialog;
     private String uid;
+    private String inteurl;
 
 
     @Override
@@ -81,6 +81,11 @@ public class SoftInfoActivity extends AppCompatActivity {
             }
         });
         uid = (String) SPUtils.getParam(App.activity, "uid", "");
+        inteurl = getIntent().getStringExtra("inurl");
+        if (inteurl != null && !inteurl.equals("")) {
+
+        }
+        loadWebView();
     }
 
     public void initListener() {
@@ -111,9 +116,6 @@ public class SoftInfoActivity extends AppCompatActivity {
 
 
     public void initData() {
-        dialog = new ProgressDialog(this);
-        dialog.setMessage("loading");
-        dialog.show();
 
         ident = getIntent().getStringExtra("ident");
         LogUtils.e("TAG", ident);
@@ -121,14 +123,12 @@ public class SoftInfoActivity extends AppCompatActivity {
         iLoadFind.getSoftInfo(ident, new NetworkCallback() {
             @Override
             public void onSuccess(String result) {
-                dialog.dismiss();
-                LogUtils.e("TAG", result);
                 XStream xStream = new XStream();
                 xStream.alias("oschina", FenLeiThree.class);
                 xStream.alias("software", FenLeiThree.SoftwareBean.class);
                 FenLeiThree o = (FenLeiThree) xStream.fromXML(result);
                 url = o.getSoftware().getUrl();
-                loadData();
+                loadWebView();
             }
 
             @Override
@@ -140,28 +140,28 @@ public class SoftInfoActivity extends AppCompatActivity {
     }
 
 
-    protected void loadData() {
-
-        WebSettings webSettings = inforWebview.getSettings();
-
-        webSettings.setJavaScriptEnabled(true);
-
-        webSettings.setUseWideViewPort(true); //将图片调整到适合webview的大小
-        webSettings.setLoadWithOverviewMode(true); // 缩放至屏幕的大小
-        webSettings.setLoadsImagesAutomatically(true); //支持自动加载图片
-        webSettings.setDefaultTextEncodingName("utf-8");//设置编码格式
-
-        inforWebview.loadUrl(url);
-
-        inforWebview.setWebViewClient(new WebViewClient() {
-            @Override
-            public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                LogUtils.e("NewsInfoActivity", "webview：" + url);
-
-                view.loadUrl(url);
-                return true;
+    private void loadWebView() {
+        if (inteurl != null && !inteurl.equals("")) {
+            inforWebview.loadUrl(inteurl);
+            inforWebview.setWebViewClient(new WebViewClient() {
+                @Override
+                public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                    view.loadUrl(url);
+                    return true;
+                }
+            });
+        } else {
+            if (url != null) {
+                inforWebview.loadUrl(url);
+                inforWebview.setWebViewClient(new WebViewClient() {
+                    @Override
+                    public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                        view.loadUrl(url);
+                        return true;
+                    }
+                });
             }
-        });
+        }
     }
 
 }

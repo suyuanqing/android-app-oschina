@@ -73,8 +73,7 @@ public class SplashActivity extends BaseActivity {
         new Thread(){
             @Override
             public void run() {
-//                TODO 发布项目时修改闪屏页面停留时间
-                SystemClock.sleep(0);
+                SystemClock.sleep(2000);
                 hand.sendEmptyMessage(999);
             }
         }.start();

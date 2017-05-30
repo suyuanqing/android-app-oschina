@@ -3,6 +3,7 @@ package com.usian.android_app_oschina.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -14,6 +15,7 @@ import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.controller.activity.tweet_activity.TweetInfoActivity;
 import com.usian.android_app_oschina.model.entity.LatestTweetModel;
+import com.usian.android_app_oschina.model.http.biz.tweetbus.ThumbUpLike;
 import com.usian.android_app_oschina.utils.DateUtils;
 
 import java.text.ParseException;
@@ -37,6 +39,15 @@ public class TweetAdapter extends BaseAdapter<LatestTweetModel.TweetBean> {
 
         ImageView userImage = (ImageView) holder.itemView.findViewById(R.id.iv_tweet_userTitle);
         ImageView img = (ImageView) holder.itemView.findViewById(R.id.iv_tweet_image);
+        Button checkBox = (Button) holder.itemView.findViewById(R.id.btn_tweet_dianzan);
+
+        checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ThumbUpLike.getInstance().addLike(tweetBean.getId(), tweetBean.getAuthorid());
+            }
+        });
+
 
         Glide.with(App.activity).load(tweetBean.getPortrait())
                 .transform(new GlideCircleTransform(App.activity))

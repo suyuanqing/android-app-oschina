@@ -35,9 +35,13 @@ public class Urls {
     //动弹apiurl
     public static final String TWEETURL = BASEURL+"action/api/tweet_list";
 
+    public static final String ADDTWEETLIKE = BASEURL + "action/api/tweet_like";
+    public static final String DELETETWEETLIKE = BASEURL + "action/api/tweet_unlike";
 
     //发现 开源软件 分类
     public static final String FIND_OSS_FL = BASEURL+"action/api/softwarecatalog_list";
+
+    public static final String FIND_OSS_FL_THREE = BASEURL+"action/api/softwaretag_list";
     //开源软件
     public static final String FIND_OSS_SOFT = BASEURL+"action/api/software_list";
     //软件详情
@@ -60,6 +64,7 @@ public class Urls {
     //获取粉丝列表
     public static final String FNS_LIST_URL = BASEURL+"action/api/friends_list";
     public static final String SC_LIST_URL = BASEURL+"action/api/favorite_list";
+    public static final String UPDATE_URL = BASEURL+"action/api/portrait_update";
 
     //弹一弹
     public static final String PUBTWEET_URL = BASEURL+"action/api/tweet_pub";

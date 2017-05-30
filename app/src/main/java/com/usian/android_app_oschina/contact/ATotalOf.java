@@ -7,5 +7,7 @@ package com.usian.android_app_oschina.contact;
 public class ATotalOf {
 
     public static final String SENTBROADACTION = "com.usian.android_app_oschina_Userstate";
+    public static final String SHUAXINADAPTER = "com.usian.shuaxinadapter";
+    public static final String SHUAXINTHREE = "com.usian.shuaxinadapterthree";
 
 }

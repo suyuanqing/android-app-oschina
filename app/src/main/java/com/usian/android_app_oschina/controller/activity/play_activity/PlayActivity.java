@@ -120,7 +120,7 @@ public class PlayActivity extends BaseActivity implements NetworkCallback{
         ThreadUtils.runOnUIThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(PlayActivity.this, o.getResult().getErrorMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(PlayActivity.this, o.getResult().getErrorMessage()+"~", Toast.LENGTH_SHORT).show();
                 finish();
             }
         });

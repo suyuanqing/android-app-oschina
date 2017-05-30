@@ -39,6 +39,16 @@ public class LoadFindImpl implements ILoadFind{
     }
 
     @Override
+    public void getSoftTagfy(String tag, String index, NetworkCallback networkCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("searchTag", tag);
+        params.put("pageIndex", index);
+        params.put("pageSize", Arguments.PAGESIZE+"");
+
+        HttpFactory.create(NetWork.VOLLEY).doGet(Urls.FIND_OSS_FL_THREE, params, networkCallback);
+    }
+
+    @Override
     public void getShakeNews(NetworkCallback networkCallback) {
 
         Map<String, String> params = new HashMap<>();
@@ -78,9 +88,9 @@ public class LoadFindImpl implements ILoadFind{
     }
 
     @Override
-    public void getSoftInfo(String inent, NetworkCallback networkCallback) {
+    public void getSoftInfo(String ident, NetworkCallback networkCallback) {
         Map<String, String> params = new HashMap<>();
-        params.put("inent", inent);
+        params.put("ident", ident);
 
         HttpFactory.create(NetWork.VOLLEY).doGet(Urls.SOFT_INFO_URL, params, networkCallback);
     }

@@ -85,4 +85,24 @@ public class LoadMineImpl implements ILoadMine {
 
         HttpFactory.create(NetWork.OKHTTP).doGet(Urls.SC_LIST_URL, params, networkCallback);
     }
+
+    @Override
+    public void uploadUserPic(String uid, String fileurl, NetworkCallback networkCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("uid", uid);
+        params.put("portrait", fileurl);
+
+        HttpFactory.create(NetWork.OKHTTP).UploadPic(Urls.UPDATE_URL, params, networkCallback);
+    }
+
+    @Override
+    public void eitMine(String uid, String catalog, String index, NetworkCallback networkCallback) {
+        Map<String, String> params = new HashMap<>();
+        params.put("uid", uid);
+        params.put("catalog", catalog);
+        params.put("pageIndex", index);
+        params.put("pageSize", Arguments.PAGESIZE+"");
+
+        HttpFactory.create(NetWork.OKHTTP).doGet(Urls.USER_MSG_URL, params, networkCallback);
+    }
 }

@@ -28,7 +28,6 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-//TODO  发表评论还未完成 分享 还有bug未修复
 public class TweetInfoActivity extends BaseActivity {
 
 

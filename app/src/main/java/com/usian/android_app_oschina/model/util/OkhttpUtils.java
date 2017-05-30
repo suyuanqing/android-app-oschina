@@ -7,14 +7,18 @@ import com.usian.android_app_oschina.model.http.callback.InfoIdCallback;
 import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.utils.LogUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -115,6 +119,30 @@ public class OkhttpUtils implements Ihttp{
 
 
     }
+
+    private static final MediaType MEDIA_TYPE_PNG = MediaType.parse("image/png");
+
+    @Override
+    public void UploadPic(String url, Map<String, String> params, final NetworkCallback callback){
+        File file = new File(params.get("portrait"));
+        MultipartBody.Builder builder = new MultipartBody.Builder();
+        builder.setType(MultipartBody.FORM);
+        builder.addFormDataPart("portrait", file.getName(), RequestBody.create(MEDIA_TYPE_PNG, file));
+        builder.addFormDataPart("uid", params.get("uid"));
+        final Request request = new Request.Builder().url(url).post(builder.build()).build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                callback.onError(e.getMessage().toString());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                callback.onSuccess(response.body().string());
+            }
+        });
+    }
+
 
     //okhttp 不需要这个
     @Override

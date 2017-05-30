@@ -36,4 +36,6 @@ public interface Ihttp {
      */
     void doXml(String url, Map<String, String> params, InfoIdCallback infoIdCallback);
 
+    void UploadPic(String url, Map<String, String> params, NetworkCallback callback);
+
 }

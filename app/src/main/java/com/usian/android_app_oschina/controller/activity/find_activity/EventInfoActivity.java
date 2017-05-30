@@ -1,6 +1,5 @@
 package com.usian.android_app_oschina.controller.activity.find_activity;
 
-import android.os.Bundle;
 import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +25,6 @@ import com.usian.android_app_oschina.model.http.callback.NetworkCallback;
 import com.usian.android_app_oschina.utils.LogUtils;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class EventInfoActivity extends BaseActivity implements NetworkCallback {
@@ -159,10 +157,4 @@ public class EventInfoActivity extends BaseActivity implements NetworkCallback {
     }
 
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

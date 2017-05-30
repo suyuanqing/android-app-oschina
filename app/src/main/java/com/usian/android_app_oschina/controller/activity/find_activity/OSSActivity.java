@@ -9,11 +9,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.usian.android_app_oschina.R;
-import com.usian.android_app_oschina.adapter.ZHPagerAdapter;
+import com.usian.android_app_oschina.adapter.FindPagerAdapter;
 import com.usian.android_app_oschina.base.BaseActivity;
-import com.usian.android_app_oschina.base.BaseFragment;
+import com.usian.android_app_oschina.base.BaseBackFragment;
 import com.usian.android_app_oschina.controller.fragment.fx_fragment.OssFyFragment;
 import com.usian.android_app_oschina.controller.fragment.fx_fragment.SubListFragment;
+import com.usian.android_app_oschina.utils.BackHandledInterface;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class OSSActivity extends BaseActivity {
+public class OSSActivity extends BaseActivity implements BackHandledInterface{
 
 
     @Bind(R.id.title_back)
@@ -41,10 +42,12 @@ public class OSSActivity extends BaseActivity {
     @Bind(R.id.activity_oss)
     LinearLayout activityOss;
 
-    private ZHPagerAdapter title_adapter;
+    private BaseBackFragment baseFragment;
+
+    private FindPagerAdapter title_adapter;
     private List<String> titleList = new ArrayList<String>(); //标题链表
     private List<String> contentList = new ArrayList<String>(); //内容链表
-    private ArrayList<BaseFragment> fragmentList = new ArrayList<BaseFragment>(); //碎片链表
+    private ArrayList<BaseBackFragment> fragmentList = new ArrayList<BaseBackFragment>(); //碎片链表
 
     @Override
     protected int getLayoutId() {
@@ -70,7 +73,7 @@ public class OSSActivity extends BaseActivity {
             fragmentList.add(testsub);
         }
 
-        title_adapter = new ZHPagerAdapter(getSupportFragmentManager(), fragmentList, contentList);
+        title_adapter = new FindPagerAdapter(getSupportFragmentManager(), fragmentList, contentList);
 
         findOssTab.setupWithViewPager(findOssPager);
 
@@ -114,6 +117,22 @@ public class OSSActivity extends BaseActivity {
     @OnClick(R.id.title_back)
     public void onViewClicked() {
         finish();
+    }
+
+    @Override
+    public void setSelectedFragment(BaseBackFragment baseFragment) {
+        this.baseFragment = baseFragment;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(baseFragment == null || !baseFragment.onBackPressed()){
+            if(getSupportFragmentManager().getBackStackEntryCount() == 0){
+                super.onBackPressed();
+            }else{
+                getSupportFragmentManager().popBackStack();
+            }
+        }
     }
 
 }

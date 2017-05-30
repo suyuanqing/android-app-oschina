@@ -50,7 +50,12 @@
         <activity android:name=".controller.activity.mine_activity.MineFnsActivity" />
         <activity android:name=".controller.activity.mine_activity.MineGZActivity" />
         <activity android:name=".controller.activity.mine_activity.MineSCActivity" />
-        <activity android:name=".controller.activity.mine_activity.MineTweetActivity"></activity>
+        <activity android:name=".controller.activity.mine_activity.MineTweetActivity" />
+        <activity android:name=".controller.activity.mine_activity.MineBlogActivity" />
+        <activity android:name=".controller.activity.mine_activity.MineWenDaActivity" />
+        <activity android:name=".controller.activity.mine_activity.MineIsActivity" />
+        <activity android:name=".controller.activity.mine_activity.MineTuanDuiActivity" />
+        <activity android:name=".controller.activity.mine_activity.MineUserInfo"></activity>
     </application>
 
 </manifest>

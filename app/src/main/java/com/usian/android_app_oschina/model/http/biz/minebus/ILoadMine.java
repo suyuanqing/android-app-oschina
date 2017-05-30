@@ -26,5 +26,8 @@ public interface ILoadMine {
     //获取收藏列表
     void getSCList(String uid, String type, String index, NetworkCallback networkCallback);
 
+    //上传用户头像
+    void uploadUserPic(String uid, String fileurl, NetworkCallback networkCallback);
 
+    void eitMine(String uid, String catalog, String index, NetworkCallback networkCallback);
 }

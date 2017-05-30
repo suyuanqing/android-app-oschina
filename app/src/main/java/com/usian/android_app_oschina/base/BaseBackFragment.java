@@ -11,6 +11,8 @@ import android.widget.Toast;
 import com.usian.android_app_oschina.App;
 import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.exception.NotFoundContainerException;
+import com.usian.android_app_oschina.exception.NotIsClassCastException;
+import com.usian.android_app_oschina.utils.BackHandledInterface;
 import com.usian.android_app_oschina.utils.NetUtils;
 
 import butterknife.ButterKnife;
@@ -20,23 +22,39 @@ import butterknife.ButterKnife;
  * 初始的Fragment
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseBackFragment extends Fragment {
 
 
     private Bundle params;
     private boolean isFirst = false;
 
+    protected BackHandledInterface mBackHandledInterface;
+
+    /**
+     * 所有继承BackHandledFragment的子类都将在这个方法中实现物理Back键按下后的逻辑
+     * FragmentActivity捕捉到物理返回键点击事件后会首先询问Fragment是否消费该事件
+     * 如果没有Fragment消息时FragmentActivity自己才会消费该事件
+     */
+    public abstract boolean onBackPressed();
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(!(getActivity() instanceof BackHandledInterface)){
+            throw new NotIsClassCastException("Hosting Activity must implement BackHandledInterface");
+        }else{
+            this.mBackHandledInterface = (BackHandledInterface)getActivity();
+        }
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        App.fragment = this;
         if (getLayoutId() != 0){
             return inflater.inflate(getLayoutId(),container,false);
         }else{
             throw new NotFoundContainerException("Fragment布局ID不能为0,currentFragment = " + getClass().getSimpleName());
         }
-
     }
 
     @Override
@@ -145,9 +163,19 @@ public abstract class BaseFragment extends Fragment {
 
 
     @Override
+    public void onStart() {
+        super.onStart();
+        //告诉FragmentActivity，当前Fragment在栈顶
+        mBackHandledInterface.setSelectedFragment(this);
+    }
+
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         ButterKnife.unbind(this);
     }
+
+
 
 }

@@ -1,6 +1,5 @@
 package com.usian.android_app_oschina.controller.activity.tweet_activity;
 
-import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.widget.ImageView;
@@ -11,7 +10,6 @@ import com.usian.android_app_oschina.R;
 import com.usian.android_app_oschina.base.BaseActivity;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 
 public class TweetUserActivity extends BaseActivity {
 
@@ -57,10 +55,4 @@ public class TweetUserActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
-    }
 }

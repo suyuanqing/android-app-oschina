@@ -175,8 +175,12 @@ public class SynthesizeFragment extends BaseFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String channel = channels.get(position);
-                channels.remove(position);
-                channels_other.add(channel);
+                if (position != 0 && position != 1 && position != 2 && position != 3
+                        && position != 4){
+                    channels.remove(position);
+                    channels_other.add(channel);
+                }
+
                 dragAdapter.notifyDataSetChanged();
                 other_adapter.notifyDataSetChanged();
                 title_adapter.notifyDataSetChanged();

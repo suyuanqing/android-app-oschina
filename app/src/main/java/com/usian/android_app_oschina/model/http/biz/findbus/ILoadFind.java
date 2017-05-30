@@ -15,6 +15,9 @@ public interface ILoadFind {
     //二级分类
     void getTwoClassify(String tag, NetworkCallback networkCallback);
 
+    //二级分类
+    void getSoftTagfy(String tag, String index, NetworkCallback networkCallback);
+
     //摇一摇资讯
     void getShakeNews(NetworkCallback networkCallback);
 

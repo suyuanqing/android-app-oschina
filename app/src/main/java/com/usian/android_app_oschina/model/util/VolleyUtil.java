@@ -160,5 +160,10 @@ public class VolleyUtil implements Ihttp {
         requestQueue.add(xmlRequest);
     }
 
+    @Override
+    public void UploadPic(String url, Map<String, String> params, NetworkCallback callback) {
+
+    }
+
 
 }
